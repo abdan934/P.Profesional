@@ -1,0 +1,17 @@
+.bg {
+    /* The image used */
+    background-image: url("nitip.jpg");
+  
+    /* Full height */
+    height: 630px;
+  
+    /* Center and scale the image nicely */
+    background-position: top;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.logo-pnc {
+    width: 72px;
+    height: 72px;
+}

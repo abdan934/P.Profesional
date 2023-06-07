@@ -11,13 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('users', function (Blueprint $table) {
-            $table->id();
-            $table->string('username')->unique();
-            $table->string('password');
-            $table->string('name');
-            $table->string('level');
-            $table->rememberToken();
+        Schema::create('sift', function (Blueprint $table) {
+            $table->string('id_sift')->primary();
+            $table->string('name_sift');
+            $table->string('waktu_sift');
             $table->timestamps();
         });
     }
@@ -27,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('sift');
     }
 };

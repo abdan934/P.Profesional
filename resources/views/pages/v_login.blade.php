@@ -11,21 +11,21 @@
                     </a>
                 </div>
                 @include('pesan/pesan_login')
-                    <form action="/login" method="post">
+                    <form action="/login" method="POST">
                         @csrf
                     <div class="form-floating mb-3">
-                        <input type="text" class="form-control" id="floatingInput" name="username" placeholder="Username" required>
+                        <input type="text" class="form-control"  name="username" placeholder="Username" required>
                         <label for="floatingInput">Username</label>
                     </div>
                     <div class="form-floating mb-4">
-                        <input type="password" class="form-control" id="floatingPassword" name="password" placeholder="Password" required>
+                        <input type="password" class="form-control"  name="password" placeholder="Password" required>
                         <label for="floatingPassword">Password</label>
                     </div>
                     <div class="d-flex align-items-center justify-content-between mb-4">
                  
                      <a href="#">Lupa Akun</a>
                     </div>
-                    <button type="submit" name="submit" class="btn btn-primary py-3 w-100 mb-4">Masuk</button>
+                    <button type="submit"  class="btn btn-primary py-3 w-100 mb-4">Masuk</button>
                 </form>
                 
             </div>

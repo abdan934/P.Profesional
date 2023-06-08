@@ -17,4 +17,7 @@ use App\Http\Controllers\LoginController;
 //     return view('pages/v_login');
 // });
 Route::get('/', [LoginController::class, 'index']);
+
+//login
 Route::post('/login', [LoginController::class, 'login']);
+Route::post('/dashboard', [LoginController::class, 'index']);

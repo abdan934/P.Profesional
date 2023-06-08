@@ -19,17 +19,12 @@ class User extends Authenticatable
      * @var array<int, string>
      */
 
-     public function setPasswordAttribute($password)
-     {
-         $this->attributes['password'] = Hash::make($password);
-     }
-
-     
+    protected $table = 'users';
     protected $fillable = [
-        'username',
-        'password',
-        'email',
         'name',
+        'username',
+        'email',
+        'password',
         'level',
     ];
 

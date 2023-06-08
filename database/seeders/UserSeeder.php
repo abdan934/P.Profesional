@@ -15,10 +15,10 @@ class UserSeeder extends Seeder
     {
         //
         \App\Models\User::factory()->create([
-            'username' => 'admin',
-            'password' => md5('admin123'),
-            'email' => 'admin@gmail.com',
             'name' => 'Admin',
+            'username' => 'admin',
+            'email' => 'admin@gmail.com',
+            'password' => 'admin123',
             'level' => 'admin'
         ]);
     }

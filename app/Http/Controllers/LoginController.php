@@ -22,20 +22,27 @@ class LoginController extends Controller
 
         Session::flash('username',$request->username);
         Session::flash('password',$request->password);
+        $pass = Hash::make($request->password);
         $infologin = [
             'username' => $request->username,
-            'password' => $request->password
+            'password' => $pass
         ];
         $infologin2 = $request->only('username', 'password');
         if(Auth::attempt($infologin2)){
             //berhasil
-            $username_login = $request->input('username');
-            return redirect()->route('dashboard');
+            // $username_login = $request->input('username');
+            // return view('pages/v_login');
+            $pesan = 'Username atau Password benar !!';
+            return redirect('/')->with(['pesan'=>$pesan]);
+            // echo 'berhasil';
               
         }else{
             //gagal
+            $infologin2 = $request->only('username', 'password');
         $pesan = 'Username atau Password salah !!';
-          return view('pages/v_login')->with(['pesan'=>$pesan]);
+        //   return view('pages/v_login')->with(['pesan'=>$pesan]);
+        //   return dd($infologin2);
+        dd(Auth::attempt($infologin2));
         }
     }
 

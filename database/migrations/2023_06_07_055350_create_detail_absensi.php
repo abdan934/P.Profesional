@@ -20,6 +20,7 @@ return new class extends Migration
             $table->foreign('id_sift')->references('id_sift')->on('sift');
             $table->string('name_kapal');
             $table->string('dermaga');
+            $table->string('keterangan');
             $table->string('waktu_absen');
             $table->timestamps();
         });

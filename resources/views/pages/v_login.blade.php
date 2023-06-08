@@ -22,11 +22,12 @@
                         <label for="floatingPassword">Password</label>
                     </div>
                     <div class="d-flex align-items-center justify-content-between mb-4">
-                   
+                 
                      <a href="#">Lupa Akun</a>
                     </div>
-                    <button type="submit" class="btn btn-primary py-3 w-100 mb-4">Masuk</button>
+                    <button type="submit" name="submit" class="btn btn-primary py-3 w-100 mb-4">Masuk</button>
                 </form>
+                
             </div>
         </div>
     </div>

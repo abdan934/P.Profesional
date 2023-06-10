@@ -11,6 +11,15 @@
                     </a>
                 </div>
                 @include('pesan/pesan_login')
+                @if ($errors->any())
+                <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                    
+                    @foreach ($errors->all() as $item)
+                    <li><i class="fa fa-exclamation-circle me-2"></i>{{$item}}</li>
+                @endforeach
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            @endif
                     <form action="/login" method="POST">
                         @csrf
                     <div class="form-floating mb-3">

@@ -20,27 +20,13 @@ class LoginController extends Controller
     //session login
     public function login(Request $request){
 
-        $validator = Validator::make($request->all(), [
-            'username' => 'required',
-            'password' => 'required|min:6'
-        ],[
-            'username.required' => 'Username wajib diisi.',
-            'password.required' => 'Password wajib diisi.',
-            'password.min' => 'Password minimal 6 karakter.'
-        ]);
-
         Session::flash('username',$request->username);
         Session::flash('password',$request->password);
-        $infologin = [
-            'username' => $request->username,
-            'password' => $request->password
-        ];
         $infologin2 = $request->only('username', 'password');
         if(Auth::attempt($infologin2)){
             //berhasil
             $username_login = $request->input('username');
-            $pesan = 'Username atau Password benar !!';
-            return view('pages/v_login')->with(['pesan'=>$pesan]);
+            return view('pages/v_login')->with('username_login', $username_login);
               
         }else{
             //gagal
@@ -52,6 +38,6 @@ class LoginController extends Controller
     //session logout
     public function logout(){
         Auth::logout();
-        return redirect('/');
+        return view('pages/v_login');
     }
 }

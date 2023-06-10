@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\UserController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -13,11 +15,15 @@ use App\Http\Controllers\LoginController;
 |
 */
 
-// Route::get('/', function () {
-//     return view('pages/v_login');
-// });
-Route::get('/', [LoginController::class, 'index']);
+
+Route::get('/', [LoginController::class, 'index'])->middleware('isTamu')->middleware('isTamu');;
 
 //login
-Route::post('/login', [LoginController::class, 'login']);
-Route::post('/dashboard', [LoginController::class, 'index']);
+Route::post('/login', [LoginController::class, 'login'])->middleware('isTamu');;
+Route::get('/logout', [LoginController::class, 'logout']);
+
+//dashboard
+Route::get('/dashboard', [DashboardController::class, 'index'])->middleware('isLogin');
+
+//user
+Route::resource('/user', UserController::class)->middleware('isLogin');

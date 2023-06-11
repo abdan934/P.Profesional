@@ -16,7 +16,7 @@ use App\Http\Controllers\UserController;
 */
 
 
-Route::get('/', [LoginController::class, 'index'])->middleware('isTamu')->middleware('isTamu');;
+Route::get('/', [LoginController::class, 'index'])->middleware('isTamu');
 
 //login
 Route::post('/login', [LoginController::class, 'login'])->middleware('isTamu');;

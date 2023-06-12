@@ -17,9 +17,16 @@
         </div>
         <div class="navbar-nav w-100">
             <a href="/dashboard" class="nav-item nav-link"><i class="fa fa-tachometer-alt me-2"></i>Dashboard</a>
-            <a href="/user" class="nav-item nav-link" ><i class="far fa-file-alt me-2"></i> User</a>
-            <a href="/hrd" class="nav-item nav-link" ><i class="bi bi-person-square me-2"></i> HRD</a>
-            
         </div>
+        <div class="navbar-nav w-100">
+            <a href="/user" class="nav-item nav-link" ><i class="far fa-file-alt me-2"></i> User</a>
+        </div>
+        <div class="navbar-nav w-100">
+            <a href="/hrd" class="nav-item nav-link" ><i class="bi bi-person-square me-2"></i> HRD</a>
+        </div>
+        <div class="navbar-nav w-100">
+            <a href="/pengawas" class="nav-item nav-link" ><i class="bi bi-person-lines-fill me-2"></i> Pengawas</a>
+        </div>
+            
     </nav>
 </div>

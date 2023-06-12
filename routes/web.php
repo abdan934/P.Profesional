@@ -5,6 +5,7 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\HRDController;
+use App\Http\Controllers\PengawasController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -35,3 +36,7 @@ Route::post('/reset-password/{id}', [UserController::class, 'resetPassword'])->m
 //hrd
 Route::resource('/hrd', HRDController::class)->middleware('isLogin');
 Route::post('/importhrd', [HRDController::class, 'importexcel'])->middleware('isLogin');
+
+//pengawas
+Route::resource('/pengawas', PengawasController::class)->middleware('isLogin');
+Route::post('/importpengawas', [PengawasController::class, 'importexcel'])->middleware('isLogin');

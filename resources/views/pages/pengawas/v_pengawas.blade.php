@@ -5,22 +5,22 @@
             <div class="container-fluid pt-4 px-4">
                 <div class="row vh-100 bg-light rounded align-items-center justify-content-center mx-0">
                     
-                    <button type="button" class="btn btn-outline-primary col-3 m-2" data-bs-toggle="modal" data-bs-target="#ModalAddHRD"><i class="bi bi-person-plus me-2"></i>Tambah</a></button>
-                    <button type="button" class="btn btn-outline-success col-3 m-2" data-bs-toggle="modal" data-bs-target="#ModalImportHRD"><i class="bi bi-file-earmark-excel me-2"></i>Import</button>
+                    <button type="button" class="btn btn-outline-primary col-3 m-2" data-bs-toggle="modal" data-bs-target="#ModalAddPengawas"><i class="bi bi-person-plus me-2"></i>Tambah</a></button>
+                    <button type="button" class="btn btn-outline-success col-3 m-2" data-bs-toggle="modal" data-bs-target="#ModalImportPengawas"><i class="bi bi-file-earmark-excel me-2"></i>Import</button>
                     <button type="button" class="btn btn-outline-secondary col-3 m-2" data-bs-toggle="modal" ><i class="bi bi-file-earmark-spreadsheet me-2"></i><a href="{{asset('template-hrd.xlsx')}}">Template</a></button>
                     <div class="bg-light rounded h-100 p-4">
                         <div class="d-flex align-items-center justify-content-between">
-                            <h4 class="mb-3">Data Human Resource Development (HRD)</h4>
+                            <h4 class="mb-3">Data Pengawas</h4>
                                 
                             </div>
                             <div class="d-flex align-items-center justify-content-between col-12">
-                                <form class="d-flex align-items-center mb-3" action="/hrd" method="GET">
+                                <form class="d-flex align-items-center mb-3" action="/pengawas" method="GET">
                                     @csrf
                                     <input class="form-control flex-grow-1" type="search" placeholder="Search" name="search">
-                                    <button type="submit" class="btn btn-lm btn-light m-1"><i class="fa fa-search"></i></button>
+                                    <button type="button submit" class="btn btn-lm btn-light m-1"><i class="fa fa-search"></i></button>
                                 </form>
                                 <div class="ml-auto m-1">
-                                    <button type="button" class="btn btn-light"><a href="/hrd"><i class="bi bi-arrow-counterclockwise me-2"></i>Refresh</a></button>
+                                    <button type="button" class="btn btn-light"><a href="/pengawas"><i class="bi bi-arrow-counterclockwise me-2"></i>Refresh</a></button>
                                 </div>
                             </div>
 
@@ -29,7 +29,7 @@
                                     <thead class="table-light">
                                         <tr class="text-center">
                                             <th scope="col">No</th>
-                                            <th scope="col">Kode HRD</th>
+                                            <th scope="col">Kode Pengawas</th>
                                             <th scope="col">Nama</th>
                                             <th ></th>
                                     </thead>
@@ -38,16 +38,16 @@
                                         @foreach ($data as $item)
                                         <tr>
                                             <th scope="row" class="text-center">{{$no++}}</th>
-                                            <td class="m-1">{{$item->id_hrd}}</td>
-                                            <td class="m-1">{{$item->name_hrd}}</td>
+                                            <td class="m-1">{{$item->id_pengawas}}</td>
+                                            <td class="m-1">{{$item->name_pengawas}}</td>
                                             <td >
-                                                    <button type="button" class="btn btn-outline-danger m-1" data-bs-toggle="modal" data-bs-target="#ModalHapus_{{$item->id_hrd}}"><i class="bi bi-trash"></i> Hapus</button>  
-                                                <a href="{{url('/hrd/'.$item->id_hrd.'/edit')}}">             
+                                                    <button type="button" class="btn btn-outline-danger m-1" data-bs-toggle="modal" data-bs-target="#ModalHapus_{{$item->id_pengawas}}"><i class="bi bi-trash"></i> Hapus</button>  
+                                                <a href="{{url('/pengawas/'.$item->id_pengawas.'/edit')}}">             
                                                     <button type="button" class="btn btn-outline-info m-1"><i class="bi bi-list"></i> Detail</button>               
                                                 </a>
                                                 
                                                 <!-- Modal hapus-->
-                                                    <div class="modal fade" id="ModalHapus_{{$item->id_hrd}}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                                    <div class="modal fade" id="ModalHapus_{{$item->id_pengawas}}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                                                         <div class="modal-dialog">
                                                         <div class="modal-content">
                                                             <div class="modal-header">
@@ -64,17 +64,17 @@
                                                                         <td><h6>Kode</h6></td>
                                                                     
                                                                         <td><h6>=</h6></td>
-                                                                        <td><h6>{{$item->id_hrd}}</h6></td>
+                                                                        <td><h6>{{$item->id_pengawas}}</h6></td>
                                                                     </tr>
                                                                     <tr>
                                                                         <td><h6>Nama</h6></td>
                                                                         <td><h6>=</h6></td>
-                                                                        <td><h6>{{$item->name_hrd}}</h6></td>
+                                                                        <td><h6>{{$item->name_pengawas}}</h6></td>
                                                                     </tr>
                                                                 </table>
                                                             
                                                             <div class="modal-footer">
-                                                                <form action="{{'/hrd/'.$item->id_hrd}}" method="POST">
+                                                                <form action="{{'/pengawas/'.$item->id_pengawas}}" method="POST">
                                                                     @csrf
                                                                     @method('DELETE')
                                                                     <button type="button submit" class="btn btn-danger"><i class="bi bi-trash"></i> Hapus</button>
@@ -110,26 +110,26 @@
             </div>
 
                 <!-- Modal Create-->
-                <div class="modal fade" id="ModalAddHRD" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <div class="modal fade" id="ModalAddPengawas" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                     <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
                                 <h1 class="modal-title fs-5" id="exampleModalLabel">
-                                    Tambah Data HRD
+                                    Tambah Data Pengawas
                                 </h1>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
                             
-                            <form method="POST" action="/hrd">
+                            <form method="POST" action="/pengawas">
                                 @csrf
                             <div class="form-floating mb-3">
-                                <input type="text" class="form-control"  name="id_hrd" required value="{{old('id_hrd')}}"
-                                    placeholder="Kode HRD"  >
-                                <label for="floatingInput">Kode HRD</label>
+                                <input type="text" class="form-control"  name="id_pengawas" required value="{{old('id_pengawas')}}"
+                                    placeholder="Kode Pengawas"  >
+                                <label for="floatingInput">Kode Pengawas</label>
                             </div>
                             <div class="form-floating mb-3">
-                                <input type="text" class="form-control" name="name_hrd" required value="{{old('name_hrd')}}"
+                                <input type="text" class="form-control" name="name_pengawas" required value="{{old('name_pengawas')}}"
                                     placeholder="Nama" >
                                 <label for="floatingInput">Nama</label>
                             </div>
@@ -144,19 +144,19 @@
     
 
                  <!-- Modal Import Excel-->
-            <div class="modal fade" id="ModalImportHRD" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal fade" id="ModalImportPengawas" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                 <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
                         
-                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Import HRD</h1>
+                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Import Pengawas</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        <form action="/importhrd" id="frmFileUpload" class="dropzone" method="post" enctype="multipart/form-data">
+                        <form action="/importpengawas" id="frmFileUpload" class="dropzone" method="post" enctype="multipart/form-data">
                         @csrf
                                     <div>
-                                        <label for="formFileLg" class="form-label"><h5>Gunakan nama file selain template-hrd.xlsx</h5></label>
+                                        <label for="formFileLg" class="form-label"><h5>Gunakan nama file selain template-pengawas.xlsx</h5></label>
                                         <label for="formFileLg" class="form-label">Masukkan File Excel</label>
                                         <input class="form-control form-control-lg" id="formFileLg" type="file" name="file_excel" multiple>
                                     </div>

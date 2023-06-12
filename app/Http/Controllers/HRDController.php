@@ -143,7 +143,7 @@ class HRDController extends Controller
     {
         $searchTerm = $request->input('search');
         $users = User::where('name', 'like', "%$searchTerm%")->paginate(5);
-        return view('user.search', ['users' => $users]);
+        return view('hrd.search', ['users' => $users]);
     }
 
     //import hrd

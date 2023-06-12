@@ -191,6 +191,7 @@
                         <form action="/importuser" id="frmFileUpload" class="dropzone" method="post" enctype="multipart/form-data">
                         @csrf
                                     <div>
+                                        <label for="formFileLg" class="form-label"><h4>Gunakan nama file selain template-user.xlsx</h4></label>
                                         <label for="formFileLg" class="form-label">Masukkan File Excel</label>
                                         <input class="form-control form-control-lg" id="formFileLg" type="file" name="file_excel" multiple>
                                     </div>

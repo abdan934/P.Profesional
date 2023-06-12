@@ -155,7 +155,6 @@ class UserController extends Controller
     public function destroy(string $id)
     {
         //
-        
         $pesan = 'Berhasil dihapus';
         $data = User::orderBy('id','asc')->paginate(10);
         $no = 1;
@@ -259,12 +258,7 @@ class UserController extends Controller
     public function search(Request $request)
             {
                 $searchTerm = $request->input('search');
-
-                // Lakukan pencarian atau tindakan lain sesuai kebutuhan
-                // Contoh: Query untuk mencari data pengguna berdasarkan kata kunci
                 $users = User::where('name', 'like', "%$searchTerm%")->paginate(5);
-
-                // Mengembalikan tampilan atau data JSON sesuai kebutuhan
                 return view('user.search', ['users' => $users]);
             }
 

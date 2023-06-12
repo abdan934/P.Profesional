@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\HRDController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -31,3 +32,6 @@ Route::get('/search', [UserController::class, 'search'])->middleware('isLogin');
 Route::post('/importuser', [UserController::class, 'importexcel'])->middleware('isLogin');
 Route::post('/reset-password/{id}', [UserController::class, 'resetPassword'])->middleware('isLogin');
 
+//hrd
+Route::resource('/hrd', HRDController::class)->middleware('isLogin');
+Route::post('/importhrd', [HRDController::class, 'importexcel'])->middleware('isLogin');

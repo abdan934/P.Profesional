@@ -26,8 +26,7 @@ class LoginController extends Controller
         if(Auth::attempt($infologin2)){
             //berhasil
             $username_login = $request->input('username');
-            return view('pages/v_login')->with('username_login', $username_login);
-              
+            return redirect()->route('dashboard')->with('username_login', $username_login);
         }else{
             //gagal
         $pesan = 'Username atau Password salah !!';
@@ -40,4 +39,5 @@ class LoginController extends Controller
         Auth::logout();
         return view('pages/v_login');
     }
+
 }

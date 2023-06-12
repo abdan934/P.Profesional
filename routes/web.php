@@ -23,7 +23,11 @@ Route::post('/login', [LoginController::class, 'login'])->middleware('isTamu');;
 Route::get('/logout', [LoginController::class, 'logout']);
 
 //dashboard
-Route::get('/dashboard', [DashboardController::class, 'index'])->middleware('isLogin');
+Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard')->middleware('isLogin');
 
 //user
 Route::resource('/user', UserController::class)->middleware('isLogin');
+Route::get('/search', [UserController::class, 'search'])->middleware('isLogin');
+Route::post('/importuser', [UserController::class, 'importexcel'])->middleware('isLogin');
+Route::post('/reset-password/{id}', [UserController::class, 'resetPassword'])->middleware('isLogin');
+

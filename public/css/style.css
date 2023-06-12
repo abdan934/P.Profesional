@@ -275,3 +275,12 @@
     background: var(--dark);
     border-color: var(--primary);
 }
+
+/* Custom css */
+
+.custom-pagination {
+        margin-top: 10px;
+        padding: 5px;
+    
+    
+}

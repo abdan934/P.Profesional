@@ -18,8 +18,8 @@ class isTamu
     public function handle(Request $request, Closure $next): Response
     {
         if(Auth::check()){
-            $pesan = 'Log Out Terbebih dahulu';
-            return redirect('/dashboard')->withErrors($pesan);
+            $pesan1 = 'Log Out Terbebih dahulu';
+            return redirect('/dashboard')->withErrors($pesan1);
         }
         return $next($request);
        

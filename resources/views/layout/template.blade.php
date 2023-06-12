@@ -104,4 +104,10 @@
 
 </html>
 
+@else
+
+    <?php
+        return redirect('/logout');
+    ?>
+
 @endif

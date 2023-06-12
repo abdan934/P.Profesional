@@ -6,6 +6,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\HRDController;
 use App\Http\Controllers\PengawasController;
+use App\Http\Controllers\KaryawanController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -40,3 +41,7 @@ Route::post('/importhrd', [HRDController::class, 'importexcel'])->middleware('is
 //pengawas
 Route::resource('/pengawas', PengawasController::class)->middleware('isLogin');
 Route::post('/importpengawas', [PengawasController::class, 'importexcel'])->middleware('isLogin');
+
+//karyawan
+Route::resource('/karyawan', KaryawanController::class)->middleware('isLogin');
+Route::post('/importkaryawan', [KaryawanController::class, 'importexcel'])->middleware('isLogin');

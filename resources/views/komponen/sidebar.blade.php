@@ -27,6 +27,9 @@
         <div class="navbar-nav w-100">
             <a href="/pengawas" class="nav-item nav-link" ><i class="bi bi-person-lines-fill me-2"></i> Pengawas</a>
         </div>
+        <div class="navbar-nav w-100">
+            <a href="/karyawan" class="nav-item nav-link" ><i class="bi bi-file-person-fill me-2"></i> Karyawan</a>
+        </div>
             
     </nav>
 </div>

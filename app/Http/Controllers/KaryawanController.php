@@ -3,16 +3,16 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Pengawas;
+use App\Models\Karyawan;
 use Illuminate\Routing\Redirector;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
-use App\Imports\PengawasImport;
+use App\Imports\KaryawanImport;
 use Maatwebsite\Excel\Facades\Excel;
 
-class PengawasController extends Controller
+class KaryawanController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -23,11 +23,11 @@ class PengawasController extends Controller
         $no = 1;
         $user = Auth::user();
         $search = request()->input('search');
-        $data = Pengawas::orderBy('id_pengawas', 'asc')->where(function ($query) use ($search) {
-            $query->where('id_pengawas', 'LIKE', '%'.$search.'%')
-                  ->orWhere('name_pengawas', 'LIKE', '%'.$search.'%');
+        $data = Karyawan::orderBy('id_karyawan', 'asc')->where(function ($query) use ($search) {
+            $query->where('id_karyawan', 'LIKE', '%'.$search.'%')
+                  ->orWhere('name_karyawan', 'LIKE', '%'.$search.'%');
         })->paginate(5);
-        return view("pages/pengawas/v_pengawas")->with(['user' => $user,'data'=>$data,'no'=>$no]);
+        return view("pages/karyawan/v_karyawan")->with(['user' => $user,'data'=>$data,'no'=>$no]);
     }
 
     /**
@@ -45,28 +45,28 @@ class PengawasController extends Controller
     {
         //
         $validator = Validator::make($request->all(), [
-            'id_pengawas' => 'unique:pengawas',
+            'id_karyawan' => 'unique:karyawan',
         ],[
-            'id_pengawas.unique' => 'Kode sudah terdaftar.',
+            'id_karyawan.unique' => 'Kode sudah terdaftar.',
         ]);
 
         $datacreate = [
-            'id_pengawas' => $request->input('id_pengawas'),
-            'name_pengawas' => $request->input('name_pengawas'),
+            'id_karyawan' => $request->input('id_karyawan'),
+            'name_karyawan' => $request->input('name_karyawan'),
         ];
 
         $user = Auth::user();
-        $data = Pengawas::orderBy('id_pengawas','asc')->paginate(10);
+        $data = Karyawan::orderBy('id_karyawan','asc')->paginate(10);
         $no = 1;
 
         if ($validator->fails()) {
             
-            return view('pages/pengawas/v_pengawas')->withErrors($validator)->with(['user' => $user,'data'=>$data,'no'=>$no]);
+            return view('pages/karyawan/v_karyawan')->withErrors($validator)->with(['user' => $user,'data'=>$data,'no'=>$no]);
 
         }else{
-            Pengawas::create($datacreate);
+            Karyawan::create($datacreate);
             $pesan = 'Berhasil ditambahkan';
-            return view('pages/pengawas/v_pengawas')->with(['isipesan'=>$pesan,'user' => $user,'data'=>$data,'no'=>$no]);
+            return view('pages/karyawan/v_karyawan')->with(['isipesan'=>$pesan,'user' => $user,'data'=>$data,'no'=>$no]);
         }
     }
 
@@ -84,9 +84,9 @@ class PengawasController extends Controller
     public function edit(string $id)
     {
         //
-        $data = Pengawas::where('id_pengawas',$id)->first();
+        $data = Karyawan::where('id_karyawan',$id)->first();
         $user = Auth::user();
-        return view('pages/pengawas/v_edit_pengawas')->with(['data'=>$data,'user'=>$user]);
+        return view('pages/karyawan/v_edit_karyawan')->with(['data'=>$data,'user'=>$user]);
     }
 
     /**
@@ -97,25 +97,25 @@ class PengawasController extends Controller
         //
         $user = Auth::user();
         $no = 1;
-        $data = Pengawas::where('id_pengawas',$id);
+        $data = Karyawan::where('id_karyawan',$id);
         $data_update=[
-            'name_pengawas' => $request->input('name_pengawas'),
+            'name_karyawan' => $request->input('name_karyawan'),
         ];
 
         $validator = Validator::make($request->all(), [
-            'name_pengawas' => 'required',
+            'name_karyawan' => 'required',
         ],[
-            'name_pengawas.required' => 'Nama wajib diisi.'
+            'name_karyawan.required' => 'Nama wajib diisi.'
         ]);
 
         if ($validator->fails()) {
         $pesan = 'Gagal diubah';
-        return view("pages/pengawas/v_edit_pengawas")->with(['user' => $user,'data'=>$data,'no'=>$no])->withErrors($pesan);
+        return view("pages/karyawan/v_edit_karyawan")->with(['user' => $user,'data'=>$data,'no'=>$no])->withErrors($pesan);
 
         }else{
-        Pengawas::where('id_pengawas',$id)->update($data_update);
+        Karyawan::where('id_karyawan',$id)->update($data_update);
         $pesan = 'Berhasil diubah';
-        return view("pages/pengawas/v_edit_pengawas")->with(['data'=>$data, 'no'=>$no,'user'=>$user,'isipesan'=>$pesan]);
+        return view("pages/karyawan/v_edit_karyawan")->with(['data'=>$data, 'no'=>$no,'user'=>$user,'isipesan'=>$pesan]);
         }
     }
 
@@ -126,29 +126,28 @@ class PengawasController extends Controller
     {
         //
         $pesan = 'Berhasil dihapus';
-        $data = Pengawas::orderBy('name_pengawas','asc')->paginate(10);
+        $data = Karyawan::orderBy('name_karyawan','asc')->paginate(10);
         $no = 1;
         $user = Auth::user();
-        $checkdata = Pengawas::where('id_pengawas', $id)->first();
+        $checkdata = Karyawan::where('id_karyawan', $id)->first();
         if($checkdata){
-            Pengawas::where('id_pengawas',$id)->delete();
-            return view("pages/pengawas/v_pengawas")->with(['data'=>$data, 'no'=>$no,'user'=>$user,'isipesan'=>$pesan]);
+            Karyawan::where('id_karyawan',$id)->delete();
+            return view("pages/karyawan/v_karyawan")->with(['data'=>$data, 'no'=>$no,'user'=>$user,'isipesan'=>$pesan]);
         }else{
             // dd($id);
             $pesan = 'Data tidak ditemukan';
-            return view("pages/pengawas/v_pengawas")->with(['user' => $user,'data'=>$data,'no'=>$no])->withErrors($pesan);
+            return view("pages/karyawan/v_karyawan")->with(['user' => $user,'data'=>$data,'no'=>$no])->withErrors($pesan);
         }
     }
 
-    
     public function search(Request $request)
     {
         $searchTerm = $request->input('search');
-        $users = Pengawas::where('name', 'like', "%$searchTerm%")->paginate(5);
-        return view('pengawas.search', ['users' => $users]);
+        $users = Karyawan::where('name', 'like', "%$searchTerm%")->paginate(5);
+        return view('karyawan.search', ['users' => $users]);
     }
 
-    //import hrd
+    //import karyawan
     public function importexcel(Request $request){
         $data = $request->file('file_excel');
 
@@ -159,32 +158,33 @@ class PengawasController extends Controller
             }
 
         $namafile = $data->getClientOriginalName();
-        $data->move('PengawasData',$namafile);
+        $data->move('KaryawanData',$namafile);
 
-        $path = public_path('/PengawasData/'.$namafile);
-        $import = new PengawasImport;
+        $path = public_path('/KaryawanData/'.$namafile);
+        $import = new KaryawanImport;
         $rows = Excel::toArray($import, $path);
-        $data_isi = Pengawas::orderBy('name_pengawas','asc')->paginate(10);
+        $data_isi = Karyawan::orderBy('name_karyawan','asc')->paginate(10);
         $no = 1;
         $user = Auth::user();
 
             foreach ($rows[0] as $row) {
                 // Sesi pemeriksaan
-                $id_pengawas = $row[0];
-                $checkdata = Pengawas::where('id_pengawas', $id_pengawas)->first();
+                $id_karyawan = $row[0];
+                $checkdata = Karyawan::where('id_karyawan', $id_karyawan)->first();
                 if ($checkdata) {
                     $pesan = 'Data sudah ada silahkan cek kembali!!';
-                    return view("pages/pengawas/v_pengawas")->with(['data'=>$data_isi,'no'=>$no,'user'=>$user])->withErrors($pesan);
+                    return view("pages/karyawan/v_karyawan")->with(['data'=>$data_isi,'no'=>$no,'user'=>$user])->withErrors($pesan);
                 } else {
-                    if ($id_pengawas == null) {
-                        $pesan = 'Kode Pengawas tidak boleh kosong!';
+                    if ($id_karyawan == null) {
+                        $pesan = 'Kode Karyawan tidak boleh kosong!';
                         return redirect()->back()->with(['data' => $data_isi, 'no' => $no, 'user' => $user])->withErrors($pesan);
                     }
                     //sesi berhasil
                     $pesan = 'Berhasil diimport';
-                    Excel::import(new PengawasImport, \public_path('/PengawasData/'.$namafile));
-                    return view("pages/pengawas/v_pengawas")->with(['data'=>$data_isi,'isipesan'=>$pesan,'no'=>$no,'user'=>$user]);
+                    Excel::import(new KaryawanImport, \public_path('/KaryawanData/'.$namafile));
+                    return view("pages/karyawan/v_karyawan")->with(['data'=>$data_isi,'isipesan'=>$pesan,'no'=>$no,'user'=>$user]);
                 }
             }
     }
+
 }

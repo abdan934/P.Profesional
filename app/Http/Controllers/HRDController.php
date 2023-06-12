@@ -56,7 +56,7 @@ class HRDController extends Controller
         ];
 
         $user = Auth::user();
-        $data = HRD::orderBy('name_hrd','asc')->paginate(10);
+        $data = HRD::orderBy('id_hrd','asc')->paginate(10);
         $no = 1;
 
         if ($validator->fails()) {
@@ -97,7 +97,7 @@ class HRDController extends Controller
         //
         $user = Auth::user();
         $no = 1;
-        $data = HRD::where('id_hrd',$id)->first();
+        $data = HRD::where('id_hrd',$id);
         $data_update=[
             'name_hrd' => $request->input('name_hrd'),
         ];

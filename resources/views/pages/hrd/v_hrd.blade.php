@@ -37,7 +37,7 @@
                                         
                                         @foreach ($data as $item)
                                         <tr>
-                                            <th scope="row">{{$no++}}</th>
+                                            <th scope="row" class="text-center">{{$no++}}</th>
                                             <td class="m-1">{{$item->id_hrd}}</td>
                                             <td class="m-1">{{$item->name_hrd}}</td>
                                             <td >

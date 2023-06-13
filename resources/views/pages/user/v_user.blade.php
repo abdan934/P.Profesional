@@ -33,7 +33,7 @@
                                 <th scope="col">Username</th>
                                 <th scope="col">Nama</th>
                                 <th scope="col">Jabatan</th>
-                                <th ></th>
+                                <th >Aksi</th>
                                 <th>Reset</th>
                         </thead>
                         <tbody >
@@ -44,7 +44,7 @@
                                 <td class="m-1">{{$item->username}}</td>
                                 <td class="m-1">{{$item->name}}</td>
                                 <td class="m-1">{{$item->level}}</td>
-                                <td >
+                                <td class="text-center">
                                         <button type="button" class="btn btn-outline-danger m-1" data-bs-toggle="modal" data-bs-target="#ModalHapus_{{$item->id}}"><i class="bi bi-trash"></i> Hapus</button>  
                                     <a href="{{url('/user/'.$item->id.'/edit')}}">             
                                         <button type="button" class="btn btn-outline-info m-1"><i class="bi bi-list"></i> Detail</button>               
@@ -89,7 +89,7 @@
                                             </div>
                                         </div>
                                     </td>
-                                    <td>
+                                    <td class="text-center">
                                         <form action="{{ ('/reset-password/'.$item->id) }}" method="POST" class="d-inline" onsubmit="return confirm('Apakah Anda yakin ingin mereset password pengguna ini?')">
                                             @csrf
                                         <button type="button submit"  class="btn btn-outline-warning" >

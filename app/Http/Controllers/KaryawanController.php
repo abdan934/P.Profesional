@@ -110,12 +110,13 @@ class KaryawanController extends Controller
 
         if ($validator->fails()) {
         $pesan = 'Gagal diubah';
-        return view("pages/karyawan/v_edit_karyawan")->with(['user' => $user,'data'=>$data,'no'=>$no])->withErrors($pesan);
+        return view("pages/karyawan/v_karyawan")->with(['user' => $user,'data'=>$data,'no'=>$no])->withErrors($pesan);
 
         }else{
+            $data = HRD::orderBy('id_karyawan','asc')->paginate(10);
         Karyawan::where('id_karyawan',$id)->update($data_update);
         $pesan = 'Berhasil diubah';
-        return view("pages/karyawan/v_edit_karyawan")->with(['data'=>$data, 'no'=>$no,'user'=>$user,'isipesan'=>$pesan]);
+        return view("pages/karyawan/v_karyawan")->with(['data'=>$data, 'no'=>$no,'user'=>$user,'isipesan'=>$pesan]);
         }
     }
 

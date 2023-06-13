@@ -110,12 +110,13 @@ class HRDController extends Controller
 
         if ($validator->fails()) {
         $pesan = 'Gagal diubah';
-        return view("pages/hrd/v_edit_hrd")->with(['user' => $user,'data'=>$data,'no'=>$no])->withErrors($pesan);
+        return view("pages/hrd/v_hrd")->with(['user' => $user,'data'=>$data,'no'=>$no])->withErrors($pesan);
 
         }else{
+            $data = HRD::orderBy('id_hrd','asc')->paginate(10);
         HRD::where('id_hrd',$id)->update($data_update);
         $pesan = 'Berhasil diubah';
-        return view("pages/hrd/v_edit_hrd")->with(['data'=>$data, 'no'=>$no,'user'=>$user,'isipesan'=>$pesan]);
+        return view("pages/hrd/v_hrd")->with(['data'=>$data, 'no'=>$no,'user'=>$user,'isipesan'=>$pesan]);
         }
     }
 

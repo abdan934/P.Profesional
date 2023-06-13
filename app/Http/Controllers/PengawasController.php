@@ -110,13 +110,15 @@ class PengawasController extends Controller
 
         if ($validator->fails()) {
         $pesan = 'Gagal diubah';
-        return view("pages/pengawas/v_edit_pengawas")->with(['user' => $user,'data'=>$data,'no'=>$no])->withErrors($pesan);
+        return view("pages/pengawas/v_pengawas")->with(['user' => $user,'data'=>$data,'no'=>$no])->withErrors($pesan);
 
         }else{
+            $data = Pengawas::orderBy('id_pengawas','asc')->paginate(10);
         Pengawas::where('id_pengawas',$id)->update($data_update);
         $pesan = 'Berhasil diubah';
-        return view("pages/pengawas/v_edit_pengawas")->with(['data'=>$data, 'no'=>$no,'user'=>$user,'isipesan'=>$pesan]);
+        return view("pages/pengawas/v_pengawas")->with(['data'=>$data, 'no'=>$no,'user'=>$user,'isipesan'=>$pesan]);
         }
+        
     }
 
     /**

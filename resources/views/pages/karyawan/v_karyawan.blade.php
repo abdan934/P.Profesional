@@ -31,7 +31,7 @@
                                             <th scope="col">No</th>
                                             <th scope="col">Kode Karyawan</th>
                                             <th scope="col">Nama</th>
-                                            <th ></th>
+                                            <th >Aksi</th>
                                     </thead>
                                     <tbody >
                                         
@@ -40,7 +40,7 @@
                                             <th scope="row" class="text-center">{{$no++}}</th>
                                             <td class="m-1">{{$item->id_karyawan}}</td>
                                             <td class="m-1">{{$item->name_karyawan}}</td>
-                                            <td >
+                                            <td class="text-center">
                                                     <button type="button" class="btn btn-outline-danger m-1" data-bs-toggle="modal" data-bs-target="#ModalHapus_{{$item->id_karyawan}}"><i class="bi bi-trash"></i> Hapus</button>  
                                                 <a href="{{url('/karyawan/'.$item->id_karyawan.'/edit')}}">             
                                                     <button type="button" class="btn btn-outline-info m-1"><i class="bi bi-list"></i> Detail</button>               

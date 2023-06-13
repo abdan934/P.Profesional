@@ -7,7 +7,8 @@
             <div class="bg-light rounded p-4 p-sm-5 my-4 mx-3">
                 <div class="d-flex align-items-center justify-content-between mb-3">
                     <a href="#" class="">
-                        <h3 class="text-primary "></i>Duta Samudera Karya</h3><h5>(DSK)</h5>
+                        <h3 class="text-success col-12"></i>Duta Samudera Karya</h3>
+                        <h5>(DSK)</h5>
                     </a>
                 </div>
                 @include('pesan/pesan_login')
@@ -32,9 +33,9 @@
                     </div>
                     <div class="d-flex align-items-center justify-content-between mb-4">
                  
-                     <a href="#">Lupa Akun</a>
+                     <a href="#" class="text-success">Lupa Akun</a>
                     </div>
-                    <button type="submit"  class="btn btn-primary py-3 w-100 mb-4">Masuk</button>
+                    <button type="submit"  class="btn btn-success py-3 w-100 mb-4">Masuk</button>
                 </form>
                 
             </div>

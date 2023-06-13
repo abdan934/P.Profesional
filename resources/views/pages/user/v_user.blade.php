@@ -109,7 +109,7 @@
                     {{$data->links('pagination::simple-bootstrap-4')}}
                     <ul class="pagination pagination-ls m-1 mb-3">
                         <li class="page-item active" aria-current="page">
-                            <span class="page-link">{{$data->currentPage()}}</span>
+                            <span class="page-link colour-success">{{$data->currentPage()}}</span>
                         </li>
                         <li class="page-item disabled">
                             <span class="page-link">Total Halaman: {{$data->lastPage()}}</span>

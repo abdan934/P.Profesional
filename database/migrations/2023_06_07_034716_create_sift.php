@@ -14,7 +14,8 @@ return new class extends Migration
         Schema::create('sift', function (Blueprint $table) {
             $table->string('id_sift')->primary();
             $table->string('name_sift');
-            $table->string('waktu_sift');
+            $table->string('waktu_awal');
+            $table->string('waktu_akhir');
             $table->timestamps();
         });
     }

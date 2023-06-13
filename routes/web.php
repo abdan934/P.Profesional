@@ -7,6 +7,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\HRDController;
 use App\Http\Controllers\PengawasController;
 use App\Http\Controllers\KaryawanController;
+use App\Http\Controllers\SiftController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -45,3 +46,7 @@ Route::post('/importpengawas', [PengawasController::class, 'importexcel'])->midd
 //karyawan
 Route::resource('/karyawan', KaryawanController::class)->middleware('isLogin');
 Route::post('/importkaryawan', [KaryawanController::class, 'importexcel'])->middleware('isLogin');
+
+//sift
+Route::resource('/sift', SiftController::class)->middleware('isLogin');
+Route::post('/importsift', [SiftController::class, 'importexcel'])->middleware('isLogin');

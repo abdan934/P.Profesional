@@ -33,6 +33,12 @@
         <div class="navbar-nav w-100">
             <a href="/sift" class="nav-item nav-link" ><i class="bi bi-stopwatch"></i>&nbsp;&nbsp; Sift</a>
         </div>
+        <div class="navbar-nav w-100">
+            <a href="/absensi" class="nav-item nav-link" ><i class="bi bi-stopwatch"></i>&nbsp;&nbsp; Absen</a>
+        </div>
+        <div class="navbar-nav w-100">
+            <a href="/detail-absensi" class="nav-item nav-link" ><i class="bi bi-stopwatch"></i>&nbsp;&nbsp; Detail Absen</a>
+        </div>
             
     </nav>
 </div>

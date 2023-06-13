@@ -151,4 +151,11 @@ class SiftController extends Controller
             return view("pages/sift/v_sift")->with(['user' => $user,'data'=>$data,'no'=>$no])->withErrors($pesan);
         }
     }
+
+    public function search(Request $request)
+    {
+        $searchTerm = $request->input('search');
+        $users = Sift::where('name', 'like', "%$searchTerm%")->paginate(5);
+        return view('sift.search', ['users' => $users]);
+    }
 }

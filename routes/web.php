@@ -8,6 +8,8 @@ use App\Http\Controllers\HRDController;
 use App\Http\Controllers\PengawasController;
 use App\Http\Controllers\KaryawanController;
 use App\Http\Controllers\SiftController;
+use App\Http\Controllers\AbsensiController;
+use App\Http\Controllers\DetailAbsensiController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -49,4 +51,9 @@ Route::post('/importkaryawan', [KaryawanController::class, 'importexcel'])->midd
 
 //sift
 Route::resource('/sift', SiftController::class)->middleware('isLogin');
-Route::post('/importsift', [SiftController::class, 'importexcel'])->middleware('isLogin');
+
+//absen
+Route::resource('/absensi', AbsensiController::class)->middleware('isLogin');
+
+//detail absen
+Route::resource('/detail-absensi', DetailAbsensiController::class)->middleware('isLogin');

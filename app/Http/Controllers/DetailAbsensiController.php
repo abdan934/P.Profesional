@@ -126,6 +126,9 @@ class DetailAbsensiController extends Controller
     public function edit(string $id)
     {
         //
+        $data = DetailAbsensi::where('id_detail_absensi',$id)->first();
+        $user = Auth::user();
+        return view('pages/d_absensi/v_edit_d_absen')->with(['data'=>$data,'user'=>$user]);
     }
 
     /**
@@ -134,6 +137,49 @@ class DetailAbsensiController extends Controller
     public function update(Request $request, string $id)
     {
         //
+        $no = 1;
+        $user = Auth::user();
+        $search = request()->input('search');
+        $data = DetailAbsensi::orderBy('detail_absensi.id_sift', 'asc')
+        ->join('absensi','detail_absensi.id_absensi' , '=','absensi.id_absensi')
+        ->join('karyawan', 'karyawan.id_karyawan', '=', 'detail_absensi.id_karyawan')
+        ->join('sift', 'sift.id_sift', '=', 'detail_absensi.id_sift')
+        ->where(function ($query) use ($search) {
+            $query->where('absensi.id_absensi', 'LIKE', '%' . $search . '%')
+                ->orWhere('detail_absensi.id_karyawan', 'LIKE', '%' . $search . '%')
+                ->orWhere('karyawan.name_karyawan', 'LIKE', '%' . $search . '%')
+                ->orWhere('detail_absensi.id_sift', 'LIKE', '%' . $search . '%')
+                ->orWhere('sift.name_sift', 'LIKE', '%' . $search . '%')
+                ->orWhere('detail_absensi.waktu_absen', 'LIKE', '%' . $search . '%');
+        })
+        ->paginate(5);
+
+        $update=[
+            'name_kapal' => $request->input('name_kapal'),
+            'bagian' => $request->input('bagian'),
+            'dermaga' => $request->input('dermaga'),
+            'keterangan' => $request->input('keterangan'),
+        ];
+
+        $validator = Validator::make($request->all(), [
+            'keterangan' => 'required',
+        ],[
+            'keterangan.required' => 'Kerangan gagal diubah',
+        ]);
+
+        if ($validator->fails()) {
+            return view('pages/d_absensi/v_d_absensi')->withErrors($validator)->with(['user' => $user,'data'=>$data,'no'=>$no]);
+        } else {
+            try {
+                DetailAbsensi::where('id_detail_absensi',$id)->update($update);
+                $pesan = 'Berhasil diubah';
+                return view('pages/d_absensi/v_d_absensi')->with(['isipesan' => $pesan,'user' => $user,'data'=>$data,'no'=>$no]);
+            } catch (Exception $e) {
+                $errorPesan = 'Gagal menambahkan: ' . $e->getMessage();
+                return view('pages/d_absensi/v_d_absensi')->withErrors([$errorPesan])->with(['user' => $user,'data'=>$data,'no'=>$no]);
+            }
+        }
+        
     }
 
     /**

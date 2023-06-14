@@ -131,7 +131,15 @@ class KaryawanController extends Controller
         $no = 1;
         $user = Auth::user();
         $checkdata = Karyawan::where('id_karyawan', $id)->first();
-        if($checkdata){
+        $validator = Validator::make( [
+            'id_karyawan' => 'unique:detail_absensi',
+        ],[
+            'id_karyawan.unique' => 'Kode sudah terdaftar.',
+        ]);
+        if($validator){
+            $pesan = 'Silahkan cek kembali data yang akan dihapus pada data yang lain!';
+            return view("pages/karyawan/v_karyawan")->with(['user' => $user,'data'=>$data,'no'=>$no])->withErrors($pesan);
+        }else if($checkdata){
             Karyawan::where('id_karyawan',$id)->delete();
             return view("pages/karyawan/v_karyawan")->with(['data'=>$data, 'no'=>$no,'user'=>$user,'isipesan'=>$pesan]);
         }else{

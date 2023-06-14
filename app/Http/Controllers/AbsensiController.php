@@ -114,8 +114,16 @@ class AbsensiController extends Controller
         $pesan = 'Berhasil dihapus';
         $data = Absensi::orderBy('tgl','asc')->paginate(10);
         $user = Auth::user();
+        $validator = Validator::make( [
+            'id_absensi' => 'unique:detail_absensi',
+        ],[
+            'id_absensi.unique' => 'Kode sudah terdaftar.',
+        ]);
         $checkdata = Absensi::where('id_absensi', $id)->first();
-        if($checkdata){
+        if($validator){
+            $pesan = 'Silahkan cek kembali data yang akan dihapus pada data yang lain!';
+            return view("pages/absensi/v_absensi")->with(['user' => $user,'data'=>$data,'no'=>$no])->withErrors($pesan);
+        }else if($checkdata){
             Absensi::where('id_absensi',$id)->delete();
             return view("pages/absensi/v_absensi")->with(['data'=>$data, 'no'=>$no,'user'=>$user,'isipesan'=>$pesan]);
         }else{

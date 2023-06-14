@@ -30,8 +30,8 @@
                                                 <thead class="table-light">
                                                     <tr class="text-center">
                                                         <th >No</th>
-                                                        <th >Kode Detail Absen</th>
-                                                        <th >Kode Absen</th>
+                                                        {{-- <th >Kode Detail Absen</th> --}}
+                                                        {{-- <th >Kode Absen</th> --}}
                                                         <th >Nama Karyawan</th>
                                                         <th >Shift</th>
                                                         <th >Nama Kapal</th>
@@ -46,28 +46,20 @@
                                                     @foreach ($data as $item)
                                                     <tr class="text-center">
                                                         <th scope="row" class="text-center">{{$no++}}</th>
-                                                        <td class="m-1">{{$item->id_detail_absensi}}</td>
-                                                        <td class="m-1">{{$item->id_absensi}}</td>
+                                                        {{-- <td class="m-1">{{$item->id_detail_absensi}}</td> --}}
+                                                        {{-- <td class="m-1">{{$item->id_absensi}}</td> --}}
                                                         <td class="m-1">{{$item->name_karyawan}}</td>
                                                         <td class="m-1">{{$item->name_sift}}</td>
                                                         <td class="m-1">{{$item->name_kapal}}</td>
                                                         <td class="m-1">{{$item->bagian}}</td>
                                                         <td class="m-1">{{$item->dermaga}}</td>
                                                         <td class="m-1" style="position: relative;">
-                                                            <div class="form-floating mb-3">
-                                                                <div style="display: flex; align-items: center;">
-                                                                    <select class="form-select" name="keterangan"
-                                                                    aria-label="Floating label select example">
-                                                                        <option value="hadir"  {{ $item->keterangan === 'Hadir' ? 'selected' : '' }}>Hadir</option>
-                                                                        <option value="absen"  {{ $item->keterangan === 'Absen' ? 'selected' : '' }}>Absen</option>
-                                                                    </select>
-                                                                </div>
-                                                        </div>
-                                                    </td>
+                                                            {{$item->keterangan}}
+                                                        </td>
                                                         <td class="m-1">{{$item->waktu_absen}}</td>
                                                         <td class="text-center">
                                                                 <button type="button" class="btn btn-outline-danger m-1" data-bs-toggle="modal" data-bs-target="#ModalHapus_{{$item->id_detail_absensi}}"><i class="bi bi-trash"></i> Hapus</button>  
-                                                            <a href="#">             
+                                                            <a href="{{url('/detail-absensi/'.$item->id_detail_absensi.'/edit')}}">             
                                                                 <button type="button" class="btn btn-outline-info m-1"><i class="bi bi-list"></i> Detail</button>               
                                                             </a>
                                                             
@@ -122,7 +114,7 @@
                                                                                     <td><h6>{{$item->dermaga}}</h6></td>
                                                                                 </tr>
                                                                                 <tr>
-                                                                                    <td><h6>Keteranga</h6></td>
+                                                                                    <td><h6>Keterangan</h6></td>
                                                                                     <td><h6>=</h6></td>
                                                                                     <td><h6>{{$item->keterangan}}</h6></td>
                                                                                 </tr>
@@ -245,4 +237,26 @@
                     </div>
                     </div>
                 </div>
+
+                <script>
+                    // Mengambil element select
+                    const keteranganSelect = document.getElementById('keterangan');
+                
+                    keteranganSelect.addEventListener('change', function() {
+                        const newValue = this.value; 
+                
+                        axios.post('/update-keterangan', {
+                            keterangan: newValue
+                        })
+                        .then(function(response) {
+                            // Tanggapan sukses, lakukan tindakan lain jika diperlukan
+                            console.log('Update keterangan berhasil');
+                        })
+                        .catch(function(error) {
+                            // Tanggapan gagal, tangani kesalahan jika diperlukan
+                            console.error('Gagal mengupdate keterangan');
+                        });
+                    });
+                </script>
+                
 @endsection

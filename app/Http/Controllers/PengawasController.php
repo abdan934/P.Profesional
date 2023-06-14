@@ -132,7 +132,15 @@ class PengawasController extends Controller
         $no = 1;
         $user = Auth::user();
         $checkdata = Pengawas::where('id_pengawas', $id)->first();
-        if($checkdata){
+        $validator = Validator::make( [
+            'id_pengawas' => 'unique:absensi',
+        ],[
+            'id_pengawas.unique' => 'Kode sudah terdaftar.',
+        ]);
+        if($validator){
+            $pesan = 'Silahkan cek kembali data yang akan dihapus pada data yang lain!';
+            return view("pages/pengawas/v_pengawas")->with(['user' => $user,'data'=>$data,'no'=>$no])->withErrors($pesan);
+        }else if($checkdata){
             Pengawas::where('id_pengawas',$id)->delete();
             return view("pages/pengawas/v_pengawas")->with(['data'=>$data, 'no'=>$no,'user'=>$user,'isipesan'=>$pesan]);
         }else{

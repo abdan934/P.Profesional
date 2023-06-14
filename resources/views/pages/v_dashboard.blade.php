@@ -9,7 +9,7 @@
         <div class="col-sm-12 col-xl-6">
             <div class="bg-light rounded h-100 p-4">
                     <div class="testimonial-item text-center">
-                        <img class="img-fluid rounded-circle mx-auto mb-4" src="img/pekerja.png" style="width: 100px; height: 100px;">
+                        <img class="img-fluid rounded-circle mx-auto mb-4" src="{{asset('img/pekerja.png')}}" style="width: 100px; height: 100px;">
                         <h5 class="mb-1">{{$user->name}}</h5>
                         <p>{{$user->level}}</p>
                         <p class="mb-0">Lorem ipsum dolor sit amet consectetur adipisicing elit. Reprehenderit, quas.</p>

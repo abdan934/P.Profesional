@@ -43,9 +43,9 @@
                                             <td class="m-1">{{$item->tgl}}</td>
                                             <td class="text-center">
                                                     <button type="button" class="btn btn-outline-danger m-1" data-bs-toggle="modal" data-bs-target="#ModalHapus_{{$item->id_absensi}}"><i class="bi bi-trash"></i> Hapus</button>  
-                                                <a href="{{url('/absensi/'.$item->id_absensi.'/edit')}}">             
+                                                {{-- <a href="{{url('/absensi/'.$item->id_absensi.'/edit')}}">             
                                                     <button type="button" class="btn btn-outline-info m-1"><i class="bi bi-list"></i> Detail</button>               
-                                                </a>
+                                                </a> --}}
                                                 
                                                 <!-- Modal hapus-->
                                                     <div class="modal fade" id="ModalHapus_{{$item->id_absensi}}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">

@@ -63,6 +63,7 @@ class UserController extends Controller
             'name' => $request->input('name'),
             'email' => $request->input('email'),
             'password' => Hash::make($request->input('password')),
+            'foto_profile' => 'pekerja.png',
             'level' => $request->input('level'),
         ];
 
@@ -210,35 +211,6 @@ class UserController extends Controller
                     }
                 }
         }
-        
-         //ubah password
-    public function UbahPassword(Request $request, $id)
-    {
-        $validator = Validator::make($request->all(), [
-            'password' => 'min:6|confirmed',
-        ],[
-            'password.min' => 'Password minimal 6 karakter.',
-            'password.confirmed' => 'Password tidak sesuai'
-        ]);
-
-        $data_update=[
-            'password' => Hash::make($request->input('password')),
-        ];
-
-        $user = Auth::user();
-        $data = User::orderBy('id','asc')->paginate(10);
-        $no = 1;
-
-        if ($validator->fails()) {
-            $pesan = 'Gagal diubah';
-            return view("pages/user/v_edit_user")->with(['user' => $user,'data'=>$data,'no'=>$no])->withErrors($pesan);
-    
-            }else{
-                User::where('id',$id)->update($data_update);
-                $pesan = 'Berhasil diubah';
-            return view("pages/user/v_edit_user")->with(['data'=>$data, 'no'=>$no,'user'=>$user,'isipesan'=>$pesan]);
-            }
-    }
 
         //reset password
         public function resetPassword(Request $request, $id){

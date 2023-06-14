@@ -20,6 +20,7 @@ class UserImport implements ToModel
         'name' => $row[1],
         'email'=> $row[2],
         'password'=> Hash::make($row[3]),
+        'foto_profile'=> 'pekerja.png',
         'level'=> $row[4],
         ]);
     }

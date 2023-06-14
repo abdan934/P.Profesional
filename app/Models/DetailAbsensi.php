@@ -19,6 +19,7 @@ class DetailAbsensi extends Model
         'bagian',
         'dermaga',
         'keterangan',
+        'foto',
         'waktu_absen',
     ];
 }

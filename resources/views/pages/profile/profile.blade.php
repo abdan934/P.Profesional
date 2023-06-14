@@ -45,7 +45,28 @@
                         </div>
                     </div>
 
-                    <div class="col-sm-12 col-xl-6 mb-5">
+                    <div class="col-sm-6 col-xl-6 mb-5">
+                        <div class="bg-light rounded h-100 p-4">
+                            <h4 class="mb-4 text-center">Foto Profile</h4>
+                            <form action="{{'/ubah-profile/'.$user->username}}" method="POST"  enctype="multipart/form-data">
+                                @csrf
+                                @method('PUT')
+                                <div class="text-center">
+                                    <img class="img-fluid rounded-circle mx-auto mb-4" src="{{asset('fotoprofile/'.$user->foto_profile)}}" style="width: 100px; height: 100px;">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="formFileMultiple" class="form-label">Masukan foto</label>
+                                    <input class="form-control" type="file" name="foto_profile" id="formFileMultiple" multiple required>
+                                </div>
+                                <!-- Button trigger modal -->
+                                    <button type="button submit" class="btn btn-primary" >
+                                        Ubah
+                                    </button>
+                            </form>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-6 col-xl-6 mb-5">
                         <div class="bg-light rounded h-100 p-4">
                             <h6 class="mb-4">Ganti Password</h6>
                             <form action="{{'/ubah-pass/'.$user->username}}" method="POST">

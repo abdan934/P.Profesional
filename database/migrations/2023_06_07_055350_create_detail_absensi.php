@@ -23,6 +23,7 @@ return new class extends Migration
             $table->string('bagian');
             $table->string('dermaga');
             $table->string('keterangan');
+            $table->string('foto');
             $table->string('waktu_absen');
             $table->timestamps();
         });

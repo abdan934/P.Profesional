@@ -12,6 +12,7 @@ use App\Http\Controllers\AbsensiController;
 use App\Http\Controllers\DetailAbsensiController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PassController;
+use App\Http\Controllers\EditProfileFoto;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -63,3 +64,4 @@ Route::resource('/detail-absensi', DetailAbsensiController::class)->middleware('
 //profile
 Route::resource('/myprofile', ProfileController::class)->middleware('isLogin');
 Route::resource('/ubah-pass', PassController::class)->middleware('isLogin');
+Route::resource('/ubah-profile', EditProfileFoto::class)->middleware('isLogin');

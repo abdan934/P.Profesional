@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('karyawan', function (Blueprint $table) {
             $table->string('id_karyawan')->primary();
             $table->string('name_karyawan');
+            $table->string('qr_karyawan');
             $table->timestamps();
         });
     }

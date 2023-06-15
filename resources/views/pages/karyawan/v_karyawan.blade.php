@@ -31,6 +31,7 @@
                                             <th scope="col">No</th>
                                             <th scope="col">Kode Karyawan</th>
                                             <th scope="col">Nama</th>
+                                            <th scope="col">QR</th>
                                             <th >Aksi</th>
                                     </thead>
                                     <tbody >
@@ -40,6 +41,11 @@
                                             <th scope="row" class="text-center">{{$no++}}</th>
                                             <td class="m-1">{{$item->id_karyawan}}</td>
                                             <td class="m-1">{{$item->name_karyawan}}</td>
+                                            <td class="m-1">
+                                                <div class="text-center">
+                                                    <img class="img-fluid rounded-square mx-auto mb-4" src="{{asset('QRcode/'.$item->qr_karyawan)}}" style="width: 100px; height: 100px;">
+                                                </div>    
+                                            </td>
                                             <td class="text-center">
                                                     <button type="button" class="btn btn-outline-danger m-1" data-bs-toggle="modal" data-bs-target="#ModalHapus_{{$item->id_karyawan}}"><i class="bi bi-trash"></i> Hapus</button>  
                                                 <a href="{{url('/karyawan/'.$item->id_karyawan.'/edit')}}">             

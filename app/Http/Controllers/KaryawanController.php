@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
 use App\Imports\KaryawanImport;
 use Maatwebsite\Excel\Facades\Excel;
+use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 class KaryawanController extends Controller
 {
@@ -50,9 +51,16 @@ class KaryawanController extends Controller
             'id_karyawan.unique' => 'Kode sudah terdaftar.',
         ]);
 
+        //generatecode
+        $qrCode = QrCode::format('png')->generate( $request->input('id_karyawan'));
+        $qrCodeFileName = 'qrcode_' . $request->input('id_karyawan') . '.png';
+        $qrCodeFile = 'QRcode/' . $qrCodeFileName;
+        file_put_contents($qrCodeFile, $qrCode);
+
         $datacreate = [
             'id_karyawan' => $request->input('id_karyawan'),
             'name_karyawan' => $request->input('name_karyawan'),
+            'qr_karyawan' => $qrCodeFileName,
         ];
 
         $user = Auth::user();

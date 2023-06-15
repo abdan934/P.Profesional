@@ -17,6 +17,7 @@ use Illuminate\Validation\Rule;
 use App\Imports\AbsensiImport;
 use Maatwebsite\Excel\Facades\Excel;
 use Carbon\Carbon;
+use DateTimeZone;
 
 class DetailAbsensiController extends Controller
 {
@@ -73,6 +74,10 @@ class DetailAbsensiController extends Controller
             'id_sift.exists' => 'Kode tidak ditemukan',
         ]);
 
+        //realtime WIB
+        $now = Carbon::now(new DateTimeZone('Asia/Jakarta'));
+        $timeWIB = $now->format('H:i:s');
+
         $datacreate = [
             'id_absensi' => $request->input('id_absensi'),
             'id_karyawan' => $request->input('id_karyawan'),
@@ -81,7 +86,7 @@ class DetailAbsensiController extends Controller
             'bagian' => $request->input('bagian'),
             'dermaga' => $request->input('dermaga'),
             'keterangan' => $request->input('keterangan'),
-            'waktu_absen' => Carbon::now()->format('H:i:s'),
+            'waktu_absen' => $timeWIB,
         ];
 
         $no = 1;

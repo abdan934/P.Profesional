@@ -150,17 +150,17 @@
                                 placeholder="Email" >
                             <label for="floatingInput">Email</label>
                         </div>
-                        <div class="form-floating mb-3">
+                        {{-- <div class="form-floating mb-3">
                             <select class="form-select" name="level" required value="{{old('level')}}"
                                 aria-label="Floating label select example">
                                 <option selected>--- Pilih ---</option>
                                 <option value="admin">Admin</option>
                                 <option value="pengawas">Pengawas</option>
-                                <option value="karyawan">Karyawan</option>
+                                <option value="karyawan">Karyawan</option>w
                                 <option value="hrd">HRD</option>
                             </select>
                             <label for="floatingSelect">Pilih jabatan</label>
-                        </div>
+                        </div> --}}
                         <div class="form-floating mb-3">
                             <input type="password" class="form-control" name="password" required value="{{old('password')}}"
                                 placeholder="Password" >

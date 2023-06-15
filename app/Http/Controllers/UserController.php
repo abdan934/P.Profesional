@@ -58,27 +58,44 @@ class UserController extends Controller
             'password.confirmed' => 'Password tidak sesuai'
         ]);
 
+        $cekkaryawan = Validator::make($request->all(), [
+            'username' => 'unique:karyawan',
+        ]);
+        $cekpengawas = Validator::make($request->all(), [
+            'username' => 'unique:pengawas',
+        ]);
+        $cekhrd = Validator::make($request->all(), [
+            'username' => 'unique:hrd',
+        ]);
+
+        if($cekkaryawan !== null){
+            $level = 'Karyawan';
+        }else if($cekpengawas !== null){
+            $level = 'Pengawas';
+        }else if($cekhrd !== null){
+            $level = 'HRD';
+        }else{
+            $level = 'Karyawan';
+        }
+
         $data = [
             'username' => $request->input('username'),
             'name' => $request->input('name'),
             'email' => $request->input('email'),
             'password' => Hash::make($request->input('password')),
             'foto_profile' => 'pekerja.png',
-            'level' => $request->input('level'),
+            'level' => $level,
         ];
 
+        $user = Auth::user();
+        $data = User::orderBy('id','asc')->paginate(10);
+        $no = 1;
         if ($validator->fails()) {
-            $user = Auth::user();
-            $data = User::orderBy('id','asc')->paginate(10);
-            $no = 1;
             return view('pages/user/v_user')->withErrors($validator)->with(['user' => $user,'data'=>$data,'no'=>$no]);
 
         }else{
             User::create($data);
             $pesan = 'Berhasil ditambahkan';
-            $user = Auth::user();
-            $data = User::orderBy('id','asc')->paginate(10);
-            $no = 1;
             return view('pages/user/v_user')->with(['isipesan'=>$pesan,'user' => $user,'data'=>$data,'no'=>$no]);
         }
     }
@@ -108,7 +125,6 @@ class UserController extends Controller
     public function update(Request $request, string $id)
     {
         //
-        $user = Auth::user();
         $data_update=[
             'name' => $request->input('name'),
             'email' => $request->input('email'),
@@ -127,10 +143,10 @@ class UserController extends Controller
         });
         
 
-        if ($validator->fails()) {
         $user = Auth::user();
         $data = User::orderBy('id','asc')->paginate(10);
         $no = 1;
+        if ($validator->fails()) {
         $pesan = 'Gagal diubah';
         return view("pages/user/v_user")->with(['user' => $user,'data'=>$data,'no'=>$no])->withErrors($pesan);
 
@@ -144,8 +160,6 @@ class UserController extends Controller
             }
             User::where('id',$id)->update($data_update);
             $pesan = 'Berhasil diubah';
-            $data = User::orderBy('id','asc')->paginate(10);
-            $no = 1;
         return view("pages/user/v_user")->with(['data'=>$data, 'no'=>$no,'user'=>$user,'isipesan'=>$pesan]);
         }
     }
@@ -189,6 +203,8 @@ class UserController extends Controller
             $data_isi = User::orderBy('id','asc')->paginate(10);
             $no = 1;
             $user = Auth::user();
+
+                
 
                 foreach ($rows[0] as $row) {
                     // Sesi pemeriksaan

@@ -9,6 +9,9 @@ use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Response;
+use Carbon\Carbon;
+use DateTimeZone;
+
 
 class LoginController extends Controller
 {
@@ -23,6 +26,7 @@ class LoginController extends Controller
         Session::flash('username',$request->username);
         Session::flash('password',$request->password);
         $infologin2 = $request->only('username', 'password');
+        
         if(Auth::attempt($infologin2)){
             //berhasil
             $username_login = $request->input('username');

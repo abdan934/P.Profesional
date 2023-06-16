@@ -30,19 +30,16 @@ class DetailAbsensiController extends Controller
         $no = 1;
         $user = Auth::user();
         $search = request()->input('search');
-        $data = DetailAbsensi::orderBy('detail_absensi.id_sift', 'asc')
+        $data = DetailAbsensi::orderBy('detail_absensi.id_d_absensi', 'desc')
                 ->join('absensi','detail_absensi.id_absensi' , '=','absensi.id_absensi')
                 ->join('karyawan', 'karyawan.id_karyawan', '=', 'detail_absensi.id_karyawan')
-                ->join('sift', 'sift.id_sift', '=', 'detail_absensi.id_sift')
                 ->where(function ($query) use ($search) {
                     $query->where('absensi.id_absensi', 'LIKE', '%' . $search . '%')
                         ->orWhere('detail_absensi.id_karyawan', 'LIKE', '%' . $search . '%')
                         ->orWhere('karyawan.name_karyawan', 'LIKE', '%' . $search . '%')
-                        ->orWhere('detail_absensi.id_sift', 'LIKE', '%' . $search . '%')
-                        ->orWhere('sift.name_sift', 'LIKE', '%' . $search . '%')
                         ->orWhere('detail_absensi.waktu_absen', 'LIKE', '%' . $search . '%');
                 })
-    ->paginate(5);
+                 ->paginate(5);
 
         return view("pages/d_absensi/v_d_absensi")->with(['user' => $user,'data'=>$data,'no'=>$no]);
         

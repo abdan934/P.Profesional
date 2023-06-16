@@ -15,6 +15,10 @@ return new class extends Migration
             $table->increments('id_absensi');
             $table->string('id_pengawas');
             $table->foreign('id_pengawas')->references('id_pengawas')->on('pengawas');
+            $table->string('id_sift');
+            $table->foreign('id_sift')->references('id_sift')->on('sift');
+            $table->string('name_kapal');
+            $table->string('dermaga');
             $table->string('tgl');
             $table->timestamps();
             

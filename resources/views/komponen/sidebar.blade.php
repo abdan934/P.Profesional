@@ -34,11 +34,16 @@
             <a href="/sift" class="nav-item nav-link" ><i class="bi bi-stopwatch"></i>&nbsp;&nbsp; Sift</a>
         </div>
         <div class="navbar-nav w-100">
-            <a href="/absensi" class="nav-item nav-link" ><i class="bi bi-stopwatch"></i>&nbsp;&nbsp; Absen</a>
+            <a href="/absensi" class="nav-item nav-link" ><i class="bi bi-card-checklist"></i>&nbsp;&nbsp; Absen</a>
         </div>
         <div class="navbar-nav w-100">
-            <a href="/detail-absensi" class="nav-item nav-link" ><i class="bi bi-stopwatch"></i>&nbsp;&nbsp; Detail Absen</a>
+            <a href="/detail-absensi" class="nav-item nav-link" ><i class="bi bi-layout-text-sidebar-reverse"></i>&nbsp;&nbsp; Detail Absen</a>
         </div>
-            
+    <div class="navbar-nav w-100">
+        <a href="/absensi-masuk" class="nav-item nav-link" ><i class="bi bi-box-arrow-in-down-right"></i></i>&nbsp;&nbsp;Absen Masuk</a>
+    </div>
+    <div class="navbar-nav w-100">
+        <a href="/absensi" class="nav-item nav-link" ><i class="bi bi-box-arrow-in-up-left"></i></i>&nbsp;&nbsp;Absen Keluar</a>
+    </div>
     </nav>
 </div>

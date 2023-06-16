@@ -30,6 +30,9 @@
                                             <th scope="col">No</th>
                                             <th scope="col">Kode Absen</th>
                                             <th scope="col">Nama Pengawas</th>
+                                            <th scope="col">Shift</th>
+                                            <th scope="col">Kapal</th>
+                                            <th scope="col">Dermaga</th>
                                             <th scope="col">Tanggal</th>
                                             <th >Aksi</th>
                                     </thead>
@@ -40,12 +43,12 @@
                                             <th scope="row" class="text-center">{{$no++}}</th>
                                             <td class="m-1">{{$item->id_absensi}}</td>
                                             <td class="m-1">{{$item->name_pengawas}}</td>
+                                            <td class="m-1">{{$item->name_sift}}</td>
+                                            <td class="m-1">{{$item->name_kapal}}</td>
+                                            <td class="m-1">{{$item->dermaga}}</td> 
                                             <td class="m-1">{{$item->tgl}}</td>
                                             <td class="text-center">
                                                     <button type="button" class="btn btn-outline-danger m-1" data-bs-toggle="modal" data-bs-target="#ModalHapus_{{$item->id_absensi}}"><i class="bi bi-trash"></i> Hapus</button>  
-                                                {{-- <a href="{{url('/absensi/'.$item->id_absensi.'/edit')}}">             
-                                                    <button type="button" class="btn btn-outline-info m-1"><i class="bi bi-list"></i> Detail</button>               
-                                                </a> --}}
                                                 
                                                 <!-- Modal hapus-->
                                                     <div class="modal fade" id="ModalHapus_{{$item->id_absensi}}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">

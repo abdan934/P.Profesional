@@ -30,13 +30,8 @@
                                                 <thead class="table-light">
                                                     <tr class="text-center">
                                                         <th >No</th>
-                                                        {{-- <th >Kode Detail Absen</th> --}}
-                                                        {{-- <th >Kode Absen</th> --}}
                                                         <th >Nama Karyawan</th>
-                                                        <th >Shift</th>
-                                                        <th >Nama Kapal</th>
                                                         <th >Bagian</th>
-                                                        <th >Dermaga</th>
                                                         <th >Keterangan</th>
                                                         <th >Waktu Absen</th>
                                                         <th >Aksi</th>
@@ -47,12 +42,8 @@
                                                     <tr class="text-center">
                                                         <th scope="row" class="text-center">{{$no++}}</th>
                                                         {{-- <td class="m-1">{{$item->id_detail_absensi}}</td> --}}
-                                                        {{-- <td class="m-1">{{$item->id_absensi}}</td> --}}
                                                         <td class="m-1">{{$item->name_karyawan}}</td>
-                                                        <td class="m-1">{{$item->name_sift}}</td>
-                                                        <td class="m-1">{{$item->name_kapal}}</td>
                                                         <td class="m-1">{{$item->bagian}}</td>
-                                                        <td class="m-1">{{$item->dermaga}}</td>
                                                         <td class="m-1" style="position: relative;">
                                                             {{$item->keterangan}}
                                                         </td>

@@ -17,11 +17,7 @@ return new class extends Migration
             $table->foreign('id_absensi')->references('id_absensi')->on('absensi');
             $table->string('id_karyawan');
             $table->foreign('id_karyawan')->references('id_karyawan')->on('karyawan');
-            $table->string('id_sift');
-            $table->foreign('id_sift')->references('id_sift')->on('sift');
-            $table->string('name_kapal');
             $table->string('bagian');
-            $table->string('dermaga');
             $table->string('keterangan');
             $table->string('foto');
             $table->string('waktu_absen');

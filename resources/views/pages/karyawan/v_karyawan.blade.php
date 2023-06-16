@@ -37,13 +37,13 @@
                                     <tbody >
                                         
                                         @foreach ($data as $item)
-                                        <tr>
+                                        <tr class="text-center">
                                             <th scope="row" class="text-center">{{$no++}}</th>
                                             <td class="m-1">{{$item->id_karyawan}}</td>
                                             <td class="m-1">{{$item->name_karyawan}}</td>
                                             <td class="m-1">
                                                 <div class="text-center">
-                                                    <img class="img-fluid rounded-square mx-auto mb-4" src="{{asset('QRcode/'.$item->qr_karyawan)}}" style="width: 100px; height: 100px;">
+                                                    <img class="img-fluid rounded-square mx-auto" src="{{asset('QRcode/'.$item->qr_karyawan)}}" style="width: 100px; height: 100px;">
                                                 </div>    
                                             </td>
                                             <td class="text-center">

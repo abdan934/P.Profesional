@@ -10,6 +10,9 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
 use App\Models\User;
+use Carbon\Carbon;
+use DateTimeZone;
+
 
 class EditProfileFoto extends Controller
 {
@@ -62,6 +65,9 @@ class EditProfileFoto extends Controller
         $user = Auth::user();
         $data = User::orderBy('id','asc')->paginate(10);
         $username_login = $request->session()->get('username_login');
+        //realtime WIB
+        $now = Carbon::now(new DateTimeZone('Asia/Jakarta'));
+        $timeWIB = $now->format('H:i');
 
         $validator = Validator::make($request->all(), [
             'foto_profile' => 'image|mimes:PNG,jpeg,png,jpg,gif|max:2048',
@@ -76,10 +82,10 @@ class EditProfileFoto extends Controller
     
                 User::where('username', $id)->update($nama_foto);
             $pesan='Berhasil ubah foto profile';
-        return view("pages/v_dashboard")->with(['user' => $user,'isipesan'=>$pesan]);
+        return view("pages/v_dashboard")->with(['user' => $user,'isipesan'=>$pesan,'time'=>$timeWIB]);
         }else{
             $pesan='Foto gagal diubah';
-        return view("pages/v_dashboard")->with(['user' => $user])->withErrors($pesan);
+        return view("pages/v_dashboard")->with(['user' => $user,'time'=>$timeWIB])->withErrors($pesan);
         }
     }
 

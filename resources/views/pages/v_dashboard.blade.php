@@ -12,6 +12,7 @@
                         <img class="img-fluid rounded-circle mx-auto mb-4" src="{{asset('fotoprofile/'.$user->foto_profile)}}" style="width: 100px; height: 100px;">
                         <h5 class="mb-1">{{$user->name}}</h5>
                         <p>{{$user->level}}</p>
+                        <p>{{$time}}</p>
                         <p class="mb-0">Lorem ipsum dolor sit amet consectetur adipisicing elit. Reprehenderit, quas.</p>
                     </div>
             </div>

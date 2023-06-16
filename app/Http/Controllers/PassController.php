@@ -10,6 +10,9 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
 use App\Models\User;
+use Carbon\Carbon;
+use DateTimeZone;
+
 
 class PassController extends Controller
 {
@@ -61,6 +64,9 @@ class PassController extends Controller
         //
         $user = Auth::user();
         $data = User::orderBy('id','asc')->paginate(10);
+         //realtime WIB
+         $now = Carbon::now(new DateTimeZone('Asia/Jakarta'));
+         $timeWIB = $now->format('H:i');
         $data_update=[
             'password' => Hash::make($request->input('password')),
         ];
@@ -78,7 +84,7 @@ class PassController extends Controller
             $username_login = $request->session()->get('username_login');
             $user = Auth::user();
             $pesan='Berhasil ubah password';
-        return view("pages/v_dashboard")->with(['user' => $user,'isipesan'=>$pesan]);
+        return view("pages/v_dashboard")->with(['user' => $user,'isipesan'=>$pesan,'time'=>$timeWIB]);
         }
     }
 

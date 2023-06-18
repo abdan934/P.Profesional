@@ -1,8 +1,7 @@
 @extends('layout/template')
 
 @section('isi-konten')
-    
-     
+
 <div class="container-fluid pt-4 px-4">
     <div class="row vh-100 bg-light rounded align-items-center justify-content-center mx-0">
         
@@ -14,6 +13,7 @@
                     </div>
             </div>
         </div>
+        
     </div>
 </div>
 
@@ -21,8 +21,6 @@
 
 <script>
     function onScanSuccess(decodedText, decodedResult) {
-        // handle the scanned code as you like, for example:
-        // console.log(`Code matched = ${decodedText}`, decodedResult);
                 html5QrcodeScanner.clear()
                 $('#result').val(decodedText)
             }

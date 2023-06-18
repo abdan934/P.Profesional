@@ -284,3 +284,25 @@
     
     
 }
+
+.bg-grass-green {
+    background-color:#5aa768; /* Kode warna CSS untuk hijau rumput */
+  }
+
+.bg-btn-shift{
+    background-color:#1d8452;
+}
+
+.bg-text-shift{
+    color:#a8dcab;
+}
+
+@media (max-width: 576px) {
+    .alert .justify-content-center:first-child {
+        flex-direction: column;
+        align-items: center;
+    }
+    .alert .justify-content-center:last-child {
+        flex-direction: row;
+    }
+}

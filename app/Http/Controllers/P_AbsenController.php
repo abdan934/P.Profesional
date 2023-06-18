@@ -19,7 +19,7 @@ class P_AbsenController extends Controller
     {
         //
         $user = Auth::user();
-        return view("pages/core/p_absen")->with(['user' => $user]);
+        return view("pages/core/p_presensi")->with(['user' => $user]);
     }
 
     /**

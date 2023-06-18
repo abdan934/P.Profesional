@@ -13,13 +13,13 @@ return new class extends Migration
     {
         Schema::create('detail_absensi', function (Blueprint $table) {
             $table->increments('id_detail_absensi');
-            $table->unsignedInteger('id_absensi');  
+            $table->string('id_absensi');  
             $table->foreign('id_absensi')->references('id_absensi')->on('absensi');
             $table->string('id_karyawan');
             $table->foreign('id_karyawan')->references('id_karyawan')->on('karyawan');
             $table->string('bagian');
+            $table->string('status');
             $table->string('keterangan');
-            $table->string('foto');
             $table->string('waktu_absen');
             $table->timestamps();
         });

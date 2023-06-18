@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('absensi', function (Blueprint $table) {
-            $table->increments('id_absensi');
+            $table->string('id_absensi')->primary();
             $table->string('id_pengawas');
             $table->foreign('id_pengawas')->references('id_pengawas')->on('pengawas');
             $table->string('id_sift');

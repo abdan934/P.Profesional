@@ -3,13 +3,16 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\User;
+use App\Models\HRD;
+use App\Models\Karyawan;
+use App\Models\Pengawas;
 use Illuminate\Routing\Redirector;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
-use App\Models\User;
 use App\Imports\UserImport;
 use Maatwebsite\Excel\Facades\Excel;
 
@@ -58,15 +61,11 @@ class UserController extends Controller
             'password.confirmed' => 'Password tidak sesuai'
         ]);
 
-        $cekkaryawan = Validator::make($request->all(), [
-            'username' => 'unique:karyawan',
-        ]);
-        $cekpengawas = Validator::make($request->all(), [
-            'username' => 'unique:pengawas',
-        ]);
-        $cekhrd = Validator::make($request->all(), [
-            'username' => 'unique:hrd',
-        ]);
+        $username =  $request->input('username');
+
+        $cekkaryawan = Karyawan::where('id_karyawan', $username)->first();
+        $cekpengawas = Pengawas::where('id_pengawas', $username)->first();
+        $cekhrd = HRD::where('id_hrd', $username)->first();
 
         if($cekkaryawan !== null){
             $level = 'Karyawan';
@@ -78,8 +77,8 @@ class UserController extends Controller
             $level = 'Karyawan';
         }
 
-        $data = [
-            'username' => $request->input('username'),
+        $data_create = [
+            'username' => $username,
             'name' => $request->input('name'),
             'email' => $request->input('email'),
             'password' => Hash::make($request->input('password')),
@@ -94,7 +93,7 @@ class UserController extends Controller
             return view('pages/user/v_user')->withErrors($validator)->with(['user' => $user,'data'=>$data,'no'=>$no]);
 
         }else{
-            User::create($data);
+            User::create($data_create);
             $pesan = 'Berhasil ditambahkan';
             return view('pages/user/v_user')->with(['isipesan'=>$pesan,'user' => $user,'data'=>$data,'no'=>$no]);
         }
@@ -186,8 +185,6 @@ class UserController extends Controller
 
     //import user
     public function importexcel(Request $request){
-            $data = $request->file('file_excel');
-
             $data = $request->file('file_excel');
                 if (!$data) {
                     $pesan = 'File belum dipilih.';

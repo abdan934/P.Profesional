@@ -12,6 +12,9 @@ class Absensi extends Model
     protected $fillable = [
         'id_absensi',
         'id_pengawas',
+        'id_sift',
+        'name_kapal',
+        'dermaga',
         'tgl',
     ];
 }

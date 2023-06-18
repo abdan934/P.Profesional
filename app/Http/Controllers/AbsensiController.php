@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Absensi;
+use App\Models\DetailAbsensi;
 use App\Models\Pengawas;
 use Illuminate\Routing\Redirector;
 use Illuminate\Http\Response;
@@ -27,11 +28,13 @@ class AbsensiController extends Controller
         $search = request()->input('search');
         $data = Absensi::orderBy('tgl', 'asc')
                 ->join('pengawas', 'absensi.id_pengawas', '=', 'pengawas.id_pengawas')
+                ->join('sift', 'absensi.id_sift', '=', 'sift.id_sift')
                 ->where(function ($query) use ($search) {
                     $query->where('absensi.id_absensi', 'LIKE', '%' . $search . '%')
                         ->orWhere('absensi.id_pengawas', 'LIKE', '%' . $search . '%')
                         ->orWhere('pengawas.name_pengawas', 'LIKE', '%' . $search . '%')
-                        ->orWhere('absensi.tgl', 'LIKE', '%' . $search . '%');
+                        ->orWhere('absensi.tgl', 'LIKE', '%' . $search . '%')
+                        ->orWhere('sift.name_sift', 'LIKE', '%' . $search . '%');
                 })
     ->paginate(5);
         return view("pages/absensi/v_absensi")->with(['user' => $user,'data'=>$data,'no'=>$no]);
@@ -114,14 +117,10 @@ class AbsensiController extends Controller
         $pesan = 'Berhasil dihapus';
         $data = Absensi::orderBy('tgl','asc')->paginate(10);
         $user = Auth::user();
-        $validator = Validator::make( [
-            'id_absensi' => 'unique:detail_absensi',
-        ],[
-            'id_absensi.unique' => 'Kode sudah terdaftar.',
-        ]);
+        $validator = DetailAbsensi::where('id_absensi',$id)->first();
         $checkdata = Absensi::where('id_absensi', $id)->first();
-        if($validator){
-            $pesan = 'Silahkan cek kembali data yang akan dihapus pada data yang lain!';
+        if($validator !==null){
+            $pesan = 'Silahkan cek data yang lain!!';
             return view("pages/absensi/v_absensi")->with(['user' => $user,'data'=>$data,'no'=>$no])->withErrors($pesan);
         }else if($checkdata){
             Absensi::where('id_absensi',$id)->delete();

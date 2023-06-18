@@ -31,7 +31,7 @@
             <a href="/karyawan" class="nav-item nav-link" ><i class="bi bi-file-person-fill me-2"></i> Karyawan</a>
         </div>
         <div class="navbar-nav w-100">
-            <a href="/sift" class="nav-item nav-link" ><i class="bi bi-stopwatch"></i>&nbsp;&nbsp; Sift</a>
+            <a href="/sift" class="nav-item nav-link" ><i class="bi bi-stopwatch"></i>&nbsp;&nbsp; Shift</a>
         </div>
         <div class="navbar-nav w-100">
             <a href="/absensi" class="nav-item nav-link" ><i class="bi bi-card-checklist"></i>&nbsp;&nbsp; Absen</a>

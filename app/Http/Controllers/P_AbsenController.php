@@ -38,23 +38,21 @@ class P_AbsenController extends Controller
         $shift2End = Carbon::today()->setTime(16, 0, 0);
         //waktu shift 3
         $shift3Start = Carbon::today()->setTime(16, 0, 0);
-        $shift3End = Carbon::today()->setTime(0, 0, 0);
+        $shift3End = Carbon::tomorrow()->setTime(0, 0, 0);
 
         $iniShift1 = $today >= $shift1Start && $today < $shift1End;
         $iniShift2 = $today >= $shift2Start && $today < $shift2End;
         $iniShift3 = $today >= $shift3Start && $today < $shift3End;
-
+        
         //waktu shift 1 selesai
-        // $shift1_1Start = Carbon::today()->setTime(7, 0, 0);
-        // $shift1_1End = Carbon::today()->setTime(9, 0, 0);
-        $shift1_1Start = Carbon::today()->setTime(21, 0, 0);
-        $shift1_1End = Carbon::today()->setTime(22, 45, 0);
+        $shift1_1Start = Carbon::today()->setTime(7, 0, 0);
+        $shift1_1End = Carbon::today()->setTime(9, 0, 0);
         //waktu shift 2 selesai
         $shift2_2Start = Carbon::today()->setTime(15, 00, 0);
         $shift2_2End = Carbon::today()->setTime(17, 0, 0);
         //waktu shift 3 selesa
         $shift3_3Start = Carbon::today()->setTime(23, 0, 0);
-        $shift3_3End = Carbon::today()->setTime(1, 0, 0);
+        $shift3_3End = Carbon::tomorrow()->setTime(1, 0, 0);
 
         $today1= $today->format('H:i:s');
         $keluarShift1 = $today1 >= $shift1_1Start && $today1 < $shift1_1End;
@@ -75,12 +73,12 @@ class P_AbsenController extends Controller
                 ->where('absensi.id_sift', $id_sift)
                 ->whereDate('absensi.tgl', $cektoday)
                 ->first();
-                // dd($cekabsenpengawas);
+
         $cekabsen = $cekabsenpengawas ? 1 : 0;
-        // dd($keluarShift1);
+        // dd($iniShift3);
 
         return view("pages/core/p_presensi")->with(['user' => $user,'cekabsen'=>$cekabsen,'kerja'=>$cekabsenpengawas,
-        'keluar_1'=>$keluarShift1,'keluar_2'=>$keluarShift2,'keluar_3'=>$keluarShift3]);
+        'keluar_1'=>$keluarShift1,'keluar_2'=>$keluarShift2,'keluar_3'=>$keluarShift3,'sift1'=>$iniShift1,'sift2'=>$iniShift2,'sift3'=>$iniShift3]);
     }
 
     /**

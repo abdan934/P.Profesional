@@ -7,17 +7,14 @@
     <div class="row vh-80 bg-light rounded align-items-center justify-content-center mx-0">
         
         {{-- Shift 1 --}}
-        <div class="alert alert-success bg-grass-green col-11 m-3 " {{ $sift1 === true ? 'hidden':' ' }}>
+        <div class="alert alert-success bg-grass-green col-11 m-3 " {{ $sift1 === false ? 'hidden':' ' }}>
             <h2 class="text-light"><i class="bi bi-stopwatch-fill"></i>&nbsp; SHIFT 1 </h2>
             <h5 class="bg-text-shift mx-4"> 00.00-08.00 </h5>
            
             <div class="" {{ $cekabsen === 1 ? 'hidden':' ' }}>
                 <div class="d-flex flex-column flex-sm-row justify-content-left align-items-left mb-1 col-12">
                     <button type="button" class="btn btn-light text-light bg-btn-shift mx-2 col-12" onclick="generateCode(1)">Mulai Shift</button>
-                        {{-- <div class="d-flex justify-content-left mt-2 mb-1">
-                            <button type="button" class="btn btn-light text-light bg-btn-shift mx-2 col-6">Masuk</button>
-                            <button type="button" class="btn btn-light text-light bg-btn-shift mx-1 col-6 ">Keluar</button>
-                        </div> --}}
+
                 </div>
                     <br>
                     <div id="generatedCodeContainer1" style="display: none;">
@@ -82,9 +79,9 @@
             <br><h4 class="text-light">{{$kerja->tgl}}</h4>
             @endif
         </div>
-        {{-- @dd() --}}
+        
         {{-- Shift 2 --}}
-        <div class="alert alert-success bg-grass-green col-11 m-3 " {{ $sift2 === true ? 'hidden':' ' }}>
+        <div class="alert alert-success bg-grass-green col-11 m-3 " {{ $sift2 === false ? 'hidden':' ' }}>
             <h2 class="text-light"><i class="bi bi-stopwatch-fill"></i>&nbsp; SHIFT 2 </h2>
             <h5 class="bg-text-shift mx-4"> 08.00-16.00 </h5>
            
@@ -93,7 +90,7 @@
                     <button type="button" class="btn btn-light text-light bg-btn-shift mx-2 col-12" onclick="generateCode(2)">Mulai Shift</button>
                 </div>
                     <br>
-                    <div id="generatedCodeContainer3" style="display: none;">
+                    <div id="generatedCodeContainer2" style="display: none;">
                             <form action="/absensi-masuk" class=" d-flex flex-wrap" method="post">
                                 @csrf
                                 <div class="form-floating mb-1 col-6 mt-1">
@@ -142,10 +139,10 @@
                   <td>
                     {{$kerja->dermaga}}
                   </td>
-                  <td {{ $keluar_1 === true ? 'hidden':' ' }}>
+                  <td {{ $keluar_2 === true ? 'hidden':' ' }}>
                     === Sedang Berlangsung ===
                   </td>
-                  <td {{ $keluar_1 === false ? 'hidden':' ' }}>
+                  <td {{ $keluar_2 === false ? 'hidden':' ' }}>
                     <a href="">
                         <button type="button" class="btn btn-light text-light bg-btn-shift mx-1 col-6 ">Keluar</button>
                     </a>
@@ -157,7 +154,7 @@
         </div>
 
         {{-- Shift 3 --}}
-        <div class="alert alert-success bg-grass-green col-11 m-3 " {{ $sift3 === true ? 'hidden':' ' }}>
+        <div class="alert alert-success bg-grass-green col-11 m-3 " {{ $sift3 === false ? 'hidden':' ' }}>
             <h2 class="text-light"><i class="bi bi-stopwatch-fill"></i>&nbsp; SHIFT 3 </h2>
             <h5 class="bg-text-shift mx-4"> 16.00-00.00 </h5>
            
@@ -215,10 +212,10 @@
                   <td>
                     {{$kerja->dermaga}}
                   </td>
-                  <td {{ $keluar_1 === true ? 'hidden':' ' }}>
+                  <td {{ $keluar_3 === true ? 'hidden':' ' }}>
                     === Sedang Berlangsung ===
                   </td>
-                  <td {{ $keluar_1 === false ? 'hidden':' ' }}>
+                  <td {{ $keluar_3 === false ? 'hidden':' ' }}>
                     <a href="">
                         <button type="button" class="btn btn-light text-light bg-btn-shift mx-1 col-6 ">Keluar</button>
                     </a>
@@ -228,6 +225,8 @@
             <br><h4 class="text-light">{{$kerja->tgl}}</h4>
             @endif
         </div>
+
+
 
     </div>
 </div>

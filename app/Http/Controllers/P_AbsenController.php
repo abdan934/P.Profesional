@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
 use Carbon\Carbon;
+use DateTimeZone;
 
 
 class P_AbsenController extends Controller
@@ -25,45 +26,54 @@ class P_AbsenController extends Controller
         $idpengawas = Auth::user()->username;
 
         // Mendapatkan tanggal hari ini
-        $today = Carbon::now();
-        $cektoday = Carbon::now()->format('Y-m-d');
-        $startOfDay = Carbon::today()->startOfDay();
-        $endOfDay = Carbon::today()->endOfDay();
+        $today = Carbon::now(new DateTimeZone('Asia/Jakarta'));
+        $tomorrow = Carbon::tomorrow(new DateTimeZone('Asia/Jakarta'));
+        $cektoday = $today->format('Y-m-d');
 
         //waktu shift 1
-        $shift1Start = Carbon::today()->setTime(0, 0, 0);
-        $shift1End = Carbon::today()->setTime(8, 0, 0);
+        $shift1Start = Carbon::createFromTime(0, 0, 0, 'Asia/Jakarta');;
+        $shift1End = Carbon::createFromTime(9, 0, 0, 'Asia/Jakarta');;
         //waktu shift 2
-        $shift2Start = Carbon::today()->setTime(8, 0, 0);
-        $shift2End = Carbon::today()->setTime(16, 0, 0);
+        $shift2Start = Carbon::createFromTime(8, 0, 0, 'Asia/Jakarta');
+        $shift2End = Carbon::createFromTime(17, 0, 0, 'Asia/Jakarta');;
         //waktu shift 3
-        $shift3Start = Carbon::today()->setTime(16, 0, 0);
-        $shift3End = Carbon::tomorrow()->setTime(0, 0, 0);
+        $shift3Start = Carbon::createFromTime(16, 0, 0, 'Asia/Jakarta');
+        $shift3End = Carbon::tomorrow(new DateTimeZone('Asia/Jakarta'))->setTime(1, 0, 0);
 
-        $iniShift1 = $today >= $shift1Start && $today < $shift1End;
-        $iniShift2 = $today >= $shift2Start && $today < $shift2End;
-        $iniShift3 = $today >= $shift3Start && $today < $shift3End;
+
         
-        //waktu shift 1 selesai
-        $shift1_1Start = Carbon::today()->setTime(7, 0, 0);
-        $shift1_1End = Carbon::today()->setTime(9, 0, 0);
-        //waktu shift 2 selesai
-        $shift2_2Start = Carbon::today()->setTime(15, 00, 0);
-        $shift2_2End = Carbon::today()->setTime(17, 0, 0);
-        //waktu shift 3 selesa
-        $shift3_3Start = Carbon::today()->setTime(23, 0, 0);
-        $shift3_3End = Carbon::tomorrow()->setTime(1, 0, 0);
 
-        $today1= $today->format('H:i:s');
-        $keluarShift1 = $today1 >= $shift1_1Start && $today1 < $shift1_1End;
-        $keluarShift2 = $today >= $shift2_2Start && $today < $shift2_2End;
-        $keluarShift3 = $today >= $shift3_3Start && $today < $shift3_3End;
+        // Waktu shift 1 selesai
+        $shift1_1Start = Carbon::createFromTime(7, 0, 0, 'Asia/Jakarta');
+        $shift1_1End = Carbon::createFromTime(9, 0, 0, 'Asia/Jakarta');
 
-        if ($iniShift1) {
+        // Waktu shift 2 selesai
+        $shift2_2Start = Carbon::createFromTime(15, 0, 0, 'Asia/Jakarta');
+        $shift2_2End = Carbon::createFromTime(17, 0, 0, 'Asia/Jakarta');
+
+        // Waktu shift 3 selesai
+        $shift3_3Start = Carbon::createFromTime(23, 30, 0,'Asia/Jakarta');
+        $shift3_3End = Carbon::createFromTime(1, 0, 0,'Asia/Jakarta');
+        //   $shift3_3End = Carbon::tomorrow(new DateTimeZone('Asia/Jakarta'))->setTime(1, 0, 0);
+
+        //Shift Masuk
+        $iniShift1 = ($today >= $shift1Start && $today < $shift1End);
+        $iniShift2 = ($today >= $shift2Start && $today < $shift2End);
+        $iniShift3 = ($today >= $shift3Start && $today < $shift3End);
+
+        //Shift Keluar
+        // $keluarShift1 = ($today >= $shift1_1Start && $today < $shift1_1End);
+        // $keluarShift2 = ($today >= $shift2_2Start && $today < $shift2_2End);
+        // $keluarShift3 = ($today >= $shift3_3Start && $today < $shift3_3End);
+        $keluarShift1 = ($today >= $shift1_1Start );
+        $keluarShift2 = ($today >= $shift2_2Start );
+        $keluarShift3 = ($today >= $shift3_3Start );
+
+        if ($iniShift1 === true) {
             $id_sift = 'S-1';
-        } elseif ($iniShift2) {
+        } elseif ($iniShift2 === true) {
             $id_sift = 'S-2';
-        } else {
+        } elseif ($iniShift3 === true) {
             $id_sift = 'S-3';
         }
 
@@ -71,11 +81,11 @@ class P_AbsenController extends Controller
                 ->join('sift', 'sift.id_sift', '=', 'absensi.id_sift')
                 ->where('absensi.id_pengawas', $idpengawas)
                 ->where('absensi.id_sift', $id_sift)
-                ->whereDate('absensi.tgl', $cektoday)
+                ->where('absensi.tgl', $cektoday)
                 ->first();
 
         $cekabsen = $cekabsenpengawas ? 1 : 0;
-        // dd($iniShift3);
+        // dd($keluarShift3);
 
         return view("pages/core/p_presensi")->with(['user' => $user,'cekabsen'=>$cekabsen,'kerja'=>$cekabsenpengawas,
         'keluar_1'=>$keluarShift1,'keluar_2'=>$keluarShift2,'keluar_3'=>$keluarShift3,'sift1'=>$iniShift1,'sift2'=>$iniShift2,'sift3'=>$iniShift3]);

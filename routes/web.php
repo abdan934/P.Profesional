@@ -14,6 +14,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PassController;
 use App\Http\Controllers\EditProfileFoto;
 use App\Http\Controllers\P_AbsenController;
+use App\Http\Controllers\K_AbsenController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -69,4 +70,6 @@ Route::resource('/ubah-profile', EditProfileFoto::class)->middleware('isLogin');
 
 //mekanisme absen
 Route::resource('/absensi-masuk', P_AbsenController::class)->middleware('isLogin');
+Route::get('/detail-absen/{id}', [K_AbsenController::class,'detail'])->middleware('isLogin');
+Route::resource('/mulai-absen', K_AbsenController::class)->middleware('isLogin');
 

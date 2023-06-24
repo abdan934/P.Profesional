@@ -40,10 +40,7 @@
             <a href="/detail-absensi" class="nav-item nav-link" ><i class="bi bi-layout-text-sidebar-reverse"></i>&nbsp;&nbsp; Detail Absen</a>
         </div>
     <div class="navbar-nav w-100">
-        <a href="/absensi-masuk" class="nav-item nav-link" ><i class="bi bi-box-arrow-in-down-right"></i></i>&nbsp;&nbsp;Absen Masuk</a>
-    </div>
-    <div class="navbar-nav w-100">
-        <a href="/absensi" class="nav-item nav-link" ><i class="bi bi-box-arrow-in-up-left"></i></i>&nbsp;&nbsp;Absen Keluar</a>
+        <a href="/absensi-masuk" class="nav-item nav-link" ><i class="bi bi-box-arrow-in-down-right"></i></i>&nbsp;&nbsp;Presensi</a>
     </div>
     </nav>
 </div>

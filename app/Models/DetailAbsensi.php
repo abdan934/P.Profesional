@@ -13,13 +13,10 @@ class DetailAbsensi extends Model
         'id_detail_absensi',
         'id_absensi',
         'id_karyawan',
-        'id_pengawas',
         'id_sift',
-        'name_kapal',
         'bagian',
-        'dermaga',
+        'status',
         'keterangan',
-        'foto',
         'waktu_absen',
     ];
 }

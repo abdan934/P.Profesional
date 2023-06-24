@@ -33,13 +33,11 @@
                                         placeholder="Dermaga" >
                                     <label for="floatingInput mt-1">Dermaga</label>
                                 </div>
-
                                 <div class="form-floating mb-1 col-12 mt-1 ">
                                     <input type="text" class="form-control mt-2" name="name_kapal"  required
                                         placeholder="Kapal" >
                                     <label for="floatingInput col-4 mt-1">Kapal</label>
                                 </div>
-
                                 <div class="form-floating mb-1 col-12 mt-1 ">
                                     <button type="button submit" class="btn btn-light text-light bg-primary col-12 ">Submit</button>
                                 </div>
@@ -70,12 +68,15 @@
                     === Sedang Berlangsung ===
                   </td>
                   <td {{ $keluar_1 === false ? 'hidden':' ' }}>
-                    <a href="">
+                    <a href="{{url('/detail-absen/'.$kerja->id_absensi)}}">
                         <button type="button" class="btn btn-light text-light bg-btn-shift mx-1 col-6 ">Keluar</button>
                     </a>
                   </td>
                 </tbody>
             </table>
+            <a href="{{url('/detail-absen/'.$kerja->id_absensi)}}" class="text-light">
+                <button type="button" class="btn btn-outline-light col-11 m-3 me-auto" ><i class="bi bi-list-check"></i> &nbsp;Details</a></button>
+            </a>
             <br><h4 class="text-light">{{$kerja->tgl}}</h4>
             @endif
         </div>
@@ -121,34 +122,39 @@
             </div>
 
             @if (isset($kerja))
-            <table class="table table-borderless">
-                <thead class="">
-                    <tr class="text-center text-light">
-                        <th scope="col">Leader</th>
-                        <th scope="col">Kapal</th>
-                        <th scope="col">Dermaga</th>
-                        <th scope="col">Keterangan</th>
-                </thead>
-                <tbody class="text-center text-light">
-                  <td>
-                    {{$kerja->name_pengawas}}
-                  </td>
-                  <td>
-                    {{$kerja->name_kapal}}
-                  </td>
-                  <td>
-                    {{$kerja->dermaga}}
-                  </td>
-                  <td {{ $keluar_2 === true ? 'hidden':' ' }}>
-                    === Sedang Berlangsung ===
-                  </td>
-                  <td {{ $keluar_2 === false ? 'hidden':' ' }}>
-                    <a href="">
-                        <button type="button" class="btn btn-light text-light bg-btn-shift mx-1 col-6 ">Keluar</button>
-                    </a>
-                  </td>
-                </tbody>
-            </table>
+            <div class="table-responsive">
+                <table class="table table-borderless">
+                    <thead class="">
+                        <tr class="text-center text-light">
+                            <th scope="col">Leader</th>
+                            <th scope="col">Kapal</th>
+                            <th scope="col">Dermaga</th>
+                            <th scope="col">Keterangan</th>
+                    </thead>
+                    <tbody class="text-center text-light">
+                    <td>
+                        {{$kerja->name_pengawas}}
+                    </td>
+                    <td>
+                        {{$kerja->name_kapal}}
+                    </td>
+                    <td>
+                        {{$kerja->dermaga}}
+                    </td>
+                    <td {{ $keluar_2 === true ? 'hidden':' ' }}>
+                        === Sedang Berlangsung ===
+                    </td>
+                    <td {{ $keluar_2 === false ? 'hidden':' ' }}>
+                        <a href="{{url('/detail-absen/'.$kerja->id_absensi)}}">
+                            <button type="button" class="btn btn-light text-light bg-btn-shift mx-1 col-6 ">Keluar</button>
+                        </a>
+                    </td>
+                    </tbody>
+                </table>
+            </div>
+            <a href="{{url('/detail-absen/'.$kerja->id_absensi)}}" class="text-light">
+                <button type="button" class="btn btn-outline-light col-11 m-3 me-auto" ><i class="bi bi-list-check"></i> &nbsp;Details</a></button>
+            </a>
             <br><h4 class="text-light">{{$kerja->tgl}}</h4>
             @endif
         </div>
@@ -216,12 +222,15 @@
                     === Sedang Berlangsung ===
                   </td>
                   <td {{ $keluar_3 === false ? 'hidden':' ' }}>
-                    <a href="">
+                    <a href="{{url('/detail-absen/'.$kerja->id_absensi)}}">
                         <button type="button" class="btn btn-light text-light bg-btn-shift mx-1 col-6 ">Keluar</button>
                     </a>
                   </td>
                 </tbody>
             </table>
+            <a href="{{url('/detail-absen/'.$kerja->id_absensi)}}" class="text-light">
+                <button type="button" class="btn btn-outline-light col-11 m-3 me-auto" ><i class="bi bi-list-check"></i> &nbsp;Details</a></button>
+            </a>
             <br><h4 class="text-light">{{$kerja->tgl}}</h4>
             @endif
         </div>
@@ -250,6 +259,8 @@
         generatedCodeInput.value = generatedCode;
         generatedCodeContainer.style.display = "block";
     }
+
+    
   </script>
 
 

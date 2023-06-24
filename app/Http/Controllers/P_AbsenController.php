@@ -31,30 +31,24 @@ class P_AbsenController extends Controller
         $cektoday = $today->format('Y-m-d');
 
         //waktu shift 1
-        $shift1Start = Carbon::createFromTime(0, 0, 0, 'Asia/Jakarta');;
-        $shift1End = Carbon::createFromTime(9, 0, 0, 'Asia/Jakarta');;
+        $shift1Start = Carbon::createFromTime(0, 0, 0, 'Asia/Jakarta');
+        $shift1End = Carbon::createFromTime(8, 0, 0, 'Asia/Jakarta');
         //waktu shift 2
         $shift2Start = Carbon::createFromTime(8, 0, 0, 'Asia/Jakarta');
-        $shift2End = Carbon::createFromTime(17, 0, 0, 'Asia/Jakarta');;
+        $shift2End = Carbon::createFromTime(16, 0, 0, 'Asia/Jakarta');
         //waktu shift 3
         $shift3Start = Carbon::createFromTime(16, 0, 0, 'Asia/Jakarta');
-        $shift3End = Carbon::tomorrow(new DateTimeZone('Asia/Jakarta'))->setTime(1, 0, 0);
+        $shift3End = Carbon::tomorrow(new DateTimeZone('Asia/Jakarta'))->setTime(0, 0, 0);
 
-
-        
 
         // Waktu shift 1 selesai
         $shift1_1Start = Carbon::createFromTime(7, 0, 0, 'Asia/Jakarta');
-        $shift1_1End = Carbon::createFromTime(9, 0, 0, 'Asia/Jakarta');
 
         // Waktu shift 2 selesai
         $shift2_2Start = Carbon::createFromTime(15, 0, 0, 'Asia/Jakarta');
-        $shift2_2End = Carbon::createFromTime(17, 0, 0, 'Asia/Jakarta');
 
         // Waktu shift 3 selesai
-        $shift3_3Start = Carbon::createFromTime(23, 30, 0,'Asia/Jakarta');
-        $shift3_3End = Carbon::createFromTime(1, 0, 0,'Asia/Jakarta');
-        //   $shift3_3End = Carbon::tomorrow(new DateTimeZone('Asia/Jakarta'))->setTime(1, 0, 0);
+        $shift3_3Start = Carbon::createFromTime(23, 00, 0,'Asia/Jakarta');
 
         //Shift Masuk
         $iniShift1 = ($today >= $shift1Start && $today < $shift1End);
@@ -62,9 +56,6 @@ class P_AbsenController extends Controller
         $iniShift3 = ($today >= $shift3Start && $today < $shift3End);
 
         //Shift Keluar
-        // $keluarShift1 = ($today >= $shift1_1Start && $today < $shift1_1End);
-        // $keluarShift2 = ($today >= $shift2_2Start && $today < $shift2_2End);
-        // $keluarShift3 = ($today >= $shift3_3Start && $today < $shift3_3End);
         $keluarShift1 = ($today >= $shift1_1Start );
         $keluarShift2 = ($today >= $shift2_2Start );
         $keluarShift3 = ($today >= $shift3_3Start );
@@ -124,14 +115,13 @@ class P_AbsenController extends Controller
         ];
 
         $user = Auth::user();
-        $request->input('id_absensi');
 
         if ($validator->fails()) {
-            return redirect()->back()->withErrors($validator)->with(['user' => $user,'data'=>$data,'no'=>$no]);
+            return redirect()->back()->withErrors($validator)->with(['user' => $user]);
 
         }else{
             Absensi::create($datacreate);
-            return view('pages/core/v_presensi')->with(['id_absen'=>$id_absen,'user' => $user]);
+            return redirect()->back();
         }
     }
 

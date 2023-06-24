@@ -30,7 +30,7 @@ class DetailAbsensiController extends Controller
         $no = 1;
         $user = Auth::user();
         $search = request()->input('search');
-        $data = DetailAbsensi::orderBy('detail_absensi.id_d_absensi', 'desc')
+        $data = DetailAbsensi::orderBy('detail_absensi.id_detail_absensi', 'desc')
                 ->join('absensi','detail_absensi.id_absensi' , '=','absensi.id_absensi')
                 ->join('karyawan', 'karyawan.id_karyawan', '=', 'detail_absensi.id_karyawan')
                 ->where(function ($query) use ($search) {
@@ -63,7 +63,7 @@ class DetailAbsensiController extends Controller
             'id_detail_absensi' => 'unique:detail_absensi',
             'id_absensi' => Rule::exists('absensi', 'id_absensi'),
             'id_karyawan' => Rule::exists('karyawan', 'id_karyawan'),
-            'id_sift' => Rule::exists('sift', 'id_sift'),
+            
         ],[
             'id_detail_absensi.unique' => 'Anda sudah absen.',
             'id_absensi.exists' => 'Kode tidak ditemukan',
@@ -71,18 +71,17 @@ class DetailAbsensiController extends Controller
             'id_sift.exists' => 'Kode tidak ditemukan',
         ]);
 
-        //realtime WIB
-        $now = Carbon::now(new DateTimeZone('Asia/Jakarta'));
-        $timeWIB = $now->format('H:i:s');
+       //cek status
+          // Mendapatkan tanggal hari ini
+          $today = Carbon::now(new DateTimeZone('Asia/Jakarta'));
+          $tomorrow = Carbon::tomorrow(new DateTimeZone('Asia/Jakarta'));
+          $cektoday = $today->format('Y-m-d');
 
         $datacreate = [
             'id_absensi' => $request->input('id_absensi'),
             'id_karyawan' => $request->input('id_karyawan'),
-            'id_sift' => $request->input('id_sift'),
-            'name_kapal' => $request->input('name_kapal'),
             'bagian' => $request->input('bagian'),
-            'dermaga' => $request->input('dermaga'),
-            'keterangan' => $request->input('keterangan'),
+            'status' => 'HADIR',
             'waktu_absen' => $timeWIB,
         ];
 
@@ -97,7 +96,6 @@ class DetailAbsensiController extends Controller
             $query->where('absensi.id_absensi', 'LIKE', '%' . $search . '%')
                 ->orWhere('detail_absensi.id_karyawan', 'LIKE', '%' . $search . '%')
                 ->orWhere('karyawan.name_karyawan', 'LIKE', '%' . $search . '%')
-                ->orWhere('detail_absensi.id_sift', 'LIKE', '%' . $search . '%')
                 ->orWhere('sift.name_sift', 'LIKE', '%' . $search . '%')
                 ->orWhere('detail_absensi.waktu_absen', 'LIKE', '%' . $search . '%');
         })
@@ -150,7 +148,6 @@ class DetailAbsensiController extends Controller
             $query->where('absensi.id_absensi', 'LIKE', '%' . $search . '%')
                 ->orWhere('detail_absensi.id_karyawan', 'LIKE', '%' . $search . '%')
                 ->orWhere('karyawan.name_karyawan', 'LIKE', '%' . $search . '%')
-                ->orWhere('detail_absensi.id_sift', 'LIKE', '%' . $search . '%')
                 ->orWhere('sift.name_sift', 'LIKE', '%' . $search . '%')
                 ->orWhere('detail_absensi.waktu_absen', 'LIKE', '%' . $search . '%');
         })
@@ -193,15 +190,14 @@ class DetailAbsensiController extends Controller
         $no = 1;
         $pesan = 'Berhasil dihapus';
         $search = request()->input('search');
-        $data = DetailAbsensi::orderBy('detail_absensi.id_sift', 'asc')
+        $data = DetailAbsensi::orderBy('detail_absensi.id_absensi', 'desc')
         ->join('absensi','detail_absensi.id_absensi' , '=','absensi.id_absensi')
         ->join('karyawan', 'karyawan.id_karyawan', '=', 'detail_absensi.id_karyawan')
-        ->join('sift', 'sift.id_sift', '=', 'detail_absensi.id_sift')
+        ->join('sift', 'sift.id_sift', '=', 'absensi.id_sift')
         ->where(function ($query) use ($search) {
             $query->where('absensi.id_absensi', 'LIKE', '%' . $search . '%')
                 ->orWhere('detail_absensi.id_karyawan', 'LIKE', '%' . $search . '%')
                 ->orWhere('karyawan.name_karyawan', 'LIKE', '%' . $search . '%')
-                ->orWhere('detail_absensi.id_sift', 'LIKE', '%' . $search . '%')
                 ->orWhere('sift.name_sift', 'LIKE', '%' . $search . '%')
                 ->orWhere('detail_absensi.waktu_absen', 'LIKE', '%' . $search . '%');
         })

@@ -85,11 +85,6 @@
                                                                                     <td><h6>{{$item->name_karyawan}}</h6></td>
                                                                                 </tr>
                                                                                 <tr>
-                                                                                    <td><h6>Shift</h6></td>
-                                                                                    <td><h6>=</h6></td>
-                                                                                    <td><h6>{{$item->name_sift}}</h6></td>
-                                                                                </tr>
-                                                                                <tr>
                                                                                     <td><h6>Nama Kapal</h6></td>
                                                                                     <td><h6>=</h6></td>
                                                                                     <td><h6>{{$item->name_kapal}}</h6></td>

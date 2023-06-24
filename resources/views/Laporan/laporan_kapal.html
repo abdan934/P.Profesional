@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Laporan</title>
+</head>
+<body>
+    <h1>Laporan</h1>
+    
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nama Produk</th>
+                <th>Jumlah</th>
+                <!-- Kolom tambahan lainnya -->
+            </tr>
+        </thead>
+        <tbody>
+            @foreach ($detailPesanan as $item)
+                <tr>
+                    <td>{{ $item->id }}</td>
+                    <td>{{ $item->nama_produk }}</td>
+                    <td>{{ $item->jumlah }}</td>
+                    <!-- Tambahkan kolom tambahan lainnya -->
+                </tr>
+            @endforeach
+        </tbody>
+    </table>
+</body>
+</html>

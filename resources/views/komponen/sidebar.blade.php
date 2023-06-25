@@ -1,7 +1,7 @@
 
 
 <div class="sidebar pe-4 pb-3">
-    <nav class="navbar bg-light navbar-light">
+    <nav class="navbar bg-light navbar-light mb-3">
         <a href="/dashboard" class="navbar-brand mx-4 mb-3">
             <h5 class="text-success">Duta Samudera Karya</h5>
         </a>
@@ -39,8 +39,11 @@
         <div class="navbar-nav w-100">
             <a href="/detail-absensi" class="nav-item nav-link" ><i class="bi bi-layout-text-sidebar-reverse"></i>&nbsp;&nbsp; Detail Absen</a>
         </div>
-    <div class="navbar-nav w-100">
-        <a href="/absensi-masuk" class="nav-item nav-link" ><i class="bi bi-box-arrow-in-down-right"></i></i>&nbsp;&nbsp;Presensi</a>
-    </div>
+        <div class="navbar-nav w-100">
+            <a href="/absensi-masuk" class="nav-item nav-link" ><i class="bi bi-clipboard-check"></i>&nbsp;&nbsp;Presensi</a>
+        </div>
+        <div class="navbar-nav w-100">
+            <a href="/laporan-kapal" class="nav-item nav-link" ><i class="bi bi-newspaper"></i>&nbsp;&nbsp;Laporan</a>
+        </div>
     </nav>
 </div>

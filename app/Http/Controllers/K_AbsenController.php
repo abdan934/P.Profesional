@@ -65,7 +65,13 @@ class K_AbsenController extends Controller
             'id_karyawan.exists' => 'Kode tidak ditemukan',
             'id_sift.exists' => 'Kode tidak ditemukan',
         ]);
-
+        $cekabsen = DetailAbsensi::join('absensi','detail_absensi.id_absensi' , '=','absensi.id_absensi')
+        ->join('sift', 'sift.id_sift', '=', 'absensi.id_sift')
+        ->join('karyawan', 'karyawan.id_karyawan', '=', 'detail_absensi.id_karyawan')
+        ->where('detail_absensi.id_karyawan','=',$request->input('id_karyawan'))
+        ->where('detail_absensi.id_absensi','=',$request->input('id_absensi'))
+        ->where('detail_absensi.keterangan','=',$request->input('keterangan'))
+        ->first();
        //cek status
           // Mendapatkan tanggal hari ini
           $today = Carbon::now(new DateTimeZone('Asia/Jakarta'));
@@ -82,6 +88,10 @@ class K_AbsenController extends Controller
             'waktu_absen' => $timeWIB,
         ];
 
+        if($cekabsen !== null){
+            $pesan = 'Sudah absen !!!';
+            return redirect()->back()->withErrors($pesan);
+        } 
         if ($validator->fails()) {
             
             return redirect()->back()->withErrors($validator);

@@ -1,3 +1,4 @@
+{{$no=1}}
 <!DOCTYPE html>
 <html>
 <head>
@@ -42,31 +43,39 @@ body {
     <div class="col-11 table-responsive align-items-center mt-3">
         <table class="table-bordered text-center">
             <thead>
-              <tr>
-                <th rowspan="3">NO</th>
-                <th colspan="1">JAM KERJA</th>
-                <th colspan="1">00.00-08.00</th>
-                <th colspan="1">08.00-16.00</th>
-                <th colspan="1">16.00-00.00</th>
+              <tr >
+                <th class="m-1" rowspan="3">NO</th>
+                <th class="m-1" colspan="1">JAM KERJA</th>
+                @foreach ($detailLaporan as $item1)
+                <th class="m-1" colspan="1">00.00-08.00</th>
+                <th class="m-1" colspan="1">08.00-16.00</th>
+                <th class="m-1" colspan="1">16.00-00.00</th>
+                @endforeach
               </tr>
               <tr>
                 <th rowspan="1">TANGGAL</th>
-                <th colspan="3">ISI TANGGAL</th>
+                @foreach ($detailLaporan->tgl as $tgl)
+                <th class="m-1" colspan="3">{{$tgl}}</th>
+                @endforeach
               </tr>
               <tr>
                 <th>SHIFT</th>
+                @foreach ($detailLaporan as $item2)
                 <th colspan="1">I</th>
                 <th colspan="1">II</th>
                 <th colspan="1">III</th>
+                @endforeach
               </tr>
             </thead>
             <tbody>
               <tr>
-                <td>Data 1</td>
+                @foreach ($detailLaporan as $item3)
+                <td>{{$no++}}</td>
                 <td>Data 2</td>
                 <td>Data 3</td>
                 <td>Data 4</td>
                 <td>Data 5</td>
+                @endforeach
               </tr>
               <!-- Tambahkan baris data lainnya -->
             </tbody>

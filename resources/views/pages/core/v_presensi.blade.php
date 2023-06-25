@@ -13,7 +13,7 @@
     </div>
 </div>
 {{-- Table Masuk --}}
-<div class="container-fluid pt-4 px-4">
+<div class="container-fluid pt-4 px-4 mb-5">
     <div class="row vh-50 bg-light rounded align-items-center justify-content-center mx-0">
         <div class="d-flex align-items-center justify-content-between">
             <h4></h4>
@@ -61,7 +61,7 @@
 </div>
 
 {{-- Table Keluar --}}
-<div class="container-fluid pt-4 px-4 mb-3" {{ $keluar === false ? 'hidden':' ' }}>
+<div class="container-fluid pt-4 px-4 mb-5" {{ $keluar === false ? 'hidden':' ' }}>
     <div class="row vh-50 bg-light rounded align-items-center justify-content-center mx-0">
         <div class="d-flex align-items-center justify-content-between">
             <h4></h4>
@@ -126,10 +126,10 @@
                     
                                 <div class="testimonial-item text-center">
                                     <button type="button" class="btn btn-success" onclick="startQRScanner(1)">Aktifkan Kamera</button>
-                                    <div id="reader1" width="600px"></div>
+                                    <div id="reader1"></div>
                                         
                                             <div class="form-floating mb-2 mt-2">
-                                                <input type="text" class="form-control" id="result"  name="id_karyawan" >
+                                                <input type="text" class="form-control" id="result1"  name="id_karyawan" >
                                                 <label for="floatingInput">Kode Karyawan</label>
                                             </div>
                                         
@@ -173,7 +173,7 @@
                                     <div id="reader2" width="600px"></div>
                                         
                                             <div class="form-floating mb-2 mt-2">
-                                                <input type="text" class="form-control" id="result"  name="id_karyawan" required >
+                                                <input type="text" class="form-control" id="result2"  name="id_karyawan" required >
                                                 <label for="floatingInput">Kode Karyawan</label>
                                             </div>
                                         
@@ -202,26 +202,27 @@
 
 
 
-<script src="https://unpkg.com/html5-qrcode" type="text/javascript"></script>
+
+
 
 <script>
+    let html5QrcodeScanner
+    let ketVal
+
+    function startQRScanner(ket) {
+        ketVal = ket 
+        html5QrcodeScanner = new Html5QrcodeScanner(
+        "reader"+ketVal,
+        { fps: 10, qrbox: {width: 250, height: 250} },
+        /* verbose= */ false);
+        html5QrcodeScanner.render(onScanSuccess);
+    }
+   
     function onScanSuccess(decodedText, decodedResult) {
                 html5QrcodeScanner.clear()
-                $('#result').val(decodedText)
+                // $('#result').val(decodedText)
+                document.getElementById('result'+ketVal).value = decodedText;
             }
-
-            function onScanFailure(error) {
-            }
-
-            function startQRScanner(ket) {
-                let html5QrcodeScanner = new Html5QrcodeScanner(
-            "reader"+ket,
-            { fps: 10, qrbox: {width: 250, height: 250} },
-            /* verbose= */ false);
-            html5QrcodeScanner.render(onScanSuccess, onScanFailure);
-    }
-           
-
 </script>
 
 

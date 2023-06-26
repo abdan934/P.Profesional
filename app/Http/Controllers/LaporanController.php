@@ -26,26 +26,37 @@ class LaporanController extends Controller
     //
     public function index(){
         $user = Auth::user();
-        $today = Carbon::now(new DateTimeZone('Asia/Jakarta'))->format('m-Y');
+        $today = Carbon::now(new DateTimeZone('Asia/Jakarta'))->format('Y-m');
         return view('Laporan/v_laporan', compact('user','today'));
     }
 
     public function cari(Request $request){
         $user = Auth::user();
-        $today = Carbon::now(new DateTimeZone('Asia/Jakarta'))->format('m-Y');
+        $today = Carbon::now(new DateTimeZone('Asia/Jakarta'))->format('Y-m');
 
         $nama_kapal = $request->input('name_kapal');
         $tgl = $request->input('tgl');
 
-        $data = DetailAbsensi::orderBy('detail_absensi.id_detail_absensi', 'desc')
-        ->join('absensi','detail_absensi.id_absensi' , '=','absensi.id_absensi')
-        ->join('sift', 'sift.id_sift', '=', 'absensi.id_sift')
-        ->join('karyawan', 'karyawan.id_karyawan', '=', 'detail_absensi.id_karyawan')
-        ->join('pengawas', 'pengawas.id_pengawas', '=', 'absensi.id_pengawas')
-        ->where('absensi.name_kapal','=',$nama_kapal)
-        ->where('absensi.tgl','=',$tgl)
-        ->get();
-        return view('Laporan/v_laporan', compact('user','today','data'));
+        $cariid = Absensi::select('id_absensi')
+                    ->where(function ($query) use ($nama_kapal,$tgl) {
+                        $query->where('name_kapal', '=', $nama_kapal)
+                            ->where('tgl', 'LIKE',$tgl.'%');
+                    });
+        
+                    foreach ($cariid as $id) {
+                        $detailAbsensi = DB::table('detail_absensi')
+                        ->join('karyawan', 'detail_absensi.id_karyawan', '=', 'karyawan.id_karyawan')
+                        ->join('absensi', 'detail_absensi.id_absensi', '=', 'absensi.id_absensi')
+                        ->where('detail_absensi.id_absensi', '=', $id->id_absensi)
+                        ->select('karyawan.name_karyawan', 'detail_absensi.bagian', 'detail_absensi.tgl')
+                        ->get();
+                        
+                        $data = array_merge($data, $detailAbsensi);
+                        
+                        dd($id->id_absensi);
+                    }
+        return view('Laporan/v_laporan', compact('user','today'));
+
     }
 
     public function exportLaporan($nama_kapal, $bulan)

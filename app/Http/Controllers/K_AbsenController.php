@@ -174,11 +174,12 @@ class K_AbsenController extends Controller
         ->join('absensi','detail_absensi.id_absensi' , '=','absensi.id_absensi')
         ->join('sift', 'sift.id_sift', '=', 'absensi.id_sift')
         ->where('detail_absensi.id_absensi','=',$id)->first();
+        // dd($cek_keluar);
         if(isset($cek_keluar)){
             if($cek_keluar->id_sift === 'S-1'){
                 $keluarShift = ($today >= $shift1_1Start );
             }elseif($cek_keluar->id_sift === 'S-2'){
-                $keluarShift->id_sift = ($today >= $shift2_2Start );
+                $keluarShift = ($today >= $shift2_2Start );
             }elseif($cek_keluar->id_sift === 'S-3'){
                 $keluarShift = ($today >= $shift3_3Start );
             }
@@ -186,7 +187,6 @@ class K_AbsenController extends Controller
             $keluarShift = false;
         }
         
-        // dd($cek_keluar);
         return view('pages/core/v_presensi')->with(['id_absen'=>$id,'user' => $user,'data_m' => $data_m,'data_k' => $data_k,'no'=>$no,'no_1'=>$no_1,'keluar'=>$keluarShift]);
     }
 }

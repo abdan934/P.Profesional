@@ -142,6 +142,21 @@
                                 <label for="floatingInput">Kode Pengawas</label>
                             </div>
                             <div class="form-floating mb-3">
+                                <input type="text" class="form-control" name="id_sift" required 
+                                    placeholder="Kode Shift" >
+                                <label for="floatingInput">Kode Shift</label>
+                            </div>
+                            <div class="form-floating mb-3">
+                                <input type="text" class="form-control" name="name_kapal" required 
+                                    placeholder="Nama Kapal" >
+                                <label for="floatingInput">Nama Kapal</label>
+                            </div>
+                            <div class="form-floating mb-3">
+                                <input type="text" class="form-control" name="dermaga" required 
+                                    placeholder="Dermaga" >
+                                <label for="floatingInput">Dermaga</label>
+                            </div>
+                            <div class="form-floating mb-3">
                                 <input type="date" class="form-control" name="tgl" required value="{{old('tgl')}}"
                                     placeholder="Tanggal" >
                                 <label for="floatingInput">Tanggal</label>

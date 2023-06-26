@@ -64,7 +64,11 @@ class AbsensiController extends Controller
         ]);
 
         $datacreate = [
+            'id_absensi' => $request->input('id_absensi'),
             'id_pengawas' => $request->input('id_pengawas'),
+            'id_sift' => $request->input('id_sift'),
+            'name_kapal' => $request->input('name_kapal'),
+            'dermaga' => $request->input('dermaga'),
             'tgl' => $request->input('tgl'),
         ];
 

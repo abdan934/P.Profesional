@@ -1,12 +1,13 @@
-{{$no=1}}
 @extends('layout/template')
 
 @section('isi-konten')
+{{$no=1}}
 
 
 <div class="container-fluid pt-4 px-4">
     <div class="row vh-10 bg-light rounded align-items-center justify-content-center mx-0">
-       <form action="">
+       <form method="POST" action="{{url('/laporan-cari-kapal')}}">
+        @csrf
         <div class="d-flex">
             <div class="form-floating m-3 col-5">
                 <input type="text" class="form-control" name="name_kapal" placeholder="Nama Kapal">
@@ -22,6 +23,7 @@
     </div>
 </div>
 
+{{-- @dd($data) --}}
 @if (isset($data))
     
 <div class="container-fluid pt-4 px-4">
@@ -30,7 +32,8 @@
         <div class="bg-light rounded h-100 p-4">
             <div class="d-flex align-items-center justify-content-between">
                 <h4 class="mb-3">Data User</h4>
-            </div>
+            </div> 
+            
             <h4 class="mb-3">{{$data->tgl}}</h4>
                 <div class="d-flex align-items-center justify-content-between col-12">
                     <form class="d-flex align-items-center mb-3" action="/user" method="GET">
@@ -48,8 +51,8 @@
                         <thead class="table-light">
                             <tr class="text-center">
                                 <th scope="col">No</th>
-                                <th scope="col">Nama</th>
                                 <th scope="col">Pengawas</th>
+                                <th scope="col">Nama</th>
                                 <th scope="col">Bagian</th>
                                 <th scope="col">Dermaga</th>
                                 <th scope="col">Tanggal</th>

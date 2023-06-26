@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Absensi;
+use App\Models\DetailAbsensi;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Redirector;
 use Illuminate\Http\Response;
@@ -121,7 +122,58 @@ class P_AbsenController extends Controller
 
         }else{
             Absensi::create($datacreate);
-            return redirect()->back();
+            // return redirect()->back();
+            $user = Auth::user();
+            $no = 1;
+            $no_1 = 1;
+            $data_m = DetailAbsensi::orderBy('detail_absensi.id_detail_absensi', 'desc')
+            ->join('absensi','detail_absensi.id_absensi' , '=','absensi.id_absensi')
+            ->join('sift', 'sift.id_sift', '=', 'absensi.id_sift')
+            ->join('karyawan', 'karyawan.id_karyawan', '=', 'detail_absensi.id_karyawan')
+            ->where('absensi.id_absensi','=',$id)
+            ->where('detail_absensi.id_absensi','=',$id)
+            ->where('detail_absensi.keterangan','=','Masuk')
+            ->paginate(10);
+            $data_k = DetailAbsensi::orderBy('detail_absensi.id_detail_absensi', 'desc')
+            ->join('absensi','detail_absensi.id_absensi' , '=','absensi.id_absensi')
+            ->join('sift', 'sift.id_sift', '=', 'absensi.id_sift')
+            ->join('karyawan', 'karyawan.id_karyawan', '=', 'detail_absensi.id_karyawan')
+            ->where('absensi.id_absensi','=',$id)
+            ->where('detail_absensi.id_absensi','=',$id)
+            ->where('detail_absensi.keterangan','=','Keluar')
+            ->paginate(10);
+    
+            //
+            // Mendapatkan tanggal hari ini
+            $today = Carbon::now(new DateTimeZone('Asia/Jakarta'));
+            // Waktu shift 1 selesai
+            $shift1_1Start = Carbon::createFromTime(7, 0, 0, 'Asia/Jakarta');
+    
+            // Waktu shift 2 selesai
+            $shift2_2Start = Carbon::createFromTime(15, 0, 0, 'Asia/Jakarta');
+    
+            // Waktu shift 3 selesai
+            $shift3_3Start = Carbon::createFromTime(23, 0, 0,'Asia/Jakarta');
+    
+            //Shift Keluar
+            $cek_keluar = DetailAbsensi::select('absensi.id_sift')
+            ->join('absensi','detail_absensi.id_absensi' , '=','absensi.id_absensi')
+            ->join('sift', 'sift.id_sift', '=', 'absensi.id_sift')
+            ->where('detail_absensi.id_absensi','=',$id)->first();
+            // dd($cek_keluar);
+            if(isset($cek_keluar)){
+                if($cek_keluar->id_sift === 'S-1'){
+                    $keluarShift = ($today >= $shift1_1Start );
+                }elseif($cek_keluar->id_sift === 'S-2'){
+                    $keluarShift = ($today >= $shift2_2Start );
+                }elseif($cek_keluar->id_sift === 'S-3'){
+                    $keluarShift = ($today >= $shift3_3Start );
+                }
+            }else{
+                $keluarShift = false;
+            }
+            
+            return view('pages/core/v_presensi')->with(['id_absen'=>$id,'user' => $user,'data_m' => $data_m,'data_k' => $data_k,'no'=>$no,'no_1'=>$no_1,'keluar'=>$keluarShift]);
         }
     }
 

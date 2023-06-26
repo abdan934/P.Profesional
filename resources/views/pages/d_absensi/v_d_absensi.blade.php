@@ -32,6 +32,7 @@
                                                         <th >No</th>
                                                         <th >Nama Karyawan</th>
                                                         <th >Bagian</th>
+                                                        <th >Nama Kapal</th>
                                                         <th >Keterangan</th>
                                                         <th >Waktu Absen</th>
                                                         <th >Aksi</th>
@@ -44,6 +45,7 @@
                                                         {{-- <td class="m-1">{{$item->id_detail_absensi}}</td> --}}
                                                         <td class="m-1">{{$item->name_karyawan}}</td>
                                                         <td class="m-1">{{$item->bagian}}</td>
+                                                        <td class="m-1">{{$item->name_kapal}}</td>
                                                         <td class="m-1" style="position: relative;">
                                                             {{$item->keterangan}}
                                                         </td>

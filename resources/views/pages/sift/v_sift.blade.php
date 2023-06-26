@@ -8,7 +8,7 @@
                     <button type="button" class="btn btn-outline-primary col-3 m-3 me-auto" data-bs-toggle="modal" data-bs-target="#ModalAddSift"><i class="bi bi-plus-circle-fill"></i> &nbsp;Tambah</a></button>
                     <div class="bg-light rounded h-100 p-4">
                         <div class="d-flex align-items-center justify-content-between">
-                            <h4 class="mb-3">Data Sift</h4>
+                            <h4 class="mb-3">Data Shift</h4>
                                 
                             </div>
                             <div class="d-flex align-items-center justify-content-between col-12">

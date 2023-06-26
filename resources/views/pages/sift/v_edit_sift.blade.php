@@ -10,7 +10,7 @@
                                 @csrf
                                 @method('PUT')
                                 <div class="bg-light rounded h-100 p-4">
-                                    <h3 class="mb-4">Data Pengawas</h3>
+                                    <h3 class="mb-4">Data Shift</h3>
                                     <div class="form-floating mb-3">
                                             <input type="text" class="form-control" value="{{$data->id_sift}}" readonly placeholder="Kode Shift" disabled
                                                 placeholder="Kode Shift">

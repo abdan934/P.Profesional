@@ -61,7 +61,7 @@
                                         </div>
                                     </fieldset>
                                     <button type="submit" class="btn btn-primary m-1" ><i class="bi bi-save"></i> Simpan</button>
-                                    <button type="button" class="btn btn-light m-1" ><a href="/hrd"><i class="bi bi-arrow-left"></i> Batal</a></button>
+                                    <button type="button" class="btn btn-light m-1" ><a href="/detail-absensi"><i class="bi bi-arrow-left"></i> Batal</a></button>
                                 </div>
                             </form>
                         </div>

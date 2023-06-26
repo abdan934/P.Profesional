@@ -1,4 +1,4 @@
-{{$no=1}}
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -15,10 +15,23 @@ body {
 <center>    
     <h3 class="m-3">ABSENSI TENAGA SUPERVISI</h3 class="m-3">
     <header>
-        <h4 style="border-bottom: 2px solid black;" class="col-4">NAMA KAPAL</h4>
+      
+        <h4 style="border-bottom: 2px solid black;" class="col-4">
+          @if (isset($namakapal))
+          {{$namakapal}}
+          @else
+          NAMA KAPAL
+          @endif
+        </h4>
     </header>
     <header>
-        <h5>Tanggal : .....................................................................</h5>
+        <h5>
+          @if (isset($tanggal))
+          {{$tanggal}}
+          @else
+          Tanggal : .....................................................................
+          @endif
+        </h5>
     </header>
 
     <table class="col-11">
@@ -44,39 +57,83 @@ body {
         <table class="table-bordered text-center">
             <thead>
               <tr >
-                <th class="m-1" rowspan="3">NO</th>
-                <th class="m-1" colspan="1">JAM KERJA</th>
-                @foreach ($detailLaporan as $item1)
-                <th class="m-1" colspan="1">00.00-08.00</th>
-                <th class="m-1" colspan="1">08.00-16.00</th>
-                <th class="m-1" colspan="1">16.00-00.00</th>
-                @endforeach
-              </tr>
-              <tr>
-                <th rowspan="1">TANGGAL</th>
-                @foreach ($detailLaporan->tgl as $tgl)
-                <th class="m-1" colspan="3">{{$tgl}}</th>
-                @endforeach
+                <th class="m-3" rowspan="3">NO</th>
+                <th class="m-3" colspan="1">JAM KERJA</th>
+                <th class="m-3" colspan="1">00.00-08.00</th>
+                <th class="m-3" colspan="1">08.00-16.00</th>
+                <th class="m-3" colspan="1">16.00-00.00</th>
               </tr>
               <tr>
                 <th>SHIFT</th>
-                @foreach ($detailLaporan as $item2)
                 <th colspan="1">I</th>
                 <th colspan="1">II</th>
                 <th colspan="1">III</th>
-                @endforeach
               </tr>
             </thead>
+            
             <tbody>
+
+              @if(isset($P1))
               <tr>
-                @foreach ($detailLaporan as $item3)
                 <td>{{$no++}}</td>
-                <td>Data 2</td>
-                <td>Data 3</td>
-                <td>Data 4</td>
-                <td>Data 5</td>
-                @endforeach
+                <td>{{$P1}}</td>
+                <td>Hadir</td>
+                <td>-</td>
+                <td>-</td>
               </tr>
+
+              @foreach ($dataS1 as $item1)
+              <tr>
+                <td>{{$no++}}</td>
+                <td>{{$item1->name_karyawan}}</td>
+                <td>Hadir</td>
+                <td>-</td>
+                <td>-</td>
+              </tr>
+              @endforeach
+              @endif
+
+
+              @if(isset($P2))
+              <tr>
+                <td>{{$no++}}</td>
+                <td>{{$P2}}</td>
+                <td>Hadir</td>
+                <td>-</td>
+                <td>-</td>
+              </tr>
+
+              @foreach ($dataS2 as $item2)
+              <tr>
+                <td>{{$no++}}</td>
+                <td>{{$item2->name_karyawan}}</td>
+                <td>Hadir</td>
+                <td>-</td>
+                <td>-</td>
+              </tr>
+              @endforeach
+              @endif
+
+              @if(isset($P3))
+                <tr>
+                  <td>{{$no++}}</td>
+                  <td>{{$P3}}</td>
+                  <td>-</td>
+                  <td>-</td>
+                  <td>Hadir</td>
+                </tr>
+
+                @foreach ($dataS3 as $item3)
+                <tr>
+                  <td>{{$no++}}</td>
+                  <td>{{$item3->name_karyawan}}</td>
+                  <td>-</td>
+                  <td>-</td>
+                  <td>Hadir</td>
+                </tr>
+                @endforeach
+              @endif
+             
               <!-- Tambahkan baris data lainnya -->
             </tbody>
           </table>

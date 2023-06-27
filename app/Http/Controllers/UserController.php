@@ -90,12 +90,12 @@ class UserController extends Controller
         $data = User::orderBy('id','asc')->paginate(10);
         $no = 1;
         if ($validator->fails()) {
-            return view('pages/user/v_user')->withErrors($validator)->with(['user' => $user,'data'=>$data,'no'=>$no]);
+            return redirect()->back()->withErrors($validator)->with(['user' => $user,'data'=>$data,'no'=>$no]);
 
         }else{
             User::create($data_create);
             $pesan = 'Berhasil ditambahkan';
-            return view('pages/user/v_user')->with(['isipesan'=>$pesan,'user' => $user,'data'=>$data,'no'=>$no]);
+            return redirect()->back()->with(['isipesan'=>$pesan,'user' => $user,'data'=>$data,'no'=>$no]);
         }
     }
 
@@ -147,7 +147,7 @@ class UserController extends Controller
         $no = 1;
         if ($validator->fails()) {
         $pesan = 'Gagal diubah';
-        return view("pages/user/v_user")->with(['user' => $user,'data'=>$data,'no'=>$no])->withErrors($pesan);
+        return redirect()->back()->with(['user' => $user,'data'=>$data,'no'=>$no])->withErrors($pesan);
 
         }else{
             if ($request->filled('password')) {
@@ -159,7 +159,7 @@ class UserController extends Controller
             }
             User::where('id',$id)->update($data_update);
             $pesan = 'Berhasil diubah';
-        return view("pages/user/v_user")->with(['data'=>$data, 'no'=>$no,'user'=>$user,'isipesan'=>$pesan]);
+        return redirect()->back()->with(['data'=>$data, 'no'=>$no,'user'=>$user,'isipesan'=>$pesan]);
         }
     }
 
@@ -176,10 +176,10 @@ class UserController extends Controller
         $checkdata = User::where('username', $id)->first();
         if($checkdata){
             User::where('username',$id)->delete();
-            return view("pages/user/v_user")->with(['data'=>$data, 'no'=>$no,'user'=>$user,'isipesan'=>$pesan]);
+            return redirect()->back()->with(['data'=>$data, 'no'=>$no,'user'=>$user,'isipesan'=>$pesan]);
         }else{
             $pesan = 'Data tidak ditemukan';
-            return view("pages/user/v_user")->with(['user' => $user,'data'=>$data,'no'=>$no])->withErrors($pesan);
+            return redirect()->back()->with(['user' => $user,'data'=>$data,'no'=>$no])->withErrors($pesan);
         }
     }
 
@@ -211,7 +211,7 @@ class UserController extends Controller
                     $checkemail = User::where('email', $email)->first();
                     if ($checkdata || $checkemail) {
                         $pesan = 'Data sudah ada silahkan cek kembali!!';
-                        return view("pages/user/v_user")->with(['data'=>$data_isi,'no'=>$no,'user'=>$user])->withErrors($pesan);
+                        return redirect()->back()->with(['data'=>$data_isi,'no'=>$no,'user'=>$user])->withErrors($pesan);
                     } else {
                         if ($username == null) {
                             $pesan = 'Username tidak boleh kosong!';
@@ -220,7 +220,7 @@ class UserController extends Controller
                         //sesi berhasil
                         $pesan = 'Berhasil diimport';
                         Excel::import(new UserImport, \public_path('/UserData/'.$namafile));
-                        return view("pages/user/v_user")->with(['data'=>$data_isi,'isipesan'=>$pesan,'no'=>$no,'user'=>$user]);
+                        return redirect()->back()->with(['data'=>$data_isi,'isipesan'=>$pesan,'no'=>$no,'user'=>$user]);
                     }
                 }
         }
@@ -236,7 +236,7 @@ class UserController extends Controller
                 $data = User::orderBy('id','asc')->paginate(10);
                 $no = 1;
                 $pesan = 'Berhasil direset';
-            return view("pages/user/v_user")->with(['data'=>$data, 'no'=>$no,'user'=>$user,'isipesan'=>$pesan]);
+            return redirect()->back()->with(['data'=>$data, 'no'=>$no,'user'=>$user,'isipesan'=>$pesan]);
             }
     }
 

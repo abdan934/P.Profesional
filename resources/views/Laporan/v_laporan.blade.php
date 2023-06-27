@@ -17,7 +17,7 @@
                 <input type="text" class="form-control" name="tgl" value="{{$today}}">
                 <label for="floatingInput">Tahun-Bulan-Tanggal </label>
             </div>
-            <button type="button submit" class="btn btn-lx btn-light mt-3 mb-3 ms-2 col-1"><i class="fa fa-search"></i> Cari</button>
+            <button type="submit" class="btn btn-lx btn-light mt-3 mb-3 ms-2 col-1"><i class="fa fa-search"></i> Cari</button>
         </div>
        </form>
     </div>

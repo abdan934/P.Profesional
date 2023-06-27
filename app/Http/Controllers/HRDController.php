@@ -61,12 +61,12 @@ class HRDController extends Controller
 
         if ($validator->fails()) {
             
-            return view('pages/user/v_user')->withErrors($validator)->with(['user' => $user,'data'=>$data,'no'=>$no]);
+            return redirect()->back()->withErrors($validator)->with(['user' => $user,'data'=>$data,'no'=>$no]);
 
         }else{
             HRD::create($datacreate);
             $pesan = 'Berhasil ditambahkan';
-            return view('pages/user/v_user')->with(['isipesan'=>$pesan,'user' => $user,'data'=>$data,'no'=>$no]);
+            return redirect()->back()->with(['isipesan'=>$pesan,'user' => $user,'data'=>$data,'no'=>$no]);
         }
     }
 
@@ -110,13 +110,13 @@ class HRDController extends Controller
 
         if ($validator->fails()) {
         $pesan = 'Gagal diubah';
-        return view("pages/hrd/v_hrd")->with(['user' => $user,'data'=>$data,'no'=>$no])->withErrors($pesan);
+        return redirect()->back()->with(['user' => $user,'data'=>$data,'no'=>$no])->withErrors($pesan);
 
         }else{
             $data = HRD::orderBy('id_hrd','asc')->paginate(10);
         HRD::where('id_hrd',$id)->update($data_update);
         $pesan = 'Berhasil diubah';
-        return view("pages/hrd/v_hrd")->with(['data'=>$data, 'no'=>$no,'user'=>$user,'isipesan'=>$pesan]);
+        return redirect()->back()->with(['data'=>$data, 'no'=>$no,'user'=>$user,'isipesan'=>$pesan]);
         }
     }
 
@@ -133,10 +133,10 @@ class HRDController extends Controller
         $checkdata = HRD::where('id_hrd', $id)->first();
         if($checkdata){
             HRD::where('id_hrd',$id)->delete();
-            return view("pages/hrd/v_hrd")->with(['data'=>$data, 'no'=>$no,'user'=>$user,'isipesan'=>$pesan]);
+            redirect()->back()->with(['data'=>$data, 'no'=>$no,'user'=>$user,'isipesan'=>$pesan]);
         }else{
             $pesan = 'Data tidak ditemukan';
-            return view("pages/hrd/v_hrd")->with(['user' => $user,'data'=>$data,'no'=>$no])->withErrors($pesan);
+            redirect()->back()->with(['user' => $user,'data'=>$data,'no'=>$no])->withErrors($pesan);
         }
     }
 
@@ -173,7 +173,7 @@ class HRDController extends Controller
                 $checkdata = HRD::where('id_hrd', $id_hrd)->first();
                 if ($checkdata) {
                     $pesan = 'Data sudah ada silahkan cek kembali!!';
-                    return view("pages/hrd/v_hrd")->with(['data'=>$data_isi,'no'=>$no,'user'=>$user])->withErrors($pesan);
+                    return vredirect()->back()->with(['data'=>$data_isi,'no'=>$no,'user'=>$user])->withErrors($pesan);
                 } else {
                     if ($id_hrd == null) {
                         $pesan = 'Kode HRD tidak boleh kosong!';
@@ -182,7 +182,7 @@ class HRDController extends Controller
                     //sesi berhasil
                     $pesan = 'Berhasil diimport';
                     Excel::import(new HRDImport, \public_path('/HRDData/'.$namafile));
-                    return view("pages/hrd/v_hrd")->with(['data'=>$data_isi,'isipesan'=>$pesan,'no'=>$no,'user'=>$user]);
+                    return vredirect()->back()->with(['data'=>$data_isi,'isipesan'=>$pesan,'no'=>$no,'user'=>$user]);
                 }
             }
     }

@@ -33,9 +33,9 @@
                                             aria-label="Floating label select example">
                                             <option selected >-- Pilih --</option>
                                             {{-- <option value="admin" {{ $data->level === 'admin' ? 'selected' : '' }}>Admin</option> --}}
-                                            <option value="pengawas" {{ $data->level === 'pengawas' ? 'selected' : '' }}>Pengawas</option>
-                                            <option value="karyawan"  {{ $data->level === 'karyawan' ? 'selected' : '' }}>Karyawan</option>
-                                            <option value="hrd"  {{ $data->level === 'hrd' ? 'selected' : '' }}>HRD</option>
+                                            <option value="Pengawas" {{ $data->level === 'Pengawas' ? 'selected' : '' }}>Pengawas</option>
+                                            <option value="Karyawan"  {{ $data->level === 'Karyawan' ? 'selected' : '' }}>Karyawan</option>
+                                            <option value="HRD"  {{ $data->level === 'HRD' ? 'selected' : '' }}>HRD</option>
                                         </select>
                                         <label for="floatingSelect">Jabatan</label>
                                     </div>

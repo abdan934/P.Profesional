@@ -17,7 +17,9 @@
         </div>
         <div class="navbar-nav w-100">
             <a href="/dashboard" class="nav-item nav-link"><i class="fa fa-tachometer-alt me-2"></i>Dashboard</a>
-        </div>
+        </div>  
+
+        @if ($user->level !== 'Karyawan'&& $user->level !== 'Pengawas')
         <div class="navbar-nav w-100">
             <a href="/user" class="nav-item nav-link" ><i class="far fa-file-alt me-2"></i> User</a>
         </div>
@@ -40,10 +42,15 @@
             <a href="/detail-absensi" class="nav-item nav-link" ><i class="bi bi-layout-text-sidebar-reverse"></i>&nbsp;&nbsp; Detail Absen</a>
         </div>
         <div class="navbar-nav w-100">
-            <a href="/absensi-masuk" class="nav-item nav-link" ><i class="bi bi-clipboard-check"></i>&nbsp;&nbsp;Presensi</a>
-        </div>
-        <div class="navbar-nav w-100">
             <a href="/laporan-kapal" class="nav-item nav-link" ><i class="bi bi-newspaper"></i>&nbsp;&nbsp;Laporan</a>
         </div>
+        @endif
+
+        @if ($user->level == 'Pengawas')
+        <div class="navbar-nav w-100">
+            <a href="/absensi-masuk" class="nav-item nav-link" ><i class="bi bi-clipboard-check"></i>&nbsp;&nbsp;Presensi</a>
+        </div>
+        @endif
+
     </nav>
 </div>

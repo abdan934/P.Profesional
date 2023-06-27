@@ -34,7 +34,7 @@ class LoginController extends Controller
         }else{
             //gagal
         $pesan = 'Username atau Password salah !!';
-          return view('pages/v_login')->with(['pesan'=>$pesan]);
+          return redirect()->back()->with(['pesan'=>$pesan]);
         }
     }
 

@@ -5,6 +5,7 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Illuminate\Support\Facades\Auth;
 
 class isPengawas
 {
@@ -18,13 +19,12 @@ class isPengawas
         $user = Auth::user();
         try{
 
-            if ($user->level == 'pengawas') {
+            if ($user->level === 'Pengawas' || $user->level === 'pengawas') {
                 return $next($request);
             } else {
                 return redirect('/dashboard')->with(['user' => $user]);
             }
             
-            return $next($request);
         }catch (exception $e){
             return redirect('/dashboard')->with(['user' => $user]);
         }

@@ -78,12 +78,12 @@ class AbsensiController extends Controller
 
         if ($validator->fails()) {
             
-            return view('pages/absensi/v_absensi')->withErrors($validator)->with(['user' => $user,'data'=>$data,'no'=>$no]);
+            return redirect()->back()->withErrors($validator)->with(['user' => $user,'data'=>$data,'no'=>$no]);
 
         }else{
             Absensi::create($datacreate);
             $pesan = 'Berhasil ditambahkan';
-            return view('pages/absensi/v_absensi')->with(['isipesan'=>$pesan,'user' => $user,'data'=>$data,'no'=>$no]);
+            return redirect()->back()->with(['isipesan'=>$pesan,'user' => $user,'data'=>$data,'no'=>$no]);
         }
     }
 
@@ -125,13 +125,13 @@ class AbsensiController extends Controller
         $checkdata = Absensi::where('id_absensi', $id)->first();
         if($validator !==null){
             $pesan = 'Silahkan cek data yang lain!!';
-            return view("pages/absensi/v_absensi")->with(['user' => $user,'data'=>$data,'no'=>$no])->withErrors($pesan);
+            return redirect()->back()->with(['user' => $user,'data'=>$data,'no'=>$no])->withErrors($pesan);
         }else if($checkdata){
             Absensi::where('id_absensi',$id)->delete();
-            return view("pages/absensi/v_absensi")->with(['data'=>$data, 'no'=>$no,'user'=>$user,'isipesan'=>$pesan]);
+            return redirect()->back()->with(['data'=>$data, 'no'=>$no,'user'=>$user,'isipesan'=>$pesan]);
         }else{
             $pesan = 'Data tidak ditemukan';
-            return view("pages/absensi/v_absensi")->with(['user' => $user,'data'=>$data,'no'=>$no])->withErrors($pesan);
+            return redirect()->back()->with(['user' => $user,'data'=>$data,'no'=>$no])->withErrors($pesan);
         }
     }
     

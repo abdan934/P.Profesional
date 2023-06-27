@@ -61,12 +61,12 @@ class PengawasController extends Controller
 
         if ($validator->fails()) {
             
-            return view('pages/pengawas/v_pengawas')->withErrors($validator)->with(['user' => $user,'data'=>$data,'no'=>$no]);
+            return redirect()->back()->withErrors($validator)->with(['user' => $user,'data'=>$data,'no'=>$no]);
 
         }else{
             Pengawas::create($datacreate);
             $pesan = 'Berhasil ditambahkan';
-            return view('pages/pengawas/v_pengawas')->with(['isipesan'=>$pesan,'user' => $user,'data'=>$data,'no'=>$no]);
+            return redirect()->back()->with(['isipesan'=>$pesan,'user' => $user,'data'=>$data,'no'=>$no]);
         }
     }
 
@@ -110,13 +110,13 @@ class PengawasController extends Controller
 
         if ($validator->fails()) {
         $pesan = 'Gagal diubah';
-        return view("pages/pengawas/v_pengawas")->with(['user' => $user,'data'=>$data,'no'=>$no])->withErrors($pesan);
+        return redirect()->back()->with(['user' => $user,'data'=>$data,'no'=>$no])->withErrors($pesan);
 
         }else{
             $data = Pengawas::orderBy('id_pengawas','asc')->paginate(10);
         Pengawas::where('id_pengawas',$id)->update($data_update);
         $pesan = 'Berhasil diubah';
-        return view("pages/pengawas/v_pengawas")->with(['data'=>$data, 'no'=>$no,'user'=>$user,'isipesan'=>$pesan]);
+        return redirect()->back()->with(['data'=>$data, 'no'=>$no,'user'=>$user,'isipesan'=>$pesan]);
         }
         
     }
@@ -139,14 +139,14 @@ class PengawasController extends Controller
         ]);
         if($validator){
             $pesan = 'Silahkan cek kembali data yang akan dihapus pada data yang lain!';
-            return view("pages/pengawas/v_pengawas")->with(['user' => $user,'data'=>$data,'no'=>$no])->withErrors($pesan);
+            redirect()->back()->with(['user' => $user,'data'=>$data,'no'=>$no])->withErrors($pesan);
         }else if($checkdata){
             Pengawas::where('id_pengawas',$id)->delete();
-            return view("pages/pengawas/v_pengawas")->with(['data'=>$data, 'no'=>$no,'user'=>$user,'isipesan'=>$pesan]);
+            redirect()->back()->with(['data'=>$data, 'no'=>$no,'user'=>$user,'isipesan'=>$pesan]);
         }else{
             // dd($id);
             $pesan = 'Data tidak ditemukan';
-            return view("pages/pengawas/v_pengawas")->with(['user' => $user,'data'=>$data,'no'=>$no])->withErrors($pesan);
+            redirect()->back()->with(['user' => $user,'data'=>$data,'no'=>$no])->withErrors($pesan);
         }
     }
 
@@ -184,7 +184,7 @@ class PengawasController extends Controller
                 $checkdata = Pengawas::where('id_pengawas', $id_pengawas)->first();
                 if ($checkdata) {
                     $pesan = 'Data sudah ada silahkan cek kembali!!';
-                    return view("pages/pengawas/v_pengawas")->with(['data'=>$data_isi,'no'=>$no,'user'=>$user])->withErrors($pesan);
+                    return redirect()->back()->with(['data'=>$data_isi,'no'=>$no,'user'=>$user])->withErrors($pesan);
                 } else {
                     if ($id_pengawas == null) {
                         $pesan = 'Kode Pengawas tidak boleh kosong!';
@@ -193,7 +193,7 @@ class PengawasController extends Controller
                     //sesi berhasil
                     $pesan = 'Berhasil diimport';
                     Excel::import(new PengawasImport, \public_path('/PengawasData/'.$namafile));
-                    return view("pages/pengawas/v_pengawas")->with(['data'=>$data_isi,'isipesan'=>$pesan,'no'=>$no,'user'=>$user]);
+                    return redirect()->back()->with(['data'=>$data_isi,'isipesan'=>$pesan,'no'=>$no,'user'=>$user]);
                 }
             }
     }

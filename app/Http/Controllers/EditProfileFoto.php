@@ -74,7 +74,7 @@ class EditProfileFoto extends Controller
         ]);
          if ($validator->fails()) {
            $pesan = 'Foto harus menggunakan format gambar';
-        return view("pages/profile/profile")->with(['user' => $user,'data'=>$data])->withErrors($pesan);
+        return redirect()->back()->with(['user' => $user,'data'=>$data])->withErrors($pesan);
 
         }else if ($request->hasFile('foto_profile')){
             $request->file('foto_profile')->move('fotoprofile/',$request->file('foto_profile')->getClientOriginalName());
@@ -82,10 +82,10 @@ class EditProfileFoto extends Controller
     
                 User::where('username', $id)->update($nama_foto);
             $pesan='Berhasil ubah foto profile';
-        return view("pages/v_dashboard")->with(['user' => $user,'isipesan'=>$pesan,'time'=>$timeWIB]);
+        return redirect('/dashboard')->with(['user' => $user,'isipesan'=>$pesan,'time'=>$timeWIB]);
         }else{
             $pesan='Foto gagal diubah';
-        return view("pages/v_dashboard")->with(['user' => $user,'time'=>$timeWIB])->withErrors($pesan);
+        return redirect('/dashboard')->with(['user' => $user,'time'=>$timeWIB])->withErrors($pesan);
         }
     }
 

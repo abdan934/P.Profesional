@@ -65,12 +65,12 @@ class SiftController extends Controller
 
         if ($validator->fails()) {
             
-            return view('pages/sift/v_sift')->withErrors($validator)->with(['user' => $user,'data'=>$data,'no'=>$no]);
+            return redirect()->back()->withErrors($validator)->with(['user' => $user,'data'=>$data,'no'=>$no]);
 
         }else{
             Sift::create($datacreate);
             $pesan = 'Berhasil ditambahkan';
-            return view('pages/sift/v_sift')->with(['isipesan'=>$pesan,'user' => $user,'data'=>$data,'no'=>$no]);
+            return redirect()->back()->with(['isipesan'=>$pesan,'user' => $user,'data'=>$data,'no'=>$no]);
         }
     }
 
@@ -121,13 +121,13 @@ class SiftController extends Controller
 
         if ($validator->fails()) {
         $pesan = 'Gagal diubah';
-        return view("pages/sift/v_sift")->with(['user' => $user,'data'=>$data,'no'=>$no])->withErrors($pesan);
+        return redirect()->back()->with(['user' => $user,'data'=>$data,'no'=>$no])->withErrors($pesan);
 
         }else{
             $data = Sift::orderBy('id_sift','asc')->paginate(10);
         Sift::where('id_sift',$id)->update($data_update);
         $pesan = 'Berhasil diubah';
-        return view("pages/sift/v_sift")->with(['data'=>$data, 'no'=>$no,'user'=>$user,'isipesan'=>$pesan]);
+        return redirect()->back()->with(['data'=>$data, 'no'=>$no,'user'=>$user,'isipesan'=>$pesan]);
         }
         
     }
@@ -145,10 +145,10 @@ class SiftController extends Controller
         $checkdata = Sift::where('id_sift', $id)->first();
         if($checkdata){
             Sift::where('id_sift',$id)->delete();
-            return view("pages/sift/v_sift")->with(['data'=>$data, 'no'=>$no,'user'=>$user,'isipesan'=>$pesan]);
+            return redirect()->back()->with(['data'=>$data, 'no'=>$no,'user'=>$user,'isipesan'=>$pesan]);
         }else{
             $pesan = 'Data tidak ditemukan';
-            return view("pages/sift/v_sift")->with(['user' => $user,'data'=>$data,'no'=>$no])->withErrors($pesan);
+            return redirect()->back()->with(['user' => $user,'data'=>$data,'no'=>$no])->withErrors($pesan);
         }
     }
 

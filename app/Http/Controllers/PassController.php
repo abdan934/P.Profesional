@@ -77,14 +77,14 @@ class PassController extends Controller
         ]);
         if ($validator->fails()) {
            
-        return view("pages/profile/profile")->with(['user' => $user,'data'=>$data])->withErrors($validator);
+        return redirect()->back()->with(['user' => $user,'data'=>$data])->withErrors($validator);
 
         }else{
             User::where('username',$id)->update($data_update);
             $username_login = $request->session()->get('username_login');
             $user = Auth::user();
             $pesan='Berhasil ubah password';
-        return view("pages/v_dashboard")->with(['user' => $user,'isipesan'=>$pesan,'time'=>$timeWIB]);
+        return redirect('/dashboard')->with(['user' => $user,'isipesan'=>$pesan,'time'=>$timeWIB]);
         }
     }
 

@@ -69,12 +69,12 @@ class KaryawanController extends Controller
 
         if ($validator->fails()) {
             
-            return view('pages/karyawan/v_karyawan')->withErrors($validator)->with(['user' => $user,'data'=>$data,'no'=>$no]);
+            return redirect()->back()->withErrors($validator)->with(['user' => $user,'data'=>$data,'no'=>$no]);
 
         }else{
             Karyawan::create($datacreate);
             $pesan = 'Berhasil ditambahkan';
-            return view('pages/karyawan/v_karyawan')->with(['isipesan'=>$pesan,'user' => $user,'data'=>$data,'no'=>$no]);
+            return redirect()->back()->with(['isipesan'=>$pesan,'user' => $user,'data'=>$data,'no'=>$no]);
         }
     }
 
@@ -118,13 +118,13 @@ class KaryawanController extends Controller
 
         if ($validator->fails()) {
         $pesan = 'Gagal diubah';
-        return view("pages/karyawan/v_karyawan")->with(['user' => $user,'data'=>$data,'no'=>$no])->withErrors($pesan);
+        return redirect()->back()->with(['user' => $user,'data'=>$data,'no'=>$no])->withErrors($pesan);
 
         }else{
             $data = HRD::orderBy('id_karyawan','asc')->paginate(10);
         Karyawan::where('id_karyawan',$id)->update($data_update);
         $pesan = 'Berhasil diubah';
-        return view("pages/karyawan/v_karyawan")->with(['data'=>$data, 'no'=>$no,'user'=>$user,'isipesan'=>$pesan]);
+        return redirect()->back()->with(['data'=>$data, 'no'=>$no,'user'=>$user,'isipesan'=>$pesan]);
         }
     }
 
@@ -146,14 +146,14 @@ class KaryawanController extends Controller
         ]);
         if($validator){
             $pesan = 'Silahkan cek kembali data yang akan dihapus pada data yang lain!';
-            return view("pages/karyawan/v_karyawan")->with(['user' => $user,'data'=>$data,'no'=>$no])->withErrors($pesan);
+            return redirect()->back()->with(['user' => $user,'data'=>$data,'no'=>$no])->withErrors($pesan);
         }else if($checkdata){
             Karyawan::where('id_karyawan',$id)->delete();
-            return view("pages/karyawan/v_karyawan")->with(['data'=>$data, 'no'=>$no,'user'=>$user,'isipesan'=>$pesan]);
+            return redirect()->back()->with(['data'=>$data, 'no'=>$no,'user'=>$user,'isipesan'=>$pesan]);
         }else{
             // dd($id);
             $pesan = 'Data tidak ditemukan';
-            return view("pages/karyawan/v_karyawan")->with(['user' => $user,'data'=>$data,'no'=>$no])->withErrors($pesan);
+            return redirect()->back()->with(['user' => $user,'data'=>$data,'no'=>$no])->withErrors($pesan);
         }
     }
 
@@ -190,7 +190,7 @@ class KaryawanController extends Controller
                 $checkdata = Karyawan::where('id_karyawan', $id_karyawan)->first();
                 if ($checkdata) {
                     $pesan = 'Data sudah ada silahkan cek kembali!!';
-                    return view("pages/karyawan/v_karyawan")->with(['data'=>$data_isi,'no'=>$no,'user'=>$user])->withErrors($pesan);
+                    return redirect()->back()->with(['data'=>$data_isi,'no'=>$no,'user'=>$user])->withErrors($pesan);
                 } else {
                     if ($id_karyawan == null) {
                         $pesan = 'Kode Karyawan tidak boleh kosong!';
@@ -199,7 +199,7 @@ class KaryawanController extends Controller
                     //sesi berhasil
                     $pesan = 'Berhasil diimport';
                     Excel::import(new KaryawanImport, \public_path('/KaryawanData/'.$namafile));
-                    return view("pages/karyawan/v_karyawan")->with(['data'=>$data_isi,'isipesan'=>$pesan,'no'=>$no,'user'=>$user]);
+                    return redirect()->back()->with(['data'=>$data_isi,'isipesan'=>$pesan,'no'=>$no,'user'=>$user]);
                 }
             }
     }

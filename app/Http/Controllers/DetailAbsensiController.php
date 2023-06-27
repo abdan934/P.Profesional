@@ -103,12 +103,12 @@ class DetailAbsensiController extends Controller
 
         if ($validator->fails()) {
             
-            return view('pages/d_absensi/v_d_absensi')->withErrors($validator)->with(['user' => $user,'data'=>$data,'no'=>$no]);
+            return redirect()->back()->withErrors($validator)->with(['user' => $user,'data'=>$data,'no'=>$no]);
 
         }else{
             DetailAbsensi::create($datacreate);
             $pesan = 'Berhasil ditambahkan';
-            return view('pages/d_absensi/v_d_absensi')->with(['isipesan'=>$pesan,'user' => $user,'data'=>$data,'no'=>$no]);
+            return redirect()->back()->with(['isipesan'=>$pesan,'user' => $user,'data'=>$data,'no'=>$no]);
         }
     }
 
@@ -167,15 +167,15 @@ class DetailAbsensiController extends Controller
         ]);
 
         if ($validator->fails()) {
-            return view('pages/d_absensi/v_d_absensi')->withErrors($validator)->with(['user' => $user,'data'=>$data,'no'=>$no]);
+            return redirect()->back()->withErrors($validator)->with(['user' => $user,'data'=>$data,'no'=>$no]);
         } else {
             try {
                 DetailAbsensi::where('id_detail_absensi',$id)->update($update);
                 $pesan = 'Berhasil diubah';
-                return view('pages/d_absensi/v_d_absensi')->with(['isipesan' => $pesan,'user' => $user,'data'=>$data,'no'=>$no]);
+                return redirect()->back()->with(['isipesan' => $pesan,'user' => $user,'data'=>$data,'no'=>$no]);
             } catch (Exception $e) {
                 $errorPesan = 'Gagal menambahkan: ' . $e->getMessage();
-                return view('pages/d_absensi/v_d_absensi')->withErrors([$errorPesan])->with(['user' => $user,'data'=>$data,'no'=>$no]);
+                return redirect()->back()->withErrors([$errorPesan])->with(['user' => $user,'data'=>$data,'no'=>$no]);
             }
         }
         
@@ -206,10 +206,10 @@ class DetailAbsensiController extends Controller
         $checkdata = DetailAbsensi::where('id_detail_absensi', $id)->first();
         if($checkdata){
             DetailAbsensi::where('id_detail_absensi',$id)->delete();
-            return view("pages/d_absensi/v_d_absensi")->with(['data'=>$data, 'no'=>$no,'user'=>$user,'isipesan'=>$pesan]);
+            return redirect()->back()->with(['data'=>$data, 'no'=>$no,'user'=>$user,'isipesan'=>$pesan]);
         }else{
             $pesan = 'Data tidak ditemukan';
-            return view("pages/d_absensi/v_d_absensi")->with(['user' => $user,'data'=>$data,'no'=>$no])->withErrors($pesan);
+            return redirect()->back()->with(['user' => $user,'data'=>$data,'no'=>$no])->withErrors($pesan);
         }
     }
 }

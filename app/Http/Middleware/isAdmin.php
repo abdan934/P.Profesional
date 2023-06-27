@@ -5,6 +5,7 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Illuminate\Support\Facades\Auth;
 
 class isAdmin
 {
@@ -18,13 +19,12 @@ class isAdmin
         $user = Auth::user();
         try{
 
-            if ($user->level == 'admin') {
+            if ($user->level == 'Admin' || $user->level == 'admin') {
                 return $next($request);
             } else {
                 return redirect('/dashboard')->with(['user' => $user]);
             }
             
-            return $next($request);
         }catch (exception $e){
             return redirect('/dashboard')->with(['user' => $user]);
         }

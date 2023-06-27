@@ -38,31 +38,31 @@ Route::get('/logout', [LoginController::class, 'logout']);
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard')->middleware('isLogin');
 
 //user
-Route::resource('/user', UserController::class)->middleware('isLogin');
-Route::get('/search', [UserController::class, 'search'])->middleware('isLogin');
-Route::post('/importuser', [UserController::class, 'importexcel'])->middleware('isLogin');
-Route::post('/reset-password/{id}', [UserController::class, 'resetPassword'])->middleware('isLogin');
+Route::resource('/user', UserController::class)->middleware(['isLogin','isAdmin']);
+Route::get('/search', [UserController::class, 'search'])->middleware(['isLogin','isAdmin']);
+Route::post('/importuser', [UserController::class, 'importexcel'])->middleware(['isLogin','isAdmin']);
+Route::post('/reset-password/{id}', [UserController::class, 'resetPassword'])->middleware(['isLogin','isAdmin']);
 
 //hrd
-Route::resource('/hrd', HRDController::class)->middleware('isLogin');
-Route::post('/importhrd', [HRDController::class, 'importexcel'])->middleware('isLogin');
+Route::resource('/hrd', HRDController::class)->middleware(['isLogin','isAdmin']);
+Route::post('/importhrd', [HRDController::class, 'importexcel'])->middleware(['isLogin','isAdmin']);
 
 //pengawas
-Route::resource('/pengawas', PengawasController::class)->middleware('isLogin');
-Route::post('/importpengawas', [PengawasController::class, 'importexcel'])->middleware('isLogin');
+Route::resource('/pengawas', PengawasController::class)->middleware(['isLogin','isAdmin']);
+Route::post('/importpengawas', [PengawasController::class, 'importexcel'])->middleware(['isLogin','isAdmin']);
 
 //karyawan
-Route::resource('/karyawan', KaryawanController::class)->middleware('isLogin');
-Route::post('/importkaryawan', [KaryawanController::class, 'importexcel'])->middleware('isLogin');
+Route::resource('/karyawan', KaryawanController::class)->middleware(['isLogin','isAdmin']);
+Route::post('/importkaryawan', [KaryawanController::class, 'importexcel'])->middleware(['isLogin','isAdmin']);
 
 //sift
-Route::resource('/sift', SiftController::class)->middleware('isLogin');
+Route::resource('/sift', SiftController::class)->middleware(['isLogin','isAdmin']);
 
 //absen
-Route::resource('/absensi', AbsensiController::class)->middleware('isLogin');
+Route::resource('/absensi', AbsensiController::class)->middleware(['isLogin','isAdmin']);
 
 //detail absen
-Route::resource('/detail-absensi', DetailAbsensiController::class)->middleware('isLogin');
+Route::resource('/detail-absensi', DetailAbsensiController::class)->middleware(['isLogin','isAdmin']);
 
 //profile
 Route::resource('/myprofile', ProfileController::class)->middleware('isLogin');
@@ -70,12 +70,12 @@ Route::resource('/ubah-pass', PassController::class)->middleware('isLogin');
 Route::resource('/ubah-profile', EditProfileFoto::class)->middleware('isLogin');
 
 //mekanisme absen
-Route::resource('/absensi-masuk', P_AbsenController::class)->middleware('isLogin');
-Route::get('/detail-absen/{id}', [K_AbsenController::class,'detail'])->middleware('isLogin');
-Route::resource('/mulai-absen', K_AbsenController::class)->middleware('isLogin');
+Route::resource('/absensi-masuk', P_AbsenController::class)->middleware(['isLogin','isPengawas']);
+Route::get('/detail-absen/{id}', [K_AbsenController::class,'detail'])->middleware(['isLogin','isPengawas']);
+Route::resource('/mulai-absen', K_AbsenController::class)->middleware(['isLogin','isPengawas']);
 
 //Laporan
-Route::get('/laporan-kapal',[LaporanController::class,'index'])->middleware('isLogin');
-Route::post('/laporan-cari-kapal',[LaporanController::class,'cari'])->middleware('isLogin');
-Route::post('/cetak-laporan',[LaporanController::class,'exportLaporan'])->middleware('isLogin');
+Route::get('/laporan-kapal',[LaporanController::class,'index'])->middleware(['isLogin','isAdmin']);
+Route::post('/laporan-cari-kapal',[LaporanController::class,'cari'])->middleware(['isLogin','isAdmin']);
+Route::post('/cetak-laporan',[LaporanController::class,'cetak'])->middleware(['isLogin','isAdmin']);
 

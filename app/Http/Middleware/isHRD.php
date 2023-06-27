@@ -5,6 +5,7 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Illuminate\Support\Facades\Auth;
 
 class isHRD
 {
@@ -17,14 +18,12 @@ class isHRD
     {
         $user = Auth::user();
         try{
-
-            if ($user->level == 'hrd') {
+            if ($user->level == 'HRD' || $user->level == 'hrd') {
                 return $next($request);
             } else {
                 return redirect('/dashboard')->with(['user' => $user]);
             }
             
-            return $next($request);
         }catch (exception $e){
             return redirect('/dashboard')->with(['user' => $user]);
         }

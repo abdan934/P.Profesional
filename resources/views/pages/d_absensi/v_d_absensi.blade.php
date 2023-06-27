@@ -177,33 +177,19 @@
                                     placeholder="Kode Karyawan" >
                                 <label for="floatingInput">Kode Karyawan</label>
                             </div>
-                            <div class="form-floating mb-3">
-                                <input type="text" class="form-control" name="id_sift" required value="{{old('id_sift')}}"
-                                    placeholder="Kode Sift" >
-                                <label for="floatingInput">Kode Sift</label>
-                            </div>
-                            <div class="form-floating mb-3">
-                                <input type="text" class="form-control" name="name_kapal" required value="{{old('name_kapal')}}"
-                                    placeholder="Nama Kapal" >
-                                <label for="floatingInput">Nama Kapal</label>
-                            </div>
-                            <div class="form-floating mb-3">
-                                <input type="text" class="form-control" name="bagian" required value="{{old('bagian')}}"
-                                    placeholder="Bagian" >
-                                <label for="floatingInput">Bagian</label>
-                            </div>
-                            <div class="form-floating mb-3">
-                                <input type="text" class="form-control" name="dermaga" required value="{{old('dermaga')}}"
-                                    placeholder="Dermaga" >
-                                <label for="floatingInput">Dermaga</label>
-                            </div>
+                            <select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example" name="bagian" required>
+                                <option selected>-- Bagian --</option>
+                                <option value="Foreman" >Foreman</option>
+                                <option value="Driver" >Driver</option>
+                                <option value="Personil" >Personil</option>
+                            </select>
                             <div class="form-floating mb-3">
                                 <fieldset class="row mb-3">
                                     <legend class="col-form-label col-sm-3 pt-0">Keterangan : </legend>
                                     <div class="col-sm-3">
                                         <div class="form-check">
                                             <input class="form-check-input" type="radio" name="keterangan"
-                                                value="Hadir" checked>
+                                                value="Hadir" >
                                             <label class="form-check-label" for="gridRadios1">
                                                 Hadir
                                             </label>

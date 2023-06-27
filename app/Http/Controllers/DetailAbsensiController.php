@@ -154,10 +154,8 @@ class DetailAbsensiController extends Controller
         ->paginate(5);
 
         $update=[
-            'name_kapal' => $request->input('name_kapal'),
             'bagian' => $request->input('bagian'),
-            'dermaga' => $request->input('dermaga'),
-            'keterangan' => $request->input('keterangan'),
+            'status' => $request->input('status'),
         ];
 
         $validator = Validator::make($request->all(), [

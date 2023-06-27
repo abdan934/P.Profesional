@@ -21,39 +21,27 @@
                                                 placeholder="Kode Karyawan">
                                             <label for="floatingInput">Kode Karyawan</label>
                                     </div>
-                                    <div class="form-floating mb-3">
-                                            <input type="text" class="form-control" value="{{$data->id_sift}}" disabled
-                                                placeholder="Kode Shift">
-                                            <label for="floatingInput">Kode Shift</label>
-                                    </div>
-                                    <div class="form-floating mb-3">
-                                        <input type="text" class="form-control" value="{{$data->name_kapal}}" name="name_kapal" required
-                                            placeholder="Nama Kapal">
-                                        <label for="floatingInput">Nama Kapal</label>
-                                    </div>
-                                    <div class="form-floating mb-3">
-                                        <input type="text" class="form-control" value="{{$data->bagian}}" name="bagian" required
-                                            placeholder="Bagian">
-                                        <label for="floatingInput">Bagian</label>
-                                    </div>
-                                    <div class="form-floating mb-3">
-                                        <input type="text" class="form-control" value="{{$data->dermaga}}" name="dermaga" required
-                                            placeholder="Dermaga">
-                                        <label for="floatingInput">Dermaga</label>
-                                    </div>
+    
+                                    <select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example" name="bagian" required>
+                                        <option selected>-- Bagian --</option>
+                                        <option value="Foreman"  {{ $data->bagian === 'Foreman' ? 'selected' : '' }}>Foreman</option>
+                                        <option value="Driver"  {{ $data->bagian === 'Driver' ? 'selected' : '' }}>Driver</option>
+                                        <option value="Personil"  {{ $data->bagian === 'Personil' ? 'selected' : '' }}>Personil</option>
+                                    </select>   
+
                                     <fieldset class="row mb-3 col-5">
                                         <legend class="col-form-label col-sm-3 pt-0">Status : </legend>
                                         <div class="col-sm-3">
                                             <div class="form-check">
                                                 <input class="form-check-input" type="radio" name="keterangan"
-                                                    value="Hadir" {{ $data->keterangan === 'Hadir' ? 'checked' : '' }}>
+                                                    value="HADIR" {{ $data->status === 'HADIR' ? 'checked' : '' }}>
                                                 <label class="form-check-label" for="gridRadios1">
                                                     Hadir
                                                 </label>
                                             </div>
                                             <div class="form-check">
                                                 <input class="form-check-input" type="radio" name="keterangan"
-                                                    value="Absen" {{ $data->keterangan === 'Absen' ? 'checked' : '' }}>
+                                                    value="-">
                                                 <label class="form-check-label" for="gridRadios2">
                                                     Absen
                                                 </label>

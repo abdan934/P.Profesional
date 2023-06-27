@@ -13,7 +13,6 @@ class DetailAbsensi extends Model
         'id_detail_absensi',
         'id_absensi',
         'id_karyawan',
-        'id_sift',
         'bagian',
         'status',
         'keterangan',

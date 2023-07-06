@@ -8,10 +8,20 @@ use App\Models\Absensi;
 use App\Models\Pengawas;
 use App\Models\Karyawan;
 use App\Models\Sift;
-use Maatwebsite\Excel\Concerns\FromView;
-use Illuminate\Contracts\View\View;
+// use Maatwebsite\Excel\Concerns\FromView;
+// use Illuminate\Contracts\View\View;
+// use Maatwebsite\Excel\Concerns\ShouldAutoSize;
+// use Maatwebsite\Excel\Concerns\WithEvents;
+// use Maatwebsite\Excel\Events\AfterSheet;
+// use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
+use Maatwebsite\Excel\Concerns\FromCollection;
+use Maatwebsite\Excel\Concerns\ShouldAutoSize;
+use Maatwebsite\Excel\Concerns\WithHeadings;
+use Maatwebsite\Excel\Events\AfterSheet;
+use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
+use Illuminate\Support\Collection;
 
-class LaporanExport implements FromView
+class LaporanExport implements FromCollection, WithHeadings, ShouldAutoSize
 {
     /**
     * @return \Illuminate\Support\view
@@ -38,18 +48,150 @@ class LaporanExport implements FromView
         $this->P3 = $P3;
     }
 
-    public function view(): View
+    public function collection()
     {
-        $no=1;
-        $dataS1 = $this->dataS1;
-        $dataS2 = $this->dataS2;
-        $dataS3 = $this->dataS3;
-        $namakapal = $this->namakapal;
-        $tanggal = $this->tanggal;
-        $P1 = $this->P1;
-        $P2 = $this->P2;
-        $P3 = $this->P3;
+        $no= 1;
+        // Menyiapkan data yang akan diekspor dalam bentuk Collection
+        $collection = new Collection();
 
-        return view('Laporan/excel_laporan_kapal', compact('no','dataS1','dataS2','dataS3','namakapal','tanggal','P1','P2','P3'));
+        // Menambahkan header custom
+        $collection->push([
+            'NO',
+            'JAM KERJA',
+            '00.00-08.00',
+            '08.00-16.00',
+            '16.00-00.00',
+        ]);
+
+        // Menambahkan baris shift I
+        $collection->push([
+            '',
+            'SHIFT',
+            'I',
+            'II',
+            'III',
+            'TANGGAL',
+            'KAPAL',
+        ]);
+
+        // Menambahkan data S1
+        if (isset($this->dataS1)) {
+            $collection->push([
+                $no++,
+                $this->P1,
+                'Hadir',
+                '-',
+                '-',
+                $this->tanggal,
+                $this->namakapal,
+            ]);
+    
+            foreach ($this->dataS1 as $item1) {
+                $collection->push([
+                    $no++,
+                    $item1->name_karyawan,
+                    'Hadir',
+                    '-',
+                    '-',
+                ]);
+            }
+        }
+    
+    
+
+        // Menambahkan data S2
+        if (isset($this->dataS2)) {
+            $collection->push([
+                $no++,
+                $this->P2,
+                '-',
+                'Hadir',
+                '-',
+                $this->tanggal,
+                $this->namakapal,
+            ]);
+    
+            foreach ($this->dataS2 as $item2) {
+                $collection->push([
+                    $no++,
+                    $item2->name_karyawan,
+                    '-',
+                    'Hadir',
+                    '-',
+                ]);
+            }
+        }
+    
+
+        // Menambahkan data S3
+        if (isset($this->dataS3)) {
+            $collection->push([
+                $no++,
+                $this->P3,
+                '-',
+                '-',
+                'Hadir',
+                $this->tanggal,
+                $this->namakapal,
+            ]);
+    
+            foreach ($this->dataS3 as $item3) {
+                $collection->push([
+                    $no++,
+                    $item3->name_karyawan,
+                    '-',
+                    '-',
+                    'Hadir',
+                ]);
+            }
+        }
+    
+
+        return $collection;
     }
+
+    public function headings(): array
+    {
+        // Mengembalikan judul kolom
+        return [
+            '',
+            '',
+            '',
+            '',
+        ];
+    }
+
+    public function registerEvents(): array
+    {
+        return [
+            AfterSheet::class => function (AfterSheet $event) {
+                $event->sheet->getDelegate()->getStyle('A1:D1')->applyFromArray([
+                    'font' => [
+                        'bold' => true,
+                    ],
+                    'fill' => [
+                        'fillType' => \PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID,
+                        'startColor' => [
+                            'rgb' => 'DDDDDD',
+                        ],
+                    ],
+                ]);
+            },
+        ];
+    }
+
+    // public function view(): View
+    // {
+    //     $no=1;
+    //     $dataS1 = $this->dataS1;
+    //     $dataS2 = $this->dataS2;
+    //     $dataS3 = $this->dataS3;
+    //     $namakapal = $this->namakapal;
+    //     $tanggal = $this->tanggal;
+    //     $P1 = $this->P1;
+    //     $P2 = $this->P2;
+    //     $P3 = $this->P3;
+
+    //     return view('Laporan/excel_laporan_kapal', compact('no','dataS1','dataS2','dataS3','namakapal','tanggal','P1','P2','P3'));
+    // }
 }

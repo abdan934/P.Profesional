@@ -262,10 +262,6 @@ class LaporanController extends Controller
     $idS2 = $request->input('id_2');
     $idS3 = $request->input('id_3');
 
-            
-    
-
-
     //
     $namakapal = Absensi::select('name_kapal')
             ->where(function ($query) use ($idS1,$idS2,$idS3) {
@@ -319,16 +315,16 @@ class LaporanController extends Controller
     ->join('sift', 'sift.id_sift', '=', 'absensi.id_sift')
     ->join('pengawas', 'pengawas.id_pengawas', '=', 'absensi.id_pengawas')->get();
     
-    $P1 = Absensi::select('name_pengawas')
+    $P1 = Absensi::select('name_pengawas','tgl','name_kapal')
     ->where('id_absensi', $idS1)
     ->join('pengawas', 'pengawas.id_pengawas', '=', 'absensi.id_pengawas')
     ->first();
     if (isset($P1)) {
-        $P1 = $P1->name_pengawas;
+        $P1_1 = $P1->name_pengawas;
     } else {
         $P1 = null; 
     }
-    $P2 = Absensi::select('name_pengawas')
+    $P2 = Absensi::select('name_pengawas','tgl','name_kapal')
     ->where('id_absensi', $idS2)
     ->join('pengawas', 'pengawas.id_pengawas', '=', 'absensi.id_pengawas')
     ->first();
@@ -337,7 +333,7 @@ class LaporanController extends Controller
     } else {
         $P2 = null; 
     }
-    $P3 = Absensi::select('name_pengawas')
+    $P3 = Absensi::select('name_pengawas','tgl','name_kapal')
     ->where('id_absensi', $idS3)
     ->join('pengawas', 'pengawas.id_pengawas', '=', 'absensi.id_pengawas')
     ->first();

@@ -78,4 +78,5 @@ Route::resource('/mulai-absen', K_AbsenController::class)->middleware(['isLogin'
 Route::get('/laporan-kapal',[LaporanController::class,'index'])->middleware(['isLogin','isAdmin']);
 Route::post('/laporan-cari-kapal',[LaporanController::class,'cari'])->middleware(['isLogin','isAdmin']);
 Route::post('/cetak-laporan',[LaporanController::class,'cetak'])->middleware(['isLogin','isAdmin']);
+Route::post('/cetak-laporan-excel',[LaporanController::class,'exportLaporan'])->middleware(['isLogin','isAdmin']);
 

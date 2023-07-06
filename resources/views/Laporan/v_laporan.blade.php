@@ -26,25 +26,42 @@
 {{-- @dd($dataS2) --}}
 @if (isset($namakapal))
 <div class="container-fluid pt-4 px-4">
-    <div class="row vh-10 bg-light rounded align-items-center justify-content-center mx-0 ">
-        <div class="col-2 mt-3">
-            <h5>{{$tanggal}}</h5>
-        </div>
-        <div class=" col-6 mt-3 text-center">
-            <h4>{{$namakapal}}</h4>
-        </div>
-        <div class=" col-3 mt-3">
-            <h4>
-                <form action="/cetak-laporan" method="POST" target="_blank">
-                    @csrf
-                    <input type="text" name="id_1" value="{{$idS1}}" hidden >
-                    <input type="text" name="id_2" value="{{$idS2}}" hidden >
-                    <input type="text" name="id_3" value="{{$idS3}}" hidden >
-                    <button type="submit" class="btn btn-success">
-                        <i class="bi bi-file-earmark-spreadsheet-fill"></i> Cetak Laporan
-                    </button>
-                </form>    
-            </h4>
+    <div class="row vh-10 bg-light rounded align-items-left justify-content-left mx-0 ">
+        <div class="row">
+            <div class="col-2 mt-3">
+                <h5>{{$tanggal}}</h5>
+            </div>
+            <div class=" col-4 mt-3 text-center">
+                <h4>{{$namakapal}}</h4>
+            </div>
+            <div class="col-3 mt-3">
+                <h4>
+                    <form class="" action="/cetak-laporan" method="POST" target="_blank">
+                        @csrf
+                        <input type="text" name="id_1" value="{{$idS1}}" hidden >
+                        <input type="text" name="id_2" value="{{$idS2}}" hidden >
+                        <input type="text" name="id_3" value="{{$idS3}}" hidden >
+                        <button type="submit" class="btn btn-danger">
+                            <i class="bi bi-file-earmark"></i> Laporan PDF
+                        </button>
+                    </form>       
+                </h4>
+            </div>
+                <div class="col-3 mt-3">
+                    <h4>
+                        <form class="" action="/cetak-laporan-excel" method="POST" target="_blank">
+                            @csrf
+                            <input type="text" name="id_1" value="{{$idS1}}" hidden >
+                            <input type="text" name="id_2" value="{{$idS2}}" hidden >
+                            <input type="text" name="id_3" value="{{$idS3}}" hidden >
+                            <button type="submit" class="btn btn-success">
+                                <i class="bi bi-file-earmark-spreadsheet-fill"></i> Cetak Laporan
+                            </button>
+                        </form>       
+                    </h4>
+                </div>
+                
+               
         </div>
     </div>
 </div>

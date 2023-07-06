@@ -30,6 +30,7 @@
                                                 <thead class="table-light">
                                                     <tr class="text-center">
                                                         <th >No</th>
+                                                        <th >Kode</th>
                                                         <th >Nama Karyawan</th>
                                                         <th >Bagian</th>
                                                         <th >Nama Kapal</th>
@@ -42,7 +43,7 @@
                                                     @foreach ($data as $item)
                                                     <tr class="text-center">
                                                         <th scope="row" class="text-center">{{$no++}}</th>
-                                                        {{-- <td class="m-1">{{$item->id_detail_absensi}}</td> --}}
+                                                        <td class="m-1">{{$item->id_absensi}}</td>
                                                         <td class="m-1">{{$item->name_karyawan}}</td>
                                                         <td class="m-1">{{$item->bagian}}</td>
                                                         <td class="m-1">{{$item->name_kapal}}</td>

@@ -55,7 +55,7 @@
                             <input type="text" name="id_2" value="{{$idS2}}" hidden >
                             <input type="text" name="id_3" value="{{$idS3}}" hidden >
                             <button type="submit" class="btn btn-success">
-                                <i class="bi bi-file-earmark-spreadsheet-fill"></i> Cetak Laporan
+                                <i class="bi bi-file-earmark-spreadsheet-fill"></i> Laporan Excel
                             </button>
                         </form>       
                     </h4>
@@ -75,7 +75,7 @@
             <div class="d-flex align-items-center justify-content-between">
                 <h4 class="mb-3"> Shift I</h4>
                 <h4 class="mb-3">
-                    {{$P2}}
+                    {{$P1}}
                 </h4>
             </div> 
 
@@ -116,7 +116,9 @@
         <div class="bg-light rounded h-100 p-4">
             <div class="d-flex align-items-center justify-content-between">
                 <h4 class="mb-3"> Shift II</h4>
-                <h4 class="mb-3">{{$P2}}<h4>
+                <h4 class="mb-3">
+                    {{$P2}}
+                </h4>
             </div> 
 
                 <div class="table-responsive">
@@ -156,7 +158,9 @@
         <div class="bg-light rounded h-100 p-4">
             <div class="d-flex align-items-center justify-content-between">
                 <h4 class="mb-3"> Shift III</h4>
-                <h4 class="mb-3">{{$P3}}<h4>
+                <h4 class="mb-3">
+                    {{$P3}}
+                </h4>
             </div> 
 
                 <div class="table-responsive">

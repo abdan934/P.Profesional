@@ -106,6 +106,17 @@
                             </form>
                         </div>
                     </div>
+
+                    @if (isset($karyawan))
+                    <div class="col-sm-6 col-xl-6 mb-5">
+                        <div class="bg-light rounded h-100 p-4">
+                            <h4 class="mb-4 text-center">QR CODE</h4>
+                                <div class="text-center">
+                                    <img class="img-fluid rounded-square mx-auto mb-4" src="{{asset('QRcode/'.$karyawan->qr_karyawan)}}" style="width: 200px; height: 200px;">
+                                </div>
+                        </div>
+                    </div>
+                    @endif
                 </div>
 
                     

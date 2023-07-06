@@ -49,7 +49,7 @@ class P_AbsenController extends Controller
         $shift2_2Start = Carbon::createFromTime(15, 0, 0, 'Asia/Jakarta');
 
         // Waktu shift 3 selesai
-        $shift3_3Start = Carbon::createFromTime(23, 00, 0,'Asia/Jakarta');
+        $shift3_3Start = Carbon::createFromTime(23, 0, 0,'Asia/Jakarta');
 
         //Shift Masuk
         $iniShift1 = ($today >= $shift1Start && $today < $shift1End);
@@ -130,16 +130,16 @@ class P_AbsenController extends Controller
             ->join('absensi','detail_absensi.id_absensi' , '=','absensi.id_absensi')
             ->join('sift', 'sift.id_sift', '=', 'absensi.id_sift')
             ->join('karyawan', 'karyawan.id_karyawan', '=', 'detail_absensi.id_karyawan')
-            ->where('absensi.id_absensi','=',$id)
-            ->where('detail_absensi.id_absensi','=',$id)
+            ->where('absensi.id_absensi','=',$id_absen)
+            ->where('detail_absensi.id_absensi','=',$id_absen)
             ->where('detail_absensi.keterangan','=','Masuk')
             ->paginate(10);
             $data_k = DetailAbsensi::orderBy('detail_absensi.id_detail_absensi', 'desc')
             ->join('absensi','detail_absensi.id_absensi' , '=','absensi.id_absensi')
             ->join('sift', 'sift.id_sift', '=', 'absensi.id_sift')
             ->join('karyawan', 'karyawan.id_karyawan', '=', 'detail_absensi.id_karyawan')
-            ->where('absensi.id_absensi','=',$id)
-            ->where('detail_absensi.id_absensi','=',$id)
+            ->where('absensi.id_absensi','=',$id_absen)
+            ->where('detail_absensi.id_absensi','=',$id_absen)
             ->where('detail_absensi.keterangan','=','Keluar')
             ->paginate(10);
     
@@ -159,7 +159,7 @@ class P_AbsenController extends Controller
             $cek_keluar = DetailAbsensi::select('absensi.id_sift')
             ->join('absensi','detail_absensi.id_absensi' , '=','absensi.id_absensi')
             ->join('sift', 'sift.id_sift', '=', 'absensi.id_sift')
-            ->where('detail_absensi.id_absensi','=',$id)->first();
+            ->where('detail_absensi.id_absensi','=',$id_absen)->first();
             // dd($cek_keluar);
             if(isset($cek_keluar)){
                 if($cek_keluar->id_sift === 'S-1'){

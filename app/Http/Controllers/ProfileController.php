@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
 use App\Models\User;
+use App\Models\Karyawan;
 
 class ProfileController extends Controller
 {
@@ -51,9 +52,10 @@ class ProfileController extends Controller
     public function edit(string $id)
     {
         //
-        $data = User::where('id',$id)->first();
         $user = Auth::user();
-        return view('pages/profile/profile')->with(['data'=>$data,'user'=>$user]);
+        $data = User::where('id',$id)->first();
+        $karyawan = Karyawan::where('id_karyawan',$user->username)->first();
+        return view('pages/profile/profile')->with(['data'=>$data,'user'=>$user,'karyawan'=>$karyawan]);
     }
 
     /**
@@ -83,12 +85,12 @@ class ProfileController extends Controller
        
 
         if ($validator->fails()) {
-        return redirect()->back()->with(['user' => $user,'data'=>$data,'no'=>$no])->withErrors($validator);
+        return redirect()->back()->with(['user' => $user,'data'=>$data,'no'=>$no,'karyawan'=>$karyawan])->withErrors($validator);
 
         }else{
             User::where('username',$id)->update($data_update);
             $pesan = 'Profile berhasil diubah';
-        return redirect()->back()->with(['data'=>$data, 'no'=>$no,'user'=>$user,'isipesan'=>$pesan]);
+        return redirect()->back()->with(['data'=>$data, 'no'=>$no,'user'=>$user,'isipesan'=>$pesan,'karyawan'=>$karyawan]);
         }
     }
 

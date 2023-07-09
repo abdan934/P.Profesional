@@ -189,4 +189,36 @@ class K_AbsenController extends Controller
         
         return view('pages/core/v_presensi')->with(['id_absen'=>$id,'user' => $user,'data_m' => $data_m,'data_k' => $data_k,'no'=>$no,'no_1'=>$no_1,'keluar'=>$keluarShift]);
     }
+
+    //cek absensi
+    public function cekabsensi_k()
+    {
+        $no = 1;
+        $search = request()->input('search');
+        $user = Auth::user();
+        $today = Carbon::now(new DateTimeZone('Asia/Jakarta'))->format('Y-m-d');
+        $bulansekarang = Carbon::now(new DateTimeZone('Asia/Jakarta'))->format('Y-M');
+        $bulan = Carbon::now(new DateTimeZone('Asia/Jakarta'))->format('m');
+
+        $data_absen = DetailAbsensi::where('detail_absensi.id_karyawan',$user->username)
+        ->where('tgl', 'LIKE', '%'.$bulan.'%')
+        ->join('absensi','detail_absensi.id_absensi' , '=','absensi.id_absensi')
+        ->join('karyawan','detail_absensi.id_karyawan' , '=','karyawan.id_karyawan')
+        ->join('sift', 'sift.id_sift', '=', 'absensi.id_sift')
+        ->get();
+
+        $data_absen_s =null;
+        if(isset($search)){
+        $data_absen_s = DetailAbsensi::where('detail_absensi.id_karyawan',$user->username)
+        ->where(function ($query) use ($search) {
+            $query->where('tgl', 'LIKE', '%'.$search.'%');
+        })
+        ->join('absensi','detail_absensi.id_absensi' , '=','absensi.id_absensi')
+        ->join('karyawan','detail_absensi.id_karyawan' , '=','karyawan.id_karyawan')
+        ->join('sift', 'sift.id_sift', '=', 'absensi.id_sift')
+        ->get();
+        }
+
+        return view('Laporan/k_laporan')->with(['today'=>$today,'user'=>$user,'data_absen'=>$data_absen,'data_absen_s'=>$data_absen_s,'no'=>$no,'bulansekarang'=>$bulansekarang]);
+    }
 }

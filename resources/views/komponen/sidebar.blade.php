@@ -18,7 +18,12 @@
         <div class="navbar-nav w-100">
             <a href="/dashboard" class="nav-item nav-link"><i class="fa fa-tachometer-alt me-2"></i>Dashboard</a>
         </div>  
-
+        @if ($user->level === 'Karyawan')
+            
+        <div class="navbar-nav w-100">
+            <a href="cek-absen-karyawan" class="nav-item nav-link" ><i class="bi bi-calendar2-check-fill"></i> Cek Absensi</a>
+        </div>
+        @endif
         @if ($user->level !== 'Karyawan'&& $user->level !== 'Pengawas')
         <div class="navbar-nav w-100">
             <a href="/user" class="nav-item nav-link" ><i class="far fa-file-alt me-2"></i> User</a>

@@ -66,7 +66,7 @@
     </div>
 </div>
 @endif
-    {{-- @dd($P1) --}}
+
 @if (isset($dataS1))
 <div class="container-fluid pt-4 px-4 mb-5">
     <div class="row vh-50 bg-light rounded align-items-center justify-content-center mx-0">

@@ -54,6 +54,7 @@ Route::post('/importpengawas', [PengawasController::class, 'importexcel'])->midd
 //karyawan
 Route::resource('/karyawan', KaryawanController::class)->middleware(['isLogin','isAdmin']);
 Route::post('/importkaryawan', [KaryawanController::class, 'importexcel'])->middleware(['isLogin','isAdmin']);
+Route::get('/cek-absen-karyawan', [K_AbsenController::class, 'cekabsensi_k'])->middleware(['isLogin','isKaryawan']);
 
 //sift
 Route::resource('/sift', SiftController::class)->middleware(['isLogin','isAdmin']);

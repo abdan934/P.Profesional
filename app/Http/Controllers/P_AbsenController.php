@@ -173,7 +173,7 @@ class P_AbsenController extends Controller
                 $keluarShift = false;
             }
             
-            return view('pages/core/v_presensi')->with(['id_absen'=>$id,'user' => $user,'data_m' => $data_m,'data_k' => $data_k,'no'=>$no,'no_1'=>$no_1,'keluar'=>$keluarShift]);
+            return view('pages/core/v_presensi')->with(['id_absen'=>$id_absen,'user' => $user,'data_m' => $data_m,'data_k' => $data_k,'no'=>$no,'no_1'=>$no_1,'keluar'=>$keluarShift]);
         }
     }
 

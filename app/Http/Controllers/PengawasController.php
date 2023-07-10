@@ -132,21 +132,21 @@ class PengawasController extends Controller
         $no = 1;
         $user = Auth::user();
         $checkdata = Pengawas::where('id_pengawas', $id)->first();
-        $validator = Validator::make( [
-            'id_pengawas' => 'unique:absensi',
-        ],[
-            'id_pengawas.unique' => 'Kode sudah terdaftar.',
+        $validator = Validator::make([
+            'id_pengawas' => $id
+        ], [
+            'id_pengawas' => 'unique:absensi'
         ]);
-        if($validator){
+        if($validator->fails()){
             $pesan = 'Silahkan cek kembali data yang akan dihapus pada data yang lain!';
-            redirect()->back()->with(['user' => $user,'data'=>$data,'no'=>$no])->withErrors($pesan);
+            return redirect()->back()->with(['user' => $user,'data'=>$data,'no'=>$no])->withErrors($pesan);
         }else if($checkdata){
+            $pesan = 'Berhasil dihapus!';
             Pengawas::where('id_pengawas',$id)->delete();
-            redirect()->back()->with(['data'=>$data, 'no'=>$no,'user'=>$user,'isipesan'=>$pesan]);
+            return redirect()->back()->with(['data'=>$data, 'no'=>$no,'user'=>$user,'isipesan'=>$pesan]);
         }else{
-            // dd($id);
             $pesan = 'Data tidak ditemukan';
-            redirect()->back()->with(['user' => $user,'data'=>$data,'no'=>$no])->withErrors($pesan);
+            return redirect()->back()->with(['user' => $user,'data'=>$data,'no'=>$no])->withErrors($pesan);
         }
     }
 

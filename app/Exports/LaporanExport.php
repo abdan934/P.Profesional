@@ -79,7 +79,7 @@ class LaporanExport implements FromCollection, WithHeadings, ShouldAutoSize
             $collection->push([
                 $no++,
                 $this->P1,
-                'Hadir',
+                'HADIR',
                 '-',
                 '-',
                 $this->tanggal,
@@ -90,14 +90,12 @@ class LaporanExport implements FromCollection, WithHeadings, ShouldAutoSize
                 $collection->push([
                     $no++,
                     $item1->name_karyawan,
-                    'Hadir',
+                    $item1->status,
                     '-',
                     '-',
                 ]);
             }
         }
-    
-    
 
         // Menambahkan data S2
         if (isset($this->dataS2)) {
@@ -105,7 +103,7 @@ class LaporanExport implements FromCollection, WithHeadings, ShouldAutoSize
                 $no++,
                 $this->P2,
                 '-',
-                'Hadir',
+                'HADIR',
                 '-',
                 $this->tanggal,
                 $this->namakapal,
@@ -116,7 +114,7 @@ class LaporanExport implements FromCollection, WithHeadings, ShouldAutoSize
                     $no++,
                     $item2->name_karyawan,
                     '-',
-                    'Hadir',
+                    $item2->status,
                     '-',
                 ]);
             }
@@ -130,7 +128,7 @@ class LaporanExport implements FromCollection, WithHeadings, ShouldAutoSize
                 $this->P3,
                 '-',
                 '-',
-                'Hadir',
+                'HADIR',
                 $this->tanggal,
                 $this->namakapal,
             ]);
@@ -141,7 +139,7 @@ class LaporanExport implements FromCollection, WithHeadings, ShouldAutoSize
                     $item3->name_karyawan,
                     '-',
                     '-',
-                    'Hadir',
+                    $item3->status,
                 ]);
             }
         }

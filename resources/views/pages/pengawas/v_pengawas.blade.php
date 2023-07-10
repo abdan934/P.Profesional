@@ -42,49 +42,50 @@
                                             <td class="m-1">{{$item->name_pengawas}}</td>
                                             <td class="text-center">
                                                     <button type="button" class="btn btn-outline-danger m-1" data-bs-toggle="modal" data-bs-target="#ModalHapus_{{$item->id_pengawas}}"><i class="bi bi-trash"></i> Hapus</button>  
-                                                <a href="{{url('/pengawas/'.$item->id_pengawas.'/edit')}}">             
-                                                    <button type="button" class="btn btn-outline-info m-1"><i class="bi bi-list"></i> Detail</button>               
+                                                <a href="{{url('/pengawas/'.$item->id_pengawas.'/edit')}}" class="btn btn-outline-info m-1">             
+                                                    <i class="bi bi-list"></i> Detail   
                                                 </a>
-                                                
-                                                <!-- Modal hapus-->
-                                                    <div class="modal fade" id="ModalHapus_{{$item->id_pengawas}}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                                                        <div class="modal-dialog">
-                                                        <div class="modal-content">
-                                                            <div class="modal-header">
-                                                                    <h1 class="modal-title fs-5" id="exampleModalLabel">
-                                                                        PERINGATAN !!
-                                                                    </h1>
-                                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                            </div>
-                                                            <div class="modal-body">
-                                                                <h5>Yakin akan menghapus data ?</h5>
-                                                                <table>
-                                                                    <tr>
-                                                                        
-                                                                        <td><h6>Kode</h6></td>
-                                                                    
-                                                                        <td><h6>=</h6></td>
-                                                                        <td><h6>{{$item->id_pengawas}}</h6></td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td><h6>Nama</h6></td>
-                                                                        <td><h6>=</h6></td>
-                                                                        <td><h6>{{$item->name_pengawas}}</h6></td>
-                                                                    </tr>
-                                                                </table>
-                                                            
-                                                            <div class="modal-footer">
-                                                                <form action="{{'/pengawas/'.$item->id_pengawas}}" method="POST">
-                                                                    @csrf
-                                                                    @method('DELETE')
-                                                                    <button type="button submit" class="btn btn-danger"><i class="bi bi-trash"></i> Hapus</button>
-                                                                </form>
-                                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Kembali</button>
-                                                            </div>
+
+                                                  <!-- Modal hapus-->
+                                                  <div class="modal fade" id="ModalHapus_{{$item->id_pengawas}}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                                    <div class="modal-dialog">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                                <h1 class="modal-title fs-5" id="exampleModalLabel">
+                                                                    PERINGATAN !!
+                                                                </h1>
+                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                         </div>
+                                                        <div class="modal-body">
+                                                            <h5>Yakin akan menghapus data ?</h5>
+                                                            <table>
+                                                                <tr>
+                                                                    
+                                                                    <td><h6>Kode</h6></td>
+                                                                
+                                                                    <td><h6>=</h6></td>
+                                                                    <td><h6>{{$item->id_pengawas}}</h6></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td><h6>Nama</h6></td>
+                                                                    <td><h6>=</h6></td>
+                                                                    <td><h6>{{$item->name_pengawas}}</h6></td>
+                                                                </tr>
+                                                            </table>
+                                                        
+                                                        <div class="modal-footer">
+                                                            <form action="{{'/pengawas/'.$item->id_pengawas}}" method="POST">
+                                                                @csrf
+                                                                @method('DELETE')
+                                                                <button type="submit" class="btn btn-danger"><i class="bi bi-trash"></i> Hapus</button>
+                                                            </form>
+                                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Kembali</button>
                                                         </div>
                                                     </div>
+                                                    </div>
+                                                </div>
                                                 </td>
+                                                                                              
                                             </tr>
                                             @endforeach
                                             

@@ -39,7 +39,6 @@
                                         <label for="floatingSelect">Jabatan</label>
                                     </div>
                                     <button type="submit" class="btn btn-primary m-1" ><i class="bi bi-save"></i> Simpan</button>
-                                    <button type="button" class="btn btn-light m-1" ><a href="/user"><i class="bi bi-arrow-left"></i> Batal</a></button>
                                 </div>
                             </form>
                         </div>

@@ -85,12 +85,12 @@ class ProfileController extends Controller
        
 
         if ($validator->fails()) {
-        return redirect()->back()->with(['user' => $user,'data'=>$data,'no'=>$no,'karyawan'=>$karyawan])->withErrors($validator);
+        return redirect()->back()->with(['user' => $user,'data'=>$data,'no'=>$no])->withErrors($validator);
 
         }else{
             User::where('username',$id)->update($data_update);
             $pesan = 'Profile berhasil diubah';
-        return redirect()->back()->with(['data'=>$data, 'no'=>$no,'user'=>$user,'isipesan'=>$pesan,'karyawan'=>$karyawan]);
+        return redirect()->back()->with(['data'=>$data, 'no'=>$no,'user'=>$user,'isipesan'=>$pesan]);
         }
     }
 

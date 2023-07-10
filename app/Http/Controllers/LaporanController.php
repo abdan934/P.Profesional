@@ -107,7 +107,7 @@ class LaporanController extends Controller
                     $idS1 = null; 
                 }
 
-                $dataS1 =  DetailAbsensi::select('pengawas.name_pengawas','karyawan.name_karyawan','detail_absensi.bagian','absensi.dermaga')
+                $dataS1 =  DetailAbsensi::select('pengawas.name_pengawas','karyawan.name_karyawan','detail_absensi.status','detail_absensi.bagian','absensi.dermaga')
                 ->where('detail_absensi.id_absensi','=',$idS1)
                 ->where('detail_absensi.keterangan','Masuk')
                 ->join('absensi','detail_absensi.id_absensi' , '=','absensi.id_absensi')
@@ -126,7 +126,7 @@ class LaporanController extends Controller
                     $idS2 = null; 
                 }
                     
-                    $dataS2 =  DetailAbsensi::select('pengawas.name_pengawas','karyawan.name_karyawan','detail_absensi.bagian','absensi.dermaga')
+                    $dataS2 =  DetailAbsensi::select('pengawas.name_pengawas','karyawan.name_karyawan','detail_absensi.status','detail_absensi.bagian','absensi.dermaga')
                     ->where('detail_absensi.id_absensi','=',$idS2)
                     ->where('detail_absensi.keterangan','Masuk')
                     ->join('absensi','detail_absensi.id_absensi' , '=','absensi.id_absensi')
@@ -145,7 +145,7 @@ class LaporanController extends Controller
                         $idS3 = null; 
                     }
                     
-                    $dataS3 =  DetailAbsensi::select('pengawas.name_pengawas','karyawan.name_karyawan','detail_absensi.bagian','absensi.dermaga')
+                    $dataS3 =  DetailAbsensi::select('pengawas.name_pengawas','karyawan.name_karyawan','detail_absensi.status','detail_absensi.bagian','absensi.dermaga')
                     ->where('detail_absensi.id_absensi','=',$idS3)
                     ->where('detail_absensi.keterangan','Masuk')
                     ->join('absensi','detail_absensi.id_absensi' , '=','absensi.id_absensi')
@@ -153,9 +153,6 @@ class LaporanController extends Controller
                     ->join('sift', 'sift.id_sift', '=', 'absensi.id_sift')
                     ->join('pengawas', 'pengawas.id_pengawas', '=', 'absensi.id_pengawas')->get();
 
-                    
-
-                    // dd($dataS3[0]->dermaga);
         return view('Laporan/v_laporan', compact('user','today','no','dataS1','dataS2','dataS3','namakapal','tanggal','P1','P2','P3','idS1','idS2','idS3'));
 
     }
@@ -197,7 +194,7 @@ class LaporanController extends Controller
                 }
                 // dd($tgl);
         //data Shift 1
-        $dataS1 =  DetailAbsensi::select('pengawas.name_pengawas','karyawan.name_karyawan','detail_absensi.bagian','absensi.dermaga')
+        $dataS1 =  DetailAbsensi::select('pengawas.name_pengawas','karyawan.name_karyawan','detail_absensi.status','detail_absensi.bagian','absensi.dermaga')
         ->where('detail_absensi.id_absensi','=',$idS1)
         ->where('detail_absensi.keterangan','Masuk')
         ->join('absensi','detail_absensi.id_absensi' , '=','absensi.id_absensi')
@@ -206,7 +203,7 @@ class LaporanController extends Controller
         ->join('pengawas', 'pengawas.id_pengawas', '=', 'absensi.id_pengawas')->get();
 
         //data Shift 2
-        $dataS2 =  DetailAbsensi::select('pengawas.name_pengawas','karyawan.name_karyawan','detail_absensi.bagian','absensi.dermaga')
+        $dataS2 =  DetailAbsensi::select('pengawas.name_pengawas','karyawan.name_karyawan','detail_absensi.status','detail_absensi.bagian','absensi.dermaga')
         ->where('detail_absensi.id_absensi','=',$idS2)
         ->where('detail_absensi.keterangan','Masuk')
         ->join('absensi','detail_absensi.id_absensi' , '=','absensi.id_absensi')
@@ -215,7 +212,7 @@ class LaporanController extends Controller
         ->join('pengawas', 'pengawas.id_pengawas', '=', 'absensi.id_pengawas')->get();
 
         //data Shift 3
-        $dataS3 =  DetailAbsensi::select('pengawas.name_pengawas','karyawan.name_karyawan','detail_absensi.bagian','absensi.dermaga')
+        $dataS3 =  DetailAbsensi::select('pengawas.name_pengawas','karyawan.name_karyawan','detail_absensi.status','detail_absensi.bagian','absensi.dermaga')
         ->where('detail_absensi.id_absensi','=',$idS3)
         ->where('detail_absensi.keterangan','Masuk')
         ->join('absensi','detail_absensi.id_absensi' , '=','absensi.id_absensi')
@@ -289,7 +286,7 @@ class LaporanController extends Controller
             }
             // dd($tgl);
     //data Shift 1
-    $dataS1 =  DetailAbsensi::select('pengawas.name_pengawas','karyawan.name_karyawan','detail_absensi.bagian','absensi.dermaga')
+    $dataS1 =  DetailAbsensi::select('pengawas.name_pengawas','karyawan.name_karyawan','detail_absensi.status','detail_absensi.bagian','absensi.dermaga')
     ->where('detail_absensi.id_absensi','=',$idS1)
     ->where('detail_absensi.keterangan','Masuk')
     ->join('absensi','detail_absensi.id_absensi' , '=','absensi.id_absensi')
@@ -298,7 +295,7 @@ class LaporanController extends Controller
     ->join('pengawas', 'pengawas.id_pengawas', '=', 'absensi.id_pengawas')->get();
 
     //data Shift 2
-    $dataS2 =  DetailAbsensi::select('pengawas.name_pengawas','karyawan.name_karyawan','detail_absensi.bagian','absensi.dermaga')
+    $dataS2 =  DetailAbsensi::select('pengawas.name_pengawas','karyawan.name_karyawan','detail_absensi.status','detail_absensi.bagian','absensi.dermaga')
     ->where('detail_absensi.id_absensi','=',$idS2)
     ->where('detail_absensi.keterangan','Masuk')
     ->join('absensi','detail_absensi.id_absensi' , '=','absensi.id_absensi')
@@ -307,7 +304,7 @@ class LaporanController extends Controller
     ->join('pengawas', 'pengawas.id_pengawas', '=', 'absensi.id_pengawas')->get();
 
     //data Shift 3
-    $dataS3 =  DetailAbsensi::select('pengawas.name_pengawas','karyawan.name_karyawan','detail_absensi.bagian','absensi.dermaga')
+    $dataS3 =  DetailAbsensi::select('pengawas.name_pengawas','karyawan.name_karyawan','detail_absensi.status','detail_absensi.bagian','absensi.dermaga')
     ->where('detail_absensi.id_absensi','=',$idS3)
     ->where('detail_absensi.keterangan','Masuk')
     ->join('absensi','detail_absensi.id_absensi' , '=','absensi.id_absensi')

@@ -33,15 +33,15 @@
                                         <legend class="col-form-label col-sm-3 pt-0">Status : </legend>
                                         <div class="col-sm-3">
                                             <div class="form-check">
-                                                <input class="form-check-input" type="radio" name="keterangan"
+                                                <input class="form-check-input" type="radio" name="status"
                                                     value="HADIR" {{ $data->status === 'HADIR' ? 'checked' : '' }}>
                                                 <label class="form-check-label" for="gridRadios1">
                                                     Hadir
                                                 </label>
                                             </div>
                                             <div class="form-check">
-                                                <input class="form-check-input" type="radio" name="keterangan"
-                                                    value="-">
+                                                <input class="form-check-input" type="radio" name="status"
+                                                    value="-" {{ $data->status === '-' ? 'checked' : '' }}>
                                                 <label class="form-check-label" for="gridRadios2">
                                                     Absen
                                                 </label>

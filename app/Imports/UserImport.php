@@ -22,7 +22,6 @@ class UserImport implements ToModel
         $cekkaryawan = Karyawan::where('id_karyawan', $row[0])->first();
         $cekpengawas = Pengawas::where('id_pengawas', $row[0])->first();
         $cekhrd =HRD::where('id_hrd', $row[0])->first();
-
         if($cekkaryawan !== null){
             $level = 'Karyawan';
         }else if($cekpengawas !== null){
@@ -41,5 +40,6 @@ class UserImport implements ToModel
         'foto_profile'=> 'pekerja.png',
         'level'=> $level,
         ]);
+        
     }
 }

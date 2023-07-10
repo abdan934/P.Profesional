@@ -88,10 +88,10 @@ class DetailAbsensiController extends Controller
         $no = 1;
         $user = Auth::user();
         $search = request()->input('search');
-        $data = DetailAbsensi::orderBy('detail_absensi.id_sift', 'asc')
+        $data = DetailAbsensi::orderBy('detail_absensi.id_absensi', 'asc')
         ->join('absensi','detail_absensi.id_absensi' , '=','absensi.id_absensi')
         ->join('karyawan', 'karyawan.id_karyawan', '=', 'detail_absensi.id_karyawan')
-        ->join('sift', 'sift.id_sift', '=', 'detail_absensi.id_sift')
+        ->join('sift', 'sift.id_sift', '=', 'absensi.id_sift')
         ->where(function ($query) use ($search) {
             $query->where('absensi.id_absensi', 'LIKE', '%' . $search . '%')
                 ->orWhere('detail_absensi.id_karyawan', 'LIKE', '%' . $search . '%')
@@ -140,10 +140,10 @@ class DetailAbsensiController extends Controller
         $no = 1;
         $user = Auth::user();
         $search = request()->input('search');
-        $data = DetailAbsensi::orderBy('detail_absensi.id_sift', 'asc')
+        $data = DetailAbsensi::orderBy('detail_absensi.id_absensi', 'asc')
         ->join('absensi','detail_absensi.id_absensi' , '=','absensi.id_absensi')
         ->join('karyawan', 'karyawan.id_karyawan', '=', 'detail_absensi.id_karyawan')
-        ->join('sift', 'sift.id_sift', '=', 'detail_absensi.id_sift')
+        ->join('sift', 'sift.id_sift', '=', 'absensi.id_sift')
         ->where(function ($query) use ($search) {
             $query->where('absensi.id_absensi', 'LIKE', '%' . $search . '%')
                 ->orWhere('detail_absensi.id_karyawan', 'LIKE', '%' . $search . '%')
@@ -159,9 +159,9 @@ class DetailAbsensiController extends Controller
         ];
 
         $validator = Validator::make($request->all(), [
-            'keterangan' => 'required',
+            'status' => 'required',
         ],[
-            'keterangan.required' => 'Kerangan gagal diubah',
+            'status.required' => 'status gagal diubah',
         ]);
 
         if ($validator->fails()) {

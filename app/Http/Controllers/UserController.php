@@ -201,21 +201,26 @@ class UserController extends Controller
             $no = 1;
             $user = Auth::user();
 
-                
 
-                foreach ($rows[0] as $row) {
+
+                foreach ($rows as $row) {
                     // Sesi pemeriksaan
-                    $username = $row[0];
-                    $email = $row[2];
-                    $checkdata = User::where('username', $username)->first();
-                    $checkemail = User::where('email', $email)->first();
-                    if ($checkdata || $checkemail) {
+                    $checkdata = User::where('username', $row[0])->first();
+                    $checkemail = User::where('email', $row[2])->first();
+
+                    if ($checkdata !== null || $checkemail !== null ) {
                         $pesan = 'Data sudah ada silahkan cek kembali!!';
                         return redirect()->back()->with(['data'=>$data_isi,'no'=>$no,'user'=>$user])->withErrors($pesan);
                     } else {
-                        if ($username == null) {
+                        if ($row[0] === '') {
                             $pesan = 'Username tidak boleh kosong!';
                             return redirect()->back()->with(['data' => $data_isi, 'no' => $no, 'user' => $user])->withErrors($pesan);
+                        }else if(isset($checkdata)){
+                            $pesan = 'Data sudah ada silahkan cek kembali!!';
+                            return redirect()->back()->with(['data'=>$data_isi,'no'=>$no,'user'=>$user])->withErrors($pesan);
+                        }else if(isset($checkemail)){
+                            $pesan = 'Data sudah ada silahkan cek kembali!!';
+                            return redirect()->back()->with(['data'=>$data_isi,'no'=>$no,'user'=>$user])->withErrors($pesan);
                         }
                         //sesi berhasil
                         $pesan = 'Berhasil diimport';

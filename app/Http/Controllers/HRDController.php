@@ -133,10 +133,10 @@ class HRDController extends Controller
         $checkdata = HRD::where('id_hrd', $id)->first();
         if($checkdata){
             HRD::where('id_hrd',$id)->delete();
-            redirect()->back()->with(['data'=>$data, 'no'=>$no,'user'=>$user,'isipesan'=>$pesan]);
+            return redirect()->back()->with(['data'=>$data, 'no'=>$no,'user'=>$user,'isipesan'=>$pesan]);
         }else{
             $pesan = 'Data tidak ditemukan';
-            redirect()->back()->with(['user' => $user,'data'=>$data,'no'=>$no])->withErrors($pesan);
+            return redirect()->back()->with(['user' => $user,'data'=>$data,'no'=>$no])->withErrors($pesan);
         }
     }
 
@@ -173,7 +173,7 @@ class HRDController extends Controller
                 $checkdata = HRD::where('id_hrd', $id_hrd)->first();
                 if ($checkdata) {
                     $pesan = 'Data sudah ada silahkan cek kembali!!';
-                    return vredirect()->back()->with(['data'=>$data_isi,'no'=>$no,'user'=>$user])->withErrors($pesan);
+                    return redirect()->back()->with(['data'=>$data_isi,'no'=>$no,'user'=>$user])->withErrors($pesan);
                 } else {
                     if ($id_hrd == null) {
                         $pesan = 'Kode HRD tidak boleh kosong!';
@@ -182,7 +182,7 @@ class HRDController extends Controller
                     //sesi berhasil
                     $pesan = 'Berhasil diimport';
                     Excel::import(new HRDImport, \public_path('/HRDData/'.$namafile));
-                    return vredirect()->back()->with(['data'=>$data_isi,'isipesan'=>$pesan,'no'=>$no,'user'=>$user]);
+                    return redirect()->back()->with(['data'=>$data_isi,'isipesan'=>$pesan,'no'=>$no,'user'=>$user]);
                 }
             }
     }

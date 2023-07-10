@@ -87,7 +87,7 @@ body {
               <tr class="text-center">
                 <td>{{$no++}}</td>
                 <td>{{$item1->name_karyawan}}</td>
-                <td>Hadir</td>
+                <td>{{$item1->status}}</td>
                 <td>-</td>
                 <td>-</td>
               </tr>
@@ -108,7 +108,7 @@ body {
               <tr class="text-center">
                 <td>{{$no++}}</td>
                 <td>{{$item2->name_karyawan}}</td>
-                <td>Hadir</td>
+                <td>{{$item2->status}}</td>
                 <td>-</td>
                 <td>-</td>
               </tr>
@@ -130,7 +130,7 @@ body {
                   <td style="text-align: left">{{$item3->name_karyawan}}</td>
                   <td>-</td>
                   <td>-</td>
-                  <td>Hadir</td>
+                  <td>{{$item3->status}}</td>
                 </tr>
                 @endforeach
               @endif

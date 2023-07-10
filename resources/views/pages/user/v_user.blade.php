@@ -32,6 +32,7 @@
                                 <th scope="col">No</th>
                                 <th scope="col">Username</th>
                                 <th scope="col">Nama</th>
+                                <th scope="col">Email</th>
                                 <th scope="col">Jabatan</th>
                                 <th >Aksi</th>
                                 <th>Reset</th>
@@ -43,6 +44,7 @@
                                 <th scope="row" class="text-center">{{$no++}}</th>
                                 <td class="m-1">{{$item->username}}</td>
                                 <td class="m-1">{{$item->name}}</td>
+                                <td class="m-1">{{$item->email}}</td>
                                 <td class="m-1">{{$item->level}}</td>
                                 <td class="text-center">
                                         <button type="button" class="btn btn-outline-danger m-1" data-bs-toggle="modal" data-bs-target="#ModalHapus_{{$item->id}}"><i class="bi bi-trash"></i> Hapus</button>  

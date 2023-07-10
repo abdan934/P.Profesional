@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Validator;
 use App\Imports\KaryawanImport;
 use Maatwebsite\Excel\Facades\Excel;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
+use Illuminate\Validation\Rule;
 
 class KaryawanController extends Controller
 {
@@ -121,7 +122,7 @@ class KaryawanController extends Controller
         return redirect()->back()->with(['user' => $user,'data'=>$data,'no'=>$no])->withErrors($pesan);
 
         }else{
-            $data = HRD::orderBy('id_karyawan','asc')->paginate(10);
+            $data = Karyawan::orderBy('id_karyawan','asc')->paginate(10);
         Karyawan::where('id_karyawan',$id)->update($data_update);
         $pesan = 'Berhasil diubah';
         return redirect()->back()->with(['data'=>$data, 'no'=>$no,'user'=>$user,'isipesan'=>$pesan]);
@@ -139,12 +140,12 @@ class KaryawanController extends Controller
         $no = 1;
         $user = Auth::user();
         $checkdata = Karyawan::where('id_karyawan', $id)->first();
-        $validator = Validator::make( [
-            'id_karyawan' => 'unique:detail_absensi',
-        ],[
-            'id_karyawan.unique' => 'Kode sudah terdaftar.',
+        $validator = Validator::make([
+            'id_karyawan' => $id
+        ], [
+            'id_karyawan' => 'unique:detail_absensi'
         ]);
-        if($validator){
+        if($validator->fails()){
             $pesan = 'Silahkan cek kembali data yang akan dihapus pada data yang lain!';
             return redirect()->back()->with(['user' => $user,'data'=>$data,'no'=>$no])->withErrors($pesan);
         }else if($checkdata){

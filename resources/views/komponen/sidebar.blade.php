@@ -21,7 +21,7 @@
         @if ($user->level === 'Karyawan')
             
         <div class="navbar-nav w-100">
-            <a href="cek-absen-karyawan" class="nav-item nav-link" ><i class="bi bi-calendar2-check-fill"></i> Cek Absensi</a>
+            <a href="/cek-absen-karyawan" class="nav-item nav-link" ><i class="bi bi-calendar2-check-fill"></i> Cek Absensi</a>
         </div>
         @endif
         @if ($user->level !== 'Karyawan'&& $user->level !== 'Pengawas')
